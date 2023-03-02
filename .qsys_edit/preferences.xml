@@ -7,6 +7,6 @@
    <irq preferredWidth="34" />
   </columns>
  </systemtable>
- <library expandedCategories="Project,Library" />
- <window width="1936" height="1056" x="-8" y="-8" />
+ <library expandedCategories="Library,Project,Project/Pan-tilt" />
+ <window width="1117" height="838" x="701" y="85" />
 </preferences>

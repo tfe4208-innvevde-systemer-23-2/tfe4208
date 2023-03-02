@@ -1,10 +1,12 @@
 
 module DE2_115_SOPC (
 	clk_clk,
-	pio_led_external_connection_export,
-	reset_reset_n);	
+	reset_reset_n,
+	pwm_1_conduit_end_pwm,
+	pwm_0_conduit_end_pwm);	
 
 	input		clk_clk;
-	output	[7:0]	pio_led_external_connection_export;
 	input		reset_reset_n;
+	output		pwm_1_conduit_end_pwm;
+	output		pwm_0_conduit_end_pwm;
 endmodule
