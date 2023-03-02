@@ -1,10 +1,10 @@
-/* Quartus Prime Version 17.1.1 Internal Build 593 12/11/2017 SJ Lite Edition */
+/* Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition */
 JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE115F29) Path("X:/Fag/TFE4205/Lab/Labfiler/Lab7/") File("Ver2.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE115F29) Path("C:/Users/dvorh/Documents/CODE/tfe4208/") File("Ver2.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

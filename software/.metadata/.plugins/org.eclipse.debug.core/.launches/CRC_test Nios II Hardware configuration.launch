@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.altera.sbtgui.launch.hardware.Nios2HardwareLaunchConfiguration">
+<booleanAttribute key="acceptBadSysId" value="true"/>
+<booleanAttribute key="acceptBadTimestamp" value="true"/>
 <stringAttribute key="byteStreamDeviceCableName" value="USB-Blaster on localhost [USB-0]"/>
 <stringAttribute key="byteStreamDeviceDeviceID" value="1"/>
-<stringAttribute key="byteStreamDeviceInstanceID" value="1"/>
+<stringAttribute key="byteStreamDeviceInstanceID" value="0"/>
 <booleanAttribute key="downloadProgram" value="true"/>
-<stringAttribute key="elfFile" value="C:\Users\kriss\Desktop\NTNU\InnvevdDesignprosjekt\Lab7\software\CRC_test\CRC_test.elf"/>
+<stringAttribute key="elfFile" value="C:\Users\dvorh\Documents\CODE\tfe4208\software\CRC_test\CRC_test.elf"/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.GDB_INIT" value=""/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_ID" value="com.altera.debug.cdi.gdb.plugin.Nios2GdbCdiDebugger"/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_START_MODE" value="run"/>
@@ -16,6 +18,6 @@
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="CRC_test"/>
 <stringAttribute key="processorCableName" value="USB-Blaster on localhost [USB-0]"/>
 <stringAttribute key="processorDeviceIndex" value="1"/>
-<stringAttribute key="processorInstanceId" value="1"/>
+<stringAttribute key="processorInstanceId" value="0"/>
 <booleanAttribute key="runProgram" value="true"/>
 </launchConfiguration>
