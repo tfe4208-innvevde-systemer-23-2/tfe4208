@@ -584,7 +584,7 @@ refer to the applicable agreement for further details.
 	(output)
 	(rect 152 -368 328 -352)
 	(text "OUTPUT" (rect 137 0 175 10)(font "Arial" (font_size 6)))
-	(text "GPIO[0]" (rect 5 0 46 12)(font "Arial" ))
+	(text "GPIO[0]" (rect 5 0 45 12)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -596,12 +596,13 @@ refer to the applicable agreement for further details.
 		(line (pt 98 12)(pt 94 8))
 	)
 	(flipy)
+	(annotation_block (location)(rect 328 -352 400 -328))
 )
 (pin
 	(output)
 	(rect 152 -328 328 -312)
 	(text "OUTPUT" (rect 137 0 175 10)(font "Arial" (font_size 6)))
-	(text "GPIO[1]" (rect 5 0 43 17)(font "Intel Clear" ))
+	(text "GPIO[1]" (rect 5 0 42 17)(font "Intel Clear" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -613,6 +614,24 @@ refer to the applicable agreement for further details.
 		(line (pt 98 12)(pt 94 8))
 	)
 	(flipy)
+	(annotation_block (location)(rect 328 -312 400 -288))
+)
+(pin
+	(output)
+	(rect 896 -320 1072 -304)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "LEDG[7..0]" (rect 90 0 145 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+	(annotation_block (location)(rect 1072 -304 1136 -280))
 )
 (pin
 	(bidir)
@@ -1541,9 +1560,24 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
+	(rect 792 -336 824 -320)
+	(text "VCC" (rect 7 0 27 10)(font "Arial" (font_size 6)))
+	(text "inst15" (rect 3 5 31 22)(font "Intel Clear" )(invisible))
+	(port
+		(pt 16 16)
+		(output)
+		(text "1" (rect 19 7 24 19)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 19 7 24 19)(font "Courier New" (bold))(invisible))
+		(line (pt 16 16)(pt 16 8))
+	)
+	(drawing
+		(line (pt 8 8)(pt 24 8))
+	)
+)
+(symbol
 	(rect 336 -472 688 -248)
 	(text "DE2_115_SOPC" (rect 129 -1 243 15)(font "Arial" (font_size 10)))
-	(text "inst12" (rect 8 208 36 225)(font "Intel Clear" ))
+	(text "inst16" (rect 8 208 36 225)(font "Intel Clear" ))
 	(port
 		(pt 0 72)
 		(input)
@@ -2307,6 +2341,16 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 328 -320)
 	(pt 336 -320)
+)
+(connector
+	(pt 896 -312)
+	(pt 808 -312)
+	(bus)
+)
+(connector
+	(pt 808 -312)
+	(pt 808 -320)
+	(bus)
 )
 (junction (pt 160 344))
 (junction (pt 488 -200))

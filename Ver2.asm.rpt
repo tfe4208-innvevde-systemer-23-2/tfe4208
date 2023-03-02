@@ -1,5 +1,5 @@
 Assembler report for Ver2
-Mon Feb 27 14:31:16 2023
+Thu Mar 02 14:52:08 2023
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -38,7 +38,7 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon Feb 27 14:31:16 2023 ;
+; Assembler Status      ; Successful - Thu Mar 02 14:52:08 2023 ;
 ; Revision Name         ; Ver2                                  ;
 ; Top-level Entity Name ; Lab7                                  ;
 ; Family                ; Cyclone IV E                          ;
@@ -79,7 +79,7 @@ refer to the applicable agreement for further details.
 ; Option         ; Setting                                                                     ;
 +----------------+-----------------------------------------------------------------------------+
 ; JTAG usercode  ; 0xFFFFFFFF                                                                  ;
-; Checksum       ; 0x00C70212                                                                  ;
+; Checksum       ; 0x00C85F3E                                                                  ;
 +----------------+-----------------------------------------------------------------------------+
 
 
@@ -89,13 +89,13 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Mon Feb 27 14:31:12 2023
+    Info: Processing started: Thu Mar 02 14:52:04 2023
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Lab7 -c Ver2
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4737 megabytes
-    Info: Processing ended: Mon Feb 27 14:31:16 2023
+    Info: Peak virtual memory: 4732 megabytes
+    Info: Processing ended: Thu Mar 02 14:52:08 2023
     Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:04
 
