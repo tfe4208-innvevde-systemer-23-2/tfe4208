@@ -20,3 +20,5 @@ incremental_db/
 *.cdb
 
 db/
+
+*.log
