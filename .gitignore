@@ -16,3 +16,5 @@
 *.tmw_info
 
 incremental_db/
+
+*.cdb
