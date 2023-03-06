@@ -26,3 +26,5 @@ db/
 *.pin
 
 *.qws
+
+*.smsg
