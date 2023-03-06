@@ -22,3 +22,7 @@ incremental_db/
 db/
 
 *.log
+
+*.pin
+
+*.qws
