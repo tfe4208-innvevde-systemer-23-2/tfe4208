@@ -1,0 +1,4 @@
+ClockScaler.sv
+fsm.sv
+SPI.sv
+SiPo.sv
