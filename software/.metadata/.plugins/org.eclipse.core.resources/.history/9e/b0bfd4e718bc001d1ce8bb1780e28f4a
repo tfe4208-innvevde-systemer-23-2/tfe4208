@@ -34,7 +34,6 @@ void pantilt_configure_horizontal(pantilt_dev *dev, uint32_t duty_cycle);
 void pantilt_set_angle_vertical(pantilt_dev *dev, uint8_t verticalAngle);
 void pantilt_set_angle_horizontal(pantilt_dev *dev, uint8_t horizontalAngle);
 void pantilt_set_angles(pantilt_dev *dev, uint8_t verticalAngel, uint8_t horizontalAngle);
-uint32_t pantilt_calculate_duty(uint8_t angle);
 void pantilt_start_vertical(pantilt_dev *dev);
 void pantilt_start_horizontal(pantilt_dev *dev);
 void pantilt_stop_vertical(pantilt_dev *dev);

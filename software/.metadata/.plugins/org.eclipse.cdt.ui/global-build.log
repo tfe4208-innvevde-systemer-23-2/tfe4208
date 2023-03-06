@@ -745,3 +745,214 @@ Info: Building ../pantiltcontroll_bsp/
 C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
 [BSP build complete]
 [pantiltcontroll build complete]
+12:01:25 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+[pantiltcontroll build complete]
+12:03:39 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+[pantiltcontroll build complete]
+12:05:55 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+[pantiltcontroll build complete]
+12:06:59 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+[pantiltcontroll build complete]
+12:42:19 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:43:35 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:43:58 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:44:48 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:45:26 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:45:54 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:47:12 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:47:31 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:47:47 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:48:07 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]
+12:48:33 **** Incremental Build of configuration Nios II for project pantiltcontroll ****
+make all 
+Info: Building ../pantiltcontroll_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pantiltcontroll_bsp/
+[BSP build complete]
+Info: Compiling app.c to obj/default/app.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/app.o app.c
+Info: Compiling pantilt/pantilt.c to obj/default/pantilt/pantilt.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pantiltcontroll_bsp//HAL/inc -I../pantiltcontroll_bsp/ -I../pantiltcontroll_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/pantilt/pantilt.o pantilt/pantilt.c
+Info: Linking pantiltcontroll.elf
+nios2-elf-g++  -T'../pantiltcontroll_bsp//linker.x' -msys-crt0='../pantiltcontroll_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pantiltcontroll_bsp/   -Wl,-Map=pantiltcontroll.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pantiltcontroll.elf obj/default/app.o obj/default/pantilt/pantilt.o obj/default/pantilt/pwm/pwm.o -lm -msys-lib=m
+nios2-elf-insert pantiltcontroll.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE2_115_SOPC --quartus_project_dir "C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208" --jdi C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../Ver2.jdi --sopcinfo C:/Users/kriss/Desktop/NTNU/InnvevdDesignprosjekt/tfe4208/software/pantiltcontroll_bsp/../../DE2_115_SOPC.sopcinfo
+Info: (pantiltcontroll.elf) 17 KBytes program size (code + initialized data).
+Info:                       177 KBytes free for stack + heap.
+Info: Creating pantiltcontroll.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pantiltcontroll.elf >pantiltcontroll.objdump
+[pantiltcontroll build complete]

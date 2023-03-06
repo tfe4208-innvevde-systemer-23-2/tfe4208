@@ -800,7 +800,7 @@ int main(void) {
     // Center servos.
     pantilt_configure_vertical(&pantilt, PANTILT_PWM_V_MIN_DUTY_CYCLE_US);
    402d0:	e0bffe04 	addi	r2,fp,-8
-   402d4:	0140fa04 	movi	r5,1000
+   402d4:	01401904 	movi	r5,100
    402d8:	1009883a 	mov	r4,r2
    402dc:	00404980 	call	40498 <pantilt_configure_vertical>
     pantilt_configure_horizontal(&pantilt, PANTILT_PWM_H_MIN_DUTY_CYCLE_US);
@@ -826,7 +826,7 @@ int main(void) {
 
         // bottom to top
         v_duty_us = PANTILT_PWM_V_MIN_DUTY_CYCLE_US;
-   40310:	0080fa04 	movi	r2,1000
+   40310:	00801904 	movi	r2,100
    40314:	e0bffc15 	stw	r2,-16(fp)
         do {
             pantilt_configure_vertical(&pantilt, v_duty_us);
@@ -843,7 +843,7 @@ int main(void) {
    40338:	0040acc0 	call	40acc <usleep>
         } while (v_duty_us <= PANTILT_PWM_V_MAX_DUTY_CYCLE_US);
    4033c:	e0bffc17 	ldw	r2,-16(fp)
-   40340:	1081f470 	cmpltui	r2,r2,2001
+   40340:	108232f0 	cmpltui	r2,r2,2251
    40344:	103ff41e 	bne	r2,zero,40318 <__alt_data_end+0xfffce318>
 
         // left to right
@@ -870,7 +870,7 @@ int main(void) {
 
         // top to bottom
         v_duty_us = PANTILT_PWM_V_MAX_DUTY_CYCLE_US;
-   40380:	0081f404 	movi	r2,2000
+   40380:	00823284 	movi	r2,2250
    40384:	e0bffc15 	stw	r2,-16(fp)
         do {
             pantilt_configure_vertical(&pantilt, v_duty_us);
@@ -887,7 +887,7 @@ int main(void) {
    403a8:	0040acc0 	call	40acc <usleep>
         } while (PANTILT_PWM_V_MIN_DUTY_CYCLE_US <= v_duty_us);
    403ac:	e0bffc17 	ldw	r2,-16(fp)
-   403b0:	1080fa28 	cmpgeui	r2,r2,1000
+   403b0:	10801928 	cmpgeui	r2,r2,100
    403b4:	103ff41e 	bne	r2,zero,40388 <__alt_data_end+0xfffce388>
 
         // left to right
@@ -995,7 +995,7 @@ void pantilt_configure_vertical(pantilt_dev *dev, uint32_t duty_cycle) {
    404ac:	e17fff15 	stw	r5,-4(fp)
     // Need to compensate for inverted servo rotation.
     duty_cycle = PANTILT_PWM_V_MAX_DUTY_CYCLE_US - duty_cycle + PANTILT_PWM_V_MIN_DUTY_CYCLE_US;
-   404b0:	00c2ee04 	movi	r3,3000
+   404b0:	00c24b84 	movi	r3,2350
    404b4:	e0bfff17 	ldw	r2,-4(fp)
    404b8:	1885c83a 	sub	r2,r3,r2
    404bc:	e0bfff15 	stw	r2,-4(fp)

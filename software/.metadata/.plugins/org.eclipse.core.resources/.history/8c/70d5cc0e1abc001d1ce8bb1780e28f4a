@@ -64,57 +64,19 @@ void pantilt_configure_horizontal(pantilt_dev *dev, uint32_t duty_cycle) {
                   PANTILT_PWM_CLOCK_FREQ_HZ);
 }
 
-/**
- * pantilt_set_angle_vertical
- *
- * Set the horizontal angle.
- *
- * @param dev pantilt device structure.
- * @param verticalAngle in degrees [0-180].
- */
 void pantilt_set_angle_vertical(pantilt_dev *dev, uint8_t verticalAngle) {
-	uint32_t duty_cycle = pantilt_calculate_duty(verticalAngle);
-	pantilt_configure_vertical(dev, duty_cycle);
-}
 
-/**
- * pantilt_set_angle_horizontal
- *
- * Set the horizontal angle.
- *
- * @param dev pantilt device structure.
- * @param horizontalAngle in degrees [0-180].
- */
+}
 void pantilt_set_angle_horizontal(pantilt_dev *dev, uint8_t horizontalAngle) {
-	uint32_t duty_cycle = pantilt_calculate_duty(horizontalAngle);
-	pantilt_configure_horizontal(dev, duty_cycle);
-}
 
-/**
- * pantilt_set_angles
- *
- * Set both the angles.
- *
- * @param dev pantilt device structure.
- * @param verticalAngel in degrees [0-180].
- * @param horizontalAngle in degrees [0-180].
- */
+}
 void pantilt_set_angles(pantilt_dev *dev, uint8_t verticalAngel, uint8_t horizontalAngle) {
 	pantilt_set_angle_vertical(dev, verticalAngel);
 	pantilt_set_angle_horizontal(dev, horizontalAngle);
 }
 
-/**
- * pantilt_calculate_duty
- *
- * Calculate the duty cycle needed for an angle.
- *
- * @param angle in degrees [0-180].
- * @return duty_cycle pwm duty cycle in us.
- */
 uint32_t pantilt_calculate_duty(uint8_t angle) {
-	uint32_t duty_cycle = (PANTILT_PWM_H_MAX_DUTY_CYCLE_US - PANTILT_PWM_H_MIN_DUTY_CYCLE_US)*(angle/180);
-	return duty_cycle;
+
 }
 
 /**
