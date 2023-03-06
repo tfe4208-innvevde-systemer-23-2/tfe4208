@@ -28,3 +28,5 @@ db/
 *.qws
 
 *.smsg
+
+*.jdi
