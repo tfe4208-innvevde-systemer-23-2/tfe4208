@@ -1,20 +1,27 @@
 // Copyright
 
-module fsm (
-    parameter SAMPLE_TIME       = 2;                // Clock cycles needed for ADC sampling
+module fsm #(
+    parameter SAMPLE_TIME       = 2,                // Clock cycles needed for ADC sampling
     parameter NUM_BITS          = 12                // Excluding Null bit
 ) (
-    input  logic            clk;
-    input  logic            rst;
+    input  logic            clk,
+    input  logic            rst,
 
-    output logic            dataInEnable;
-    output logic            chipEnable;
-    output logic            busClkEnable;
+    output logic            dataInEnable,
+    output logic            chipEnable,
+    output logic            busClkEnable,
     output logic            dataOutValid
 );
 
+    // -- FSM States
+    typedef enum logic[1:0] {IDLE, CHIPENABLE, SAMPLE, TRANSFER} states;
+    states state;
+    states nextState;
+
     // -- Internal signals
-    logic[$clod2(NUM_BITS+1)-1:0] cnt;        // Counter for multi-cycle states
+    logic[$clog2(NUM_BITS+1)-1:0]   cnt;                        // Counter for multi-cycle states
+    logic                           dataOutValidInternal;       // Combinatorial signal for dataOutValid
+                                                                //  ^ This also removes any risk of glitches on the output 
 
     // -- Main counter
     always_ff @(posedge clk or posedge rst) begin
@@ -31,15 +38,21 @@ module fsm (
         end
     end
 
-    // -- FSM States
-    enum logic[1:0] {INIT, CHIPENABLE, SAMPLE, TRANSFER} states;
-    states state;
-    states nextState;
+    // -- DataOutValid control
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            dataOutValid <= 1'b0;
+        end
+        else begin
+            dataOutValid <= dataOutValidInternal;
+        end
+    end
+    
 
     // -- Main FSM
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
-            state <= INIT;
+            state <= IDLE;
         end else begin
             state <= nextState;
         end
@@ -47,13 +60,13 @@ module fsm (
 
     always_comb begin
         case (state)
-            INIT: begin
+            IDLE: begin
                 nextState <= CHIPENABLE;
 
                 dataInEnable = 0;
                 chipEnable = 0;
                 busClkEnable = 0;
-                dataOutValid = 0;
+                dataOutValidInternal = 0;
             end
 
             CHIPENABLE: begin
@@ -80,11 +93,11 @@ module fsm (
             TRANSFER: begin
                 if (cnt == NUM_BITS) begin      // Including one null-bit cycle
                     nextState <= CHIPENABLE;
-                    dataOutValid = 1;           // This might lead to latch, but oh well
+                    dataOutValidInternal = 1;           // This might lead to latch, but oh well
                 end 
                 else begin
                     nextState <= TRANSFER;
-                    dataOutValid = 0;
+                    dataOutValidInternal = 0;
                 end
 
                 dataInEnable = 1;
@@ -92,7 +105,7 @@ module fsm (
                 busClkEnable = 1;
             end
 
-            default: nextState = INIT;
+            default: nextState = IDLE;
         endcase
     end
 
