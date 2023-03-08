@@ -45,7 +45,7 @@ module SPI #(
                 .dataOut    (dataOut[i])
             );
     end
-    //endgenerate gen
+    endgenerate
 
     // -- FSM
     fsm #(

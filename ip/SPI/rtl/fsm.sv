@@ -13,17 +13,17 @@ module fsm #(
     output logic            dataOutValid
 );
 
-    // -- FSM States
+    // -- FSM States --
     typedef enum logic[1:0] {IDLE, CHIPENABLE, SAMPLE, TRANSFER} states;
     states state;
     states nextState;
 
-    // -- Internal signals
+    // -- Internal signals --
     logic[$clog2(NUM_BITS+1)-1:0]   cnt;                        // Counter for multi-cycle states
     logic                           dataOutValidInternal;       // Combinatorial signal for dataOutValid
                                                                 //  ^ This also removes any risk of glitches on the output 
 
-    // -- Main counter
+    // -- Main counter --
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             cnt <= '0;
@@ -33,23 +33,32 @@ module fsm #(
                 cnt <= '0;
             end
             else begin
-                cnt <= cnt + 1;
+                cnt <= cnt + 1'b1;
             end
         end
     end
 
-    // -- DataOutValid control
+    // -- DataOutValid control --
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             dataOutValid <= 1'b0;
         end
         else begin
-            dataOutValid <= dataOutValidInternal;
+            if (state == TRANSFER) begin
+                if (nextState == CHIPENABLE) begin
+                    dataOutValid <= 1'b1;
+                end
+                else begin
+                    dataOutValid <= 1'b0;
+                end
+            end
+            else begin
+                dataOutValid <= dataOutValid;
+            end
         end
     end
     
-
-    // -- Main FSM
+    // -- Main FSM --
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             state <= IDLE;
@@ -66,7 +75,6 @@ module fsm #(
                 dataInEnable = 0;
                 chipEnable = 0;
                 busClkEnable = 0;
-                dataOutValidInternal = 0;
             end
 
             CHIPENABLE: begin
@@ -93,11 +101,9 @@ module fsm #(
             TRANSFER: begin
                 if (cnt == NUM_BITS) begin      // Including one null-bit cycle
                     nextState <= CHIPENABLE;
-                    dataOutValidInternal = 1;           // This might lead to latch, but oh well
                 end 
                 else begin
                     nextState <= TRANSFER;
-                    dataOutValidInternal = 0;
                 end
 
                 dataInEnable = 1;
