@@ -35,7 +35,7 @@ module SPI #(
     // -- Generate SiPo registers
     genvar i;
     generate
-        for (i = 0; i < NUM_SLAVES; i++) begin
+        for (i = 0; i < NUM_SLAVES; i++) begin : sipoGen
             SiPo #(
                 .NUM_BITS   (NUM_BITS)
             ) u_SiPo (
@@ -44,8 +44,8 @@ module SPI #(
                 .enable     (dataInEnable),
                 .dataOut    (dataOut[i])
             );
-        end
-    endgenerate
+    end
+    //endgenerate gen
 
     // -- FSM
     fsm #(
