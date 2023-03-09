@@ -35,43 +35,43 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   8 .debug_aranges 00000ed8  00000000  00000000  00012cc8  2**3
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_info   00023514  00000000  00000000  00013ba0  2**0
+  9 .debug_info   000234e1  00000000  00000000  00013ba0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_abbrev 00008fd6  00000000  00000000  000370b4  2**0
+ 10 .debug_abbrev 00008fd6  00000000  00000000  00037081  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_line   0000b46c  00000000  00000000  0004008a  2**0
+ 11 .debug_line   0000b46c  00000000  00000000  00040057  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_frame  000020f4  00000000  00000000  0004b4f8  2**2
+ 12 .debug_frame  000020f4  00000000  00000000  0004b4c4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    00003804  00000000  00000000  0004d5ec  2**0
+ 13 .debug_str    00003878  00000000  00000000  0004d5b8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    00017868  00000000  00000000  00050df0  2**0
+ 14 .debug_loc    00017868  00000000  00000000  00050e30  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_alt_sim_info 00000030  00000000  00000000  00068658  2**2
+ 15 .debug_alt_sim_info 00000030  00000000  00000000  00068698  2**2
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_ranges 000018c0  00000000  00000000  00068688  2**3
+ 16 .debug_ranges 000018c0  00000000  00000000  000686c8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .thread_model 00000003  00000000  00000000  0006cfe6  2**0
+ 17 .thread_model 00000003  00000000  00000000  0006d026  2**0
                   CONTENTS, READONLY
- 18 .cpu          00000003  00000000  00000000  0006cfe9  2**0
+ 18 .cpu          00000003  00000000  00000000  0006d029  2**0
                   CONTENTS, READONLY
- 19 .qsys         00000001  00000000  00000000  0006cfec  2**0
+ 19 .qsys         00000001  00000000  00000000  0006d02c  2**0
                   CONTENTS, READONLY
- 20 .simulation_enabled 00000001  00000000  00000000  0006cfed  2**0
+ 20 .simulation_enabled 00000001  00000000  00000000  0006d02d  2**0
                   CONTENTS, READONLY
- 21 .stderr_dev   00000009  00000000  00000000  0006cfee  2**0
+ 21 .stderr_dev   00000009  00000000  00000000  0006d02e  2**0
                   CONTENTS, READONLY
- 22 .stdin_dev    00000009  00000000  00000000  0006cff7  2**0
+ 22 .stdin_dev    00000009  00000000  00000000  0006d037  2**0
                   CONTENTS, READONLY
- 23 .stdout_dev   00000009  00000000  00000000  0006d000  2**0
+ 23 .stdout_dev   00000009  00000000  00000000  0006d040  2**0
                   CONTENTS, READONLY
- 24 .sopc_system_name 0000000c  00000000  00000000  0006d009  2**0
+ 24 .sopc_system_name 0000000c  00000000  00000000  0006d049  2**0
                   CONTENTS, READONLY
- 25 .quartus_project_dir 00000036  00000000  00000000  0006d015  2**0
+ 25 .quartus_project_dir 00000025  00000000  00000000  0006d055  2**0
                   CONTENTS, READONLY
- 26 .jdi          0000886c  00000000  00000000  0006d04b  2**0
+ 26 .jdi          00004b80  00000000  00000000  0006d07a  2**0
                   CONTENTS, READONLY
- 27 .sopcinfo     00034c83  00000000  00000000  000758b7  2**0
+ 27 .sopcinfo     00036898  00000000  00000000  00071bfa  2**0
                   CONTENTS, READONLY
 SYMBOL TABLE:
 00040000 l    d  .entry	00000000 .entry
@@ -1085,38 +1085,18 @@ unsigned long crcCI(unsigned char * input_data, unsigned long input_data_length)
    4038c:	f800283a 	ret
 
 00040390 <reflect>:
- * Returns:   The reflection of the original data.
- *
- *********************************************************************/
-static unsigned long
-reflect(unsigned long data, unsigned char nBits)
-{
    40390:	defffb04 	addi	sp,sp,-20
    40394:	df000415 	stw	fp,16(sp)
    40398:	df000404 	addi	fp,sp,16
    4039c:	e13ffe15 	stw	r4,-8(fp)
    403a0:	2805883a 	mov	r2,r5
    403a4:	e0bfff05 	stb	r2,-4(fp)
-  unsigned long  reflection = 0x00000000;
    403a8:	e03ffc15 	stw	zero,-16(fp)
-  unsigned char  bit;
-
-  /*
-   * Reflect the data about the center bit.
-   */
-  for (bit = 0; bit < nBits; ++bit)
    403ac:	e03ffd05 	stb	zero,-12(fp)
    403b0:	00001306 	br	40400 <reflect+0x70>
-  {
-    /*
-     * If the LSB bit is set, set the reflection of it.
-     */
-    if (data & 0x01)
    403b4:	e0bffe17 	ldw	r2,-8(fp)
    403b8:	1080004c 	andi	r2,r2,1
    403bc:	10000a26 	beq	r2,zero,403e8 <reflect+0x58>
-    {
-      reflection |= (1 << ((nBits - 1) - bit));
    403c0:	e0bfff03 	ldbu	r2,-4(fp)
    403c4:	10ffffc4 	addi	r3,r2,-1
    403c8:	e0bffd03 	ldbu	r2,-12(fp)
@@ -1127,67 +1107,32 @@ reflect(unsigned long data, unsigned char nBits)
    403dc:	e0bffc17 	ldw	r2,-16(fp)
    403e0:	10c4b03a 	or	r2,r2,r3
    403e4:	e0bffc15 	stw	r2,-16(fp)
-    }
-
-    data = (data >> 1);
    403e8:	e0bffe17 	ldw	r2,-8(fp)
    403ec:	1004d07a 	srli	r2,r2,1
    403f0:	e0bffe15 	stw	r2,-8(fp)
-  unsigned char  bit;
-
-  /*
-   * Reflect the data about the center bit.
-   */
-  for (bit = 0; bit < nBits; ++bit)
    403f4:	e0bffd03 	ldbu	r2,-12(fp)
    403f8:	10800044 	addi	r2,r2,1
    403fc:	e0bffd05 	stb	r2,-12(fp)
    40400:	e0fffd03 	ldbu	r3,-12(fp)
    40404:	e0bfff03 	ldbu	r2,-4(fp)
    40408:	18bfea36 	bltu	r3,r2,403b4 <__alt_data_end+0xfffce3b4>
-    }
-
-    data = (data >> 1);
-  }
-
-  return (reflection);
    4040c:	e0bffc17 	ldw	r2,-16(fp)
-
-} /* reflect() */
    40410:	e037883a 	mov	sp,fp
    40414:	df000017 	ldw	fp,0(sp)
    40418:	dec00104 	addi	sp,sp,4
    4041c:	f800283a 	ret
 
 00040420 <crcSlow>:
- * Returns:   The CRC of the message.
- *
- *********************************************************************/
-crc
-crcSlow(unsigned char const message[], int nBytes)
-{
    40420:	defff904 	addi	sp,sp,-28
    40424:	dfc00615 	stw	ra,24(sp)
    40428:	df000515 	stw	fp,20(sp)
    4042c:	df000504 	addi	fp,sp,20
    40430:	e13ffe15 	stw	r4,-8(fp)
    40434:	e17fff15 	stw	r5,-4(fp)
-    crc            remainder = INITIAL_REMAINDER;
    40438:	00bfffc4 	movi	r2,-1
    4043c:	e0bffb15 	stw	r2,-20(fp)
-
-
-    /*
-     * Perform modulo-2 division, a byte at a time.
-     */
-    for (byte = 0; byte < nBytes; ++byte)
    40440:	e03ffc15 	stw	zero,-16(fp)
    40444:	00002506 	br	404dc <crcSlow+0xbc>
-    {
-        /*
-         * Bring the next byte into the remainder.
-         */
-        remainder ^= (REFLECT_DATA(message[byte]) << (WIDTH - 8));
    40448:	e0bffc17 	ldw	r2,-16(fp)
    4044c:	e0fffe17 	ldw	r3,-8(fp)
    40450:	1885883a 	add	r2,r3,r2
@@ -1201,23 +1146,11 @@ crcSlow(unsigned char const message[], int nBytes)
    40470:	e0bffb17 	ldw	r2,-20(fp)
    40474:	10c4f03a 	xor	r2,r2,r3
    40478:	e0bffb15 	stw	r2,-20(fp)
-
-        /*
-         * Perform modulo-2 division, a bit at a time.
-         */
-        for (bit = 8; bit > 0; --bit)
    4047c:	00800204 	movi	r2,8
    40480:	e0bffd05 	stb	r2,-12(fp)
    40484:	00001006 	br	404c8 <crcSlow+0xa8>
-        {
-            /*
-             * Try to divide the current data bit.
-             */
-            if (remainder & TOPBIT)
    40488:	e0bffb17 	ldw	r2,-20(fp)
    4048c:	1000080e 	bge	r2,zero,404b0 <crcSlow+0x90>
-            {
-                remainder = (remainder << 1) ^ POLYNOMIAL;
    40490:	e0bffb17 	ldw	r2,-20(fp)
    40494:	1085883a 	add	r2,r2,r2
    40498:	1007883a 	mov	r3,r2
@@ -1226,48 +1159,24 @@ crcSlow(unsigned char const message[], int nBytes)
    404a4:	1884f03a 	xor	r2,r3,r2
    404a8:	e0bffb15 	stw	r2,-20(fp)
    404ac:	00000306 	br	404bc <crcSlow+0x9c>
-            }
-            else
-            {
-                remainder = (remainder << 1);
    404b0:	e0bffb17 	ldw	r2,-20(fp)
    404b4:	1085883a 	add	r2,r2,r2
    404b8:	e0bffb15 	stw	r2,-20(fp)
-        remainder ^= (REFLECT_DATA(message[byte]) << (WIDTH - 8));
-
-        /*
-         * Perform modulo-2 division, a bit at a time.
-         */
-        for (bit = 8; bit > 0; --bit)
    404bc:	e0bffd03 	ldbu	r2,-12(fp)
    404c0:	10bfffc4 	addi	r2,r2,-1
    404c4:	e0bffd05 	stb	r2,-12(fp)
    404c8:	e0bffd03 	ldbu	r2,-12(fp)
    404cc:	103fee1e 	bne	r2,zero,40488 <__alt_data_end+0xfffce488>
-
-
-    /*
-     * Perform modulo-2 division, a byte at a time.
-     */
-    for (byte = 0; byte < nBytes; ++byte)
    404d0:	e0bffc17 	ldw	r2,-16(fp)
    404d4:	10800044 	addi	r2,r2,1
    404d8:	e0bffc15 	stw	r2,-16(fp)
    404dc:	e0fffc17 	ldw	r3,-16(fp)
    404e0:	e0bfff17 	ldw	r2,-4(fp)
    404e4:	18bfd816 	blt	r3,r2,40448 <__alt_data_end+0xfffce448>
-    }
-
-    /*
-     * The final remainder is the CRC result.
-     */
-    return (REFLECT_REMAINDER(remainder) ^ FINAL_XOR_VALUE);
    404e8:	01400804 	movi	r5,32
    404ec:	e13ffb17 	ldw	r4,-20(fp)
    404f0:	00403900 	call	40390 <reflect>
    404f4:	0084303a 	nor	r2,zero,r2
-
-}   /* crcSlow() */
    404f8:	e037883a 	mov	sp,fp
    404fc:	dfc00117 	ldw	ra,4(sp)
    40500:	df000017 	ldw	fp,0(sp)
@@ -1275,48 +1184,19 @@ crcSlow(unsigned char const message[], int nBytes)
    40508:	f800283a 	ret
 
 0004050c <crcInit>:
- * Returns:   None defined.
- *
- *********************************************************************/
-void
-crcInit(void)
-{
    4050c:	defffc04 	addi	sp,sp,-16
    40510:	df000315 	stw	fp,12(sp)
    40514:	df000304 	addi	fp,sp,12
-
-
-    /*
-     * Compute the remainder of each possible dividend.
-     */
-    for (dividend = 0; dividend < 256; ++dividend)
    40518:	e03ffe15 	stw	zero,-8(fp)
    4051c:	00002306 	br	405ac <crcInit+0xa0>
-    {
-        /*
-         * Start with the dividend followed by zeros.
-         */
-        remainder = dividend << (WIDTH - 8);
    40520:	e0bffe17 	ldw	r2,-8(fp)
    40524:	1004963a 	slli	r2,r2,24
    40528:	e0bffd15 	stw	r2,-12(fp)
-
-        /*
-         * Perform modulo-2 division, a bit at a time.
-         */
-        for (bit = 8; bit > 0; --bit)
    4052c:	00800204 	movi	r2,8
    40530:	e0bfff05 	stb	r2,-4(fp)
    40534:	00001006 	br	40578 <crcInit+0x6c>
-        {
-            /*
-             * Try to divide the current data bit.
-             */     
-            if (remainder & TOPBIT)
    40538:	e0bffd17 	ldw	r2,-12(fp)
    4053c:	1000080e 	bge	r2,zero,40560 <crcInit+0x54>
-            {
-                remainder = (remainder << 1) ^ POLYNOMIAL;
    40540:	e0bffd17 	ldw	r2,-12(fp)
    40544:	1085883a 	add	r2,r2,r2
    40548:	1007883a 	mov	r3,r2
@@ -1325,30 +1205,14 @@ crcInit(void)
    40554:	1884f03a 	xor	r2,r3,r2
    40558:	e0bffd15 	stw	r2,-12(fp)
    4055c:	00000306 	br	4056c <crcInit+0x60>
-            }
-            else
-            {
-                remainder = (remainder << 1);
    40560:	e0bffd17 	ldw	r2,-12(fp)
    40564:	1085883a 	add	r2,r2,r2
    40568:	e0bffd15 	stw	r2,-12(fp)
-        remainder = dividend << (WIDTH - 8);
-
-        /*
-         * Perform modulo-2 division, a bit at a time.
-         */
-        for (bit = 8; bit > 0; --bit)
    4056c:	e0bfff03 	ldbu	r2,-4(fp)
    40570:	10bfffc4 	addi	r2,r2,-1
    40574:	e0bfff05 	stb	r2,-4(fp)
    40578:	e0bfff03 	ldbu	r2,-4(fp)
    4057c:	103fee1e 	bne	r2,zero,40538 <__alt_data_end+0xfffce538>
-        }
-
-        /*
-         * Store the result into the table.
-         */
-        crcTable[dividend] = remainder;
    40580:	00800174 	movhi	r2,5
    40584:	108dfc04 	addi	r2,r2,14320
    40588:	e0fffe17 	ldw	r3,-8(fp)
@@ -1357,24 +1221,12 @@ crcInit(void)
    40594:	10c5883a 	add	r2,r2,r3
    40598:	e0fffd17 	ldw	r3,-12(fp)
    4059c:	10c00015 	stw	r3,0(r2)
-
-
-    /*
-     * Compute the remainder of each possible dividend.
-     */
-    for (dividend = 0; dividend < 256; ++dividend)
    405a0:	e0bffe17 	ldw	r2,-8(fp)
    405a4:	10800044 	addi	r2,r2,1
    405a8:	e0bffe15 	stw	r2,-8(fp)
    405ac:	e0bffe17 	ldw	r2,-8(fp)
    405b0:	10804010 	cmplti	r2,r2,256
    405b4:	103fda1e 	bne	r2,zero,40520 <__alt_data_end+0xfffce520>
-         * Store the result into the table.
-         */
-        crcTable[dividend] = remainder;
-    }
-
-}   /* crcInit() */
    405b8:	0001883a 	nop
    405bc:	e037883a 	mov	sp,fp
    405c0:	df000017 	ldw	fp,0(sp)
@@ -1382,31 +1234,16 @@ crcInit(void)
    405c8:	f800283a 	ret
 
 000405cc <crcFast>:
- * Returns:   The CRC of the message.
- *
- *********************************************************************/
-crc
-crcFast(unsigned char const message[], int nBytes)
-{
    405cc:	defff904 	addi	sp,sp,-28
    405d0:	dfc00615 	stw	ra,24(sp)
    405d4:	df000515 	stw	fp,20(sp)
    405d8:	df000504 	addi	fp,sp,20
    405dc:	e13ffe15 	stw	r4,-8(fp)
    405e0:	e17fff15 	stw	r5,-4(fp)
-    crc            remainder = INITIAL_REMAINDER;
    405e4:	00bfffc4 	movi	r2,-1
    405e8:	e0bffb15 	stw	r2,-20(fp)
-
-
-    /*
-     * Divide the message by the polynomial, a byte at a time.
-     */
-    for (byte = 0; byte < nBytes; ++byte)
    405ec:	e03ffc15 	stw	zero,-16(fp)
    405f0:	00001b06 	br	40660 <crcFast+0x94>
-    {
-        data = REFLECT_DATA(message[byte]) ^ (remainder >> (WIDTH - 8));
    405f4:	e0bffc17 	ldw	r2,-16(fp)
    405f8:	e0fffe17 	ldw	r3,-8(fp)
    405fc:	1885883a 	add	r2,r3,r2
@@ -1420,7 +1257,6 @@ crcFast(unsigned char const message[], int nBytes)
    4061c:	1004d63a 	srli	r2,r2,24
    40620:	1884f03a 	xor	r2,r3,r2
    40624:	e0bffd05 	stb	r2,-12(fp)
-      remainder = crcTable[data] ^ (remainder << 8);
    40628:	e0fffd03 	ldbu	r3,-12(fp)
    4062c:	00800174 	movhi	r2,5
    40630:	108dfc04 	addi	r2,r2,14320
@@ -1432,30 +1268,16 @@ crcFast(unsigned char const message[], int nBytes)
    40648:	1004923a 	slli	r2,r2,8
    4064c:	1884f03a 	xor	r2,r3,r2
    40650:	e0bffb15 	stw	r2,-20(fp)
-
-
-    /*
-     * Divide the message by the polynomial, a byte at a time.
-     */
-    for (byte = 0; byte < nBytes; ++byte)
    40654:	e0bffc17 	ldw	r2,-16(fp)
    40658:	10800044 	addi	r2,r2,1
    4065c:	e0bffc15 	stw	r2,-16(fp)
    40660:	e0fffc17 	ldw	r3,-16(fp)
    40664:	e0bfff17 	ldw	r2,-4(fp)
    40668:	18bfe216 	blt	r3,r2,405f4 <__alt_data_end+0xfffce5f4>
-    }
-
-    /*
-     * The final remainder is the CRC.
-     */
-    return (REFLECT_REMAINDER(remainder) ^ FINAL_XOR_VALUE);
    4066c:	01400804 	movi	r5,32
    40670:	e13ffb17 	ldw	r4,-20(fp)
    40674:	00403900 	call	40390 <reflect>
    40678:	0084303a 	nor	r2,zero,r2
-
-}   /* crcFast() */
    4067c:	e037883a 	mov	sp,fp
    40680:	dfc00117 	ldw	ra,4(sp)
    40684:	df000017 	ldw	fp,0(sp)
@@ -15593,27 +15415,16 @@ int ALT_ISATTY (int file)
    4d974:	f800283a 	ret
 
 0004d978 <alt_load_section>:
- */
-
-static void ALT_INLINE alt_load_section (alt_u32* from, 
-                                         alt_u32* to, 
-                                         alt_u32* end)
-{
    4d978:	defffc04 	addi	sp,sp,-16
    4d97c:	df000315 	stw	fp,12(sp)
    4d980:	df000304 	addi	fp,sp,12
    4d984:	e13ffd15 	stw	r4,-12(fp)
    4d988:	e17ffe15 	stw	r5,-8(fp)
    4d98c:	e1bfff15 	stw	r6,-4(fp)
-  if (to != from)
    4d990:	e0fffe17 	ldw	r3,-8(fp)
    4d994:	e0bffd17 	ldw	r2,-12(fp)
    4d998:	18800c26 	beq	r3,r2,4d9cc <alt_load_section+0x54>
-  {
-    while( to != end )
    4d99c:	00000806 	br	4d9c0 <alt_load_section+0x48>
-    {
-      *to++ = *from++;
    4d9a0:	e0bffe17 	ldw	r2,-8(fp)
    4d9a4:	10c00104 	addi	r3,r2,4
    4d9a8:	e0fffe15 	stw	r3,-8(fp)
@@ -15622,20 +15433,9 @@ static void ALT_INLINE alt_load_section (alt_u32* from,
    4d9b4:	e13ffd15 	stw	r4,-12(fp)
    4d9b8:	18c00017 	ldw	r3,0(r3)
    4d9bc:	10c00015 	stw	r3,0(r2)
-                                         alt_u32* to, 
-                                         alt_u32* end)
-{
-  if (to != from)
-  {
-    while( to != end )
    4d9c0:	e0fffe17 	ldw	r3,-8(fp)
    4d9c4:	e0bfff17 	ldw	r2,-4(fp)
    4d9c8:	18bff51e 	bne	r3,r2,4d9a0 <__alt_data_end+0xfffdb9a0>
-    {
-      *to++ = *from++;
-    }
-  }
-}
    4d9cc:	0001883a 	nop
    4d9d0:	e037883a 	mov	sp,fp
    4d9d4:	df000017 	ldw	fp,0(sp)
@@ -15643,21 +15443,10 @@ static void ALT_INLINE alt_load_section (alt_u32* from,
    4d9dc:	f800283a 	ret
 
 0004d9e0 <alt_load>:
- * there is no bootloader, so this application is responsible for loading to
- * RAM any sections that are required.
- */  
-
-void alt_load (void)
-{
    4d9e0:	defffe04 	addi	sp,sp,-8
    4d9e4:	dfc00115 	stw	ra,4(sp)
    4d9e8:	df000015 	stw	fp,0(sp)
    4d9ec:	d839883a 	mov	fp,sp
-  /* 
-   * Copy the .rwdata section. 
-   */
-
-  alt_load_section (&__flash_rwdata_start, 
    4d9f0:	01800174 	movhi	r6,5
    4d9f4:	31872904 	addi	r6,r6,7332
    4d9f8:	01400174 	movhi	r5,5
@@ -15665,12 +15454,6 @@ void alt_load (void)
    4da00:	01000174 	movhi	r4,5
    4da04:	21072904 	addi	r4,r4,7332
    4da08:	004d9780 	call	4d978 <alt_load_section>
-
-  /*
-   * Copy the exception handler.
-   */
-
-  alt_load_section (&__flash_exceptions_start, 
    4da0c:	01800134 	movhi	r6,4
    4da10:	31809104 	addi	r6,r6,580
    4da14:	01400134 	movhi	r5,4
@@ -15678,12 +15461,6 @@ void alt_load (void)
    4da1c:	01000134 	movhi	r4,4
    4da20:	21000804 	addi	r4,r4,32
    4da24:	004d9780 	call	4d978 <alt_load_section>
-
-  /*
-   * Copy the .rodata section.
-   */
-
-  alt_load_section (&__flash_rodata_start, 
    4da28:	01800174 	movhi	r6,5
    4da2c:	31806e04 	addi	r6,r6,440
    4da30:	01400174 	movhi	r5,5
@@ -15691,16 +15468,8 @@ void alt_load (void)
    4da38:	01000174 	movhi	r4,5
    4da3c:	213eca04 	addi	r4,r4,-1240
    4da40:	004d9780 	call	4d978 <alt_load_section>
-  
-  /*
-   * Now ensure that the caches are in synch.
-   */
-  
-  alt_dcache_flush_all();
    4da44:	004ec000 	call	4ec00 <alt_dcache_flush_all>
-  alt_icache_flush_all();
    4da48:	004ede80 	call	4ede8 <alt_icache_flush_all>
-}
    4da4c:	0001883a 	nop
    4da50:	e037883a 	mov	sp,fp
    4da54:	dfc00117 	ldw	ra,4(sp)
@@ -15915,17 +15684,10 @@ void alt_main (void)
    4dbec:	0040b680 	call	40b68 <exit>
 
 0004dbf0 <__malloc_lock>:
- * configuration is single threaded, so there is nothing to do here. Note that 
- * this requires that malloc is never called by an interrupt service routine.
- */
-
-void __malloc_lock ( struct _reent *_r )
-{
    4dbf0:	defffe04 	addi	sp,sp,-8
    4dbf4:	df000115 	stw	fp,4(sp)
    4dbf8:	df000104 	addi	fp,sp,4
    4dbfc:	e13fff15 	stw	r4,-4(fp)
-}
    4dc00:	0001883a 	nop
    4dc04:	e037883a 	mov	sp,fp
    4dc08:	df000017 	ldw	fp,0(sp)
@@ -15933,17 +15695,10 @@ void __malloc_lock ( struct _reent *_r )
    4dc10:	f800283a 	ret
 
 0004dc14 <__malloc_unlock>:
-/*
- *
- */
-
-void __malloc_unlock ( struct _reent *_r )
-{
    4dc14:	defffe04 	addi	sp,sp,-8
    4dc18:	df000115 	stw	fp,4(sp)
    4dc1c:	df000104 	addi	fp,sp,4
    4dc20:	e13fff15 	stw	r4,-4(fp)
-}
    4dc24:	0001883a 	nop
    4dc28:	e037883a 	mov	sp,fp
    4dc2c:	df000017 	ldw	fp,0(sp)
@@ -17891,24 +17646,16 @@ void alt_dcache_flush_all (void)
    4ec44:	f800283a 	ret
 
 0004ec48 <alt_get_errno>:
-#undef errno
-
-extern int errno;
-
-static ALT_INLINE int* alt_get_errno(void)
-{
    4ec48:	defffe04 	addi	sp,sp,-8
    4ec4c:	dfc00115 	stw	ra,4(sp)
    4ec50:	df000015 	stw	fp,0(sp)
    4ec54:	d839883a 	mov	fp,sp
-  return ((alt_errno) ? alt_errno() : &errno);
    4ec58:	d0a00b17 	ldw	r2,-32724(gp)
    4ec5c:	10000326 	beq	r2,zero,4ec6c <alt_get_errno+0x24>
    4ec60:	d0a00b17 	ldw	r2,-32724(gp)
    4ec64:	103ee83a 	callr	r2
    4ec68:	00000106 	br	4ec70 <alt_get_errno+0x28>
    4ec6c:	d0a6d104 	addi	r2,gp,-25788
-}
    4ec70:	e037883a 	mov	sp,fp
    4ec74:	dfc00117 	ldw	ra,4(sp)
    4ec78:	df000017 	ldw	fp,0(sp)
@@ -17916,75 +17663,42 @@ static ALT_INLINE int* alt_get_errno(void)
    4ec80:	f800283a 	ret
 
 0004ec84 <alt_dev_llist_insert>:
-/*
- *
- */
-
-int alt_dev_llist_insert (alt_dev_llist* dev, alt_llist* list)
-{
    4ec84:	defffa04 	addi	sp,sp,-24
    4ec88:	dfc00515 	stw	ra,20(sp)
    4ec8c:	df000415 	stw	fp,16(sp)
    4ec90:	df000404 	addi	fp,sp,16
    4ec94:	e13ffe15 	stw	r4,-8(fp)
    4ec98:	e17fff15 	stw	r5,-4(fp)
-  /*
-   * check that the device exists, and that it has a valid name.
-   */
-
-  if (!dev || !dev->name)
    4ec9c:	e0bffe17 	ldw	r2,-8(fp)
    4eca0:	10000326 	beq	r2,zero,4ecb0 <alt_dev_llist_insert+0x2c>
    4eca4:	e0bffe17 	ldw	r2,-8(fp)
    4eca8:	10800217 	ldw	r2,8(r2)
    4ecac:	1000061e 	bne	r2,zero,4ecc8 <alt_dev_llist_insert+0x44>
-  {
-    ALT_ERRNO = EINVAL;
    4ecb0:	004ec480 	call	4ec48 <alt_get_errno>
    4ecb4:	1007883a 	mov	r3,r2
    4ecb8:	00800584 	movi	r2,22
    4ecbc:	18800015 	stw	r2,0(r3)
-    return -EINVAL;
    4ecc0:	00bffa84 	movi	r2,-22
    4ecc4:	00001306 	br	4ed14 <alt_dev_llist_insert+0x90>
-  
-  /*
-   * register the device.
-   */
-  
-  alt_llist_insert(list, &dev->llist);
    4ecc8:	e0bffe17 	ldw	r2,-8(fp)
    4eccc:	e0ffff17 	ldw	r3,-4(fp)
    4ecd0:	e0fffc15 	stw	r3,-16(fp)
    4ecd4:	e0bffd15 	stw	r2,-12(fp)
- */
-
-static ALT_INLINE void ALT_ALWAYS_INLINE alt_llist_insert(alt_llist* list, 
-                alt_llist* entry)
-{
-  entry->previous = list;
    4ecd8:	e0bffd17 	ldw	r2,-12(fp)
    4ecdc:	e0fffc17 	ldw	r3,-16(fp)
    4ece0:	10c00115 	stw	r3,4(r2)
-  entry->next     = list->next;
    4ece4:	e0bffc17 	ldw	r2,-16(fp)
    4ece8:	10c00017 	ldw	r3,0(r2)
    4ecec:	e0bffd17 	ldw	r2,-12(fp)
    4ecf0:	10c00015 	stw	r3,0(r2)
-
-  list->next->previous = entry;
    4ecf4:	e0bffc17 	ldw	r2,-16(fp)
    4ecf8:	10800017 	ldw	r2,0(r2)
    4ecfc:	e0fffd17 	ldw	r3,-12(fp)
    4ed00:	10c00115 	stw	r3,4(r2)
-  list->next           = entry;
    4ed04:	e0bffc17 	ldw	r2,-16(fp)
    4ed08:	e0fffd17 	ldw	r3,-12(fp)
    4ed0c:	10c00015 	stw	r3,0(r2)
-
-  return 0;  
    4ed10:	0005883a 	mov	r2,zero
-}
    4ed14:	e037883a 	mov	sp,fp
    4ed18:	dfc00117 	ldw	ra,4(sp)
    4ed1c:	df000017 	ldw	fp,0(sp)
@@ -17992,33 +17706,17 @@ static ALT_INLINE void ALT_ALWAYS_INLINE alt_llist_insert(alt_llist* list,
    4ed24:	f800283a 	ret
 
 0004ed28 <_do_ctors>:
-/*
- * Run the C++ static constructors.
- */
-
-void _do_ctors(void)
-{
    4ed28:	defffd04 	addi	sp,sp,-12
    4ed2c:	dfc00215 	stw	ra,8(sp)
    4ed30:	df000115 	stw	fp,4(sp)
    4ed34:	df000104 	addi	fp,sp,4
-  constructor* ctor;
-
-  for (ctor = &__CTOR_END__[-1]; ctor >= __CTOR_LIST__; ctor--)
    4ed38:	00800174 	movhi	r2,5
    4ed3c:	10bec904 	addi	r2,r2,-1244
    4ed40:	e0bfff15 	stw	r2,-4(fp)
    4ed44:	00000606 	br	4ed60 <_do_ctors+0x38>
-        (*ctor) (); 
    4ed48:	e0bfff17 	ldw	r2,-4(fp)
    4ed4c:	10800017 	ldw	r2,0(r2)
    4ed50:	103ee83a 	callr	r2
-
-void _do_ctors(void)
-{
-  constructor* ctor;
-
-  for (ctor = &__CTOR_END__[-1]; ctor >= __CTOR_LIST__; ctor--)
    4ed54:	e0bfff17 	ldw	r2,-4(fp)
    4ed58:	10bfff04 	addi	r2,r2,-4
    4ed5c:	e0bfff15 	stw	r2,-4(fp)
@@ -18026,8 +17724,6 @@ void _do_ctors(void)
    4ed64:	00800174 	movhi	r2,5
    4ed68:	10beca04 	addi	r2,r2,-1240
    4ed6c:	18bff62e 	bgeu	r3,r2,4ed48 <__alt_data_end+0xfffdcd48>
-        (*ctor) (); 
-}
    4ed70:	0001883a 	nop
    4ed74:	e037883a 	mov	sp,fp
    4ed78:	dfc00117 	ldw	ra,4(sp)
@@ -18036,33 +17732,17 @@ void _do_ctors(void)
    4ed84:	f800283a 	ret
 
 0004ed88 <_do_dtors>:
-/*
- * Run the C++ static destructors.
- */
-
-void _do_dtors(void)
-{
    4ed88:	defffd04 	addi	sp,sp,-12
    4ed8c:	dfc00215 	stw	ra,8(sp)
    4ed90:	df000115 	stw	fp,4(sp)
    4ed94:	df000104 	addi	fp,sp,4
-  destructor* dtor;
-
-  for (dtor = &__DTOR_END__[-1]; dtor >= __DTOR_LIST__; dtor--)
    4ed98:	00800174 	movhi	r2,5
    4ed9c:	10bec904 	addi	r2,r2,-1244
    4eda0:	e0bfff15 	stw	r2,-4(fp)
    4eda4:	00000606 	br	4edc0 <_do_dtors+0x38>
-        (*dtor) (); 
    4eda8:	e0bfff17 	ldw	r2,-4(fp)
    4edac:	10800017 	ldw	r2,0(r2)
    4edb0:	103ee83a 	callr	r2
-
-void _do_dtors(void)
-{
-  destructor* dtor;
-
-  for (dtor = &__DTOR_END__[-1]; dtor >= __DTOR_LIST__; dtor--)
    4edb4:	e0bfff17 	ldw	r2,-4(fp)
    4edb8:	10bfff04 	addi	r2,r2,-4
    4edbc:	e0bfff15 	stw	r2,-4(fp)
@@ -18070,8 +17750,6 @@ void _do_dtors(void)
    4edc4:	00800174 	movhi	r2,5
    4edc8:	10beca04 	addi	r2,r2,-1240
    4edcc:	18bff62e 	bgeu	r3,r2,4eda8 <__alt_data_end+0xfffdcda8>
-        (*dtor) (); 
-}
    4edd0:	0001883a 	nop
    4edd4:	e037883a 	mov	sp,fp
    4edd8:	dfc00117 	ldw	ra,4(sp)
