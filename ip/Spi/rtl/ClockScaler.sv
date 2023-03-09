@@ -1,28 +1,44 @@
 // Copyright
 
 module ClockScaler #(
-    parameter FREQ_SCALE       = 2                // Board-to-SPI clock frequency scale 
+    parameter FREQ_SCALE       = 2      // Board-to-SPI clock frequency scale 
+										//  ^ Has to be divisble by two
 ) (
     input  logic        clkIn,
     input  logic        rst,
     input  logic        clkEnable,
     output logic        clkOut
 );
-
-    logic[$clog2(FREQ_SCALE)-1:0]   cnt;
+	// Internal signals
+    logic[$clog2((FREQ_SCALE/2)-1)-1:0]   cnt;
+	logic 							comp;
+	 
+	// Internal assignments
+	assign comp = (cnt == (FREQ_SCALE/2)-1);
     
     always_ff @(posedge clkIn or posedge rst) begin
         if (rst) begin
             cnt <= '0;
         end
         else begin
-            cnt <= cnt + 1'b1;
-            if (cnt == (FREQ_SCALE-1)) begin
-                cnt <= '0;
-            end
+            if (comp) begin
+				cnt <= '0;
+			end	
+			else begin
+				cnt = cnt + 1'b1;
+			end
         end
-
-        clkOut <= (cnt < ((FREQ_SCALE)/2)) ? 1'b1 : 1'b0;
     end
+	 
+	always_ff @(posedge clkIn or posedge rst) begin
+	    if (rst) begin
+			clkOut <= 1'b0;
+		end
+		else begin
+			if (comp) begin
+				clkOut <= ~clkOut;
+			end
+		end
+	end
 
 endmodule
