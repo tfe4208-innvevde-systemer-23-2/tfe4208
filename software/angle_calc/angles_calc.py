@@ -19,7 +19,7 @@ t43 = t_t[5]
 
 C = 343.3 # m/s 
 
-a = 7.5
+a = 0.075  #cm
 #t21, t31, t41, t32, t42, t43 = 1
 r21 = [-0.5*a, np.sqrt(3)*a/2, 0] 
 r31 = [-a, 0, 0] 
@@ -37,9 +37,8 @@ t = [t21, t31, t41, t32, t42, t43]
 T = np.transpose(t)
 
 #r = np.empty(3, dtype=object)
-r = T / X
+r = np.divide(T, X)
 r = np.transpose(r)
-
 
 def theta():
     return np.rad2deg(np.arccos(r[2]/np.linalg.norm(r)))
