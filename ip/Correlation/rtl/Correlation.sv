@@ -1,6 +1,6 @@
 // Copyright
 
-module Mem #(
+module Correlation #(
     parameter NUM_BITS                  = 12;
     parameter NUM_SLAVES                = 5;
     parameter 
