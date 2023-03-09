@@ -1,6 +1,6 @@
 // Copyright
 
-module SPI_test;
+module Spi_test;
 
     // Parameters 
     parameter NUM_SLAVES = 1;                // Number of SPI channels
@@ -22,7 +22,7 @@ module SPI_test;
     logic[NUM_SLAVES-1:0][NUM_BITS-1:0]     dataOut;
 
     // DUT
-    SPI #(
+    Spi #(
         .NUM_SLAVES     (NUM_SLAVES),
         .NUM_BITS       (NUM_BITS),
         .SAMPLE_TIME    (SAMPLE_TIME),
@@ -47,9 +47,9 @@ module SPI_test;
     end
 
     // Generate clock
-    always #1 clk50M=!clk50M;
+    always #10 clk50M=!clk50M;
 
-    always #8 dataIn=!dataIn;
+    always #80 dataIn=!dataIn;
 
     always @(posedge clk50M) 
         $display($stime,,,"rst=%b busClk=%b DIN=%0b CE=%b Valid_out=%b DataOut=%b state=%b sipoEn=%b",

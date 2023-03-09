@@ -1,7 +1,12 @@
-// Copyright
+//////////////////////////////////////////////////
+// Title:           Spi
+// Author:          Mathias Støle
+// Date:            09.03.2023
+// Description:     
+////////////////////////////////////////////////////
 
 
-module SPI #(
+module Spi #(
     // -- Parameters --
     parameter NUM_SLAVES = 5,                // Number of SPI channels
     parameter NUM_BITS = 12,                 // Number of bits in SPI word
@@ -48,7 +53,7 @@ module SPI #(
     endgenerate
 
     // -- FSM
-    fsm #(
+    Fsm #(
         .SAMPLE_TIME        (SAMPLE_TIME),
         .NUM_BITS           (NUM_BITS)
     ) u_fsm (

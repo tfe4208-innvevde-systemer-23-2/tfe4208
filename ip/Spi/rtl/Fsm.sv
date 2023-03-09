@@ -1,6 +1,6 @@
 // Copyright
 
-module fsm #(
+module Fsm #(
     parameter SAMPLE_TIME       = 2,                // Clock cycles needed for ADC sampling
     parameter NUM_BITS          = 12                // Excluding Null bit
 ) (
@@ -20,8 +20,6 @@ module fsm #(
 
     // -- Internal signals --
     logic[$clog2(NUM_BITS+1)-1:0]   cnt;                        // Counter for multi-cycle states
-    logic                           dataOutValidInternal;       // Combinatorial signal for dataOutValid
-                                                                //  ^ This also removes any risk of glitches on the output 
 
     // -- Main counter --
     always_ff @(posedge clk or posedge rst) begin
@@ -44,17 +42,7 @@ module fsm #(
             dataOutValid <= 1'b0;
         end
         else begin
-            if (state == TRANSFER) begin
-                if (nextState == CHIPENABLE) begin
-                    dataOutValid <= 1'b1;
-                end
-                else begin
-                    dataOutValid <= 1'b0;
-                end
-            end
-            else begin
-                dataOutValid <= dataOutValid;
-            end
+            dataOutValid <= (state == TRANSFER) & (nextState == CHIPENABLE);
         end
     end
     
