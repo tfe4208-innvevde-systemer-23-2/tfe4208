@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.signal as signal
+import pyperclip
 
 
 def raspi_import(path, channels=5):
@@ -19,7 +20,7 @@ def theta(lags):  # Calculate the incident angle
 
 
 sample_period, data = raspi_import(
-    'en_mling2.bin')  # Import data from binary file
+    'rett_4.bin')  # Import data from binary file
 
 data = signal.detrend(data, axis=0)  # removes DC component for each channel
 num_of_samples = data.shape[0]  # returns shape of matrix
@@ -47,8 +48,10 @@ lags = [round(I[x21.argmax()])/31250, round(I[x31.argmax()])/31250, round(I[x41.
         round(I[x32.argmax()])/31250, round(I[x42.argmax()])/31250, round(I[x43.argmax()])/31250]
 
 print("Lags: ", lags)
+
 # print("Calculated angle: ", round(theta(lags), 1))
 
+"""
 plt.figure(figsize=(6, 3))
 plt.plot(x1)
 plt.plot(x2)
@@ -58,7 +61,9 @@ plt.ylabel("Spenning [V]")
 plt.show()
 
 plt.figure(figsize=(8, 4))
-plt.plot(I, x01)
+#plt.plot(I, x01)
 plt.xlabel("Forskyvning l")
 plt.ylabel("Krysskorrelasjon")
 plt.show()
+
+"""
