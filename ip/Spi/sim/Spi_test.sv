@@ -21,7 +21,7 @@ module Spi_test;
     logic                                   dataOutValid;
     logic[NUM_SLAVES-1:0][NUM_BITS-1:0]     dataOut;
 
-    // DUT
+    // Instantiate DUT
     Spi #(
         .NUM_SLAVES     (NUM_SLAVES),
         .NUM_BITS       (NUM_BITS),
@@ -49,9 +49,10 @@ module Spi_test;
     // Generate clock
     always #10 clk50M=!clk50M;
 
-    always #80 dataIn=!dataIn;
+    always #80 dataIn=!dataIn;          // Just "Make" some data
 
     always @(posedge clk50M) 
+        // This is just a dumb testbench not checking anything, just displaying
         $display($stime,,,"rst=%b busClk=%b DIN=%0b CE=%b Valid_out=%b DataOut=%b state=%b sipoEn=%b",
 	        rst, busClk, dataIn, chipEnable, dataOutValid, dataOut, dut.u_fsm.state, dut.dataInEnable);
    
