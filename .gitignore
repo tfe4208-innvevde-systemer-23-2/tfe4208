@@ -16,11 +16,12 @@ incremental_db/
 software/.metadata/
 
 # Build files from Eclipse
-#*.o
-#*.d
-#*.elf
-#*.objdump
-#*.map
+*.o
+*.d
+*.elf
+*.objdump
+*.map
+*libhal_bsp.a
 
 # Other useful ignores
 *.html

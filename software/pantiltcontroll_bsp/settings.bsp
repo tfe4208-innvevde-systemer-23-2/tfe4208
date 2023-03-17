@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>17.mar.2023 23:21:38</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1679091698080</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>17.mar.2023 23:26:04</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1679091964642</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\Maths\Desktop\tfe4208\software\pantiltcontroll_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\DE2_115_SOPC.sopcinfo</SopcDesignFile>
