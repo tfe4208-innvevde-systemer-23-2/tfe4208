@@ -15,6 +15,13 @@ db/
 incremental_db/
 software/.metadata/
 
+# Build files from Eclipse
+*.o
+*.d
+*.elf
+*.objdump
+*.map
+
 # Other useful ignores
 *.html
 *.xml
