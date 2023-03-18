@@ -20,6 +20,7 @@ module Fsm #(
 
     // -- Internal signals --
     logic[$clog2(NUM_BITS+1)-1:0]   cnt;                        // Counter for multi-cycle states
+    logic                           chipEnableInternal;
 
     // -- Main counter --
     always_ff @(posedge clk or posedge rst) begin
@@ -45,7 +46,12 @@ module Fsm #(
             dataOutValid <= (state == TRANSFER) & (nextState == CHIPENABLE);
         end
     end
-    
+
+    // -- ChipEnable delay
+    always_ff @(negedge clk) begin
+        chipEnable <= chipEnableInternal;       // Delay the chipEnable until negative flank
+    end
+
     // -- Main FSM --
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
@@ -61,15 +67,15 @@ module Fsm #(
                 nextState <= CHIPENABLE;
 
                 dataInEnable = 0;
-                chipEnable = 0;
+                chipEnableInternal = 0;
                 busClkEnable = 0;
             end
 
             CHIPENABLE: begin
                 nextState <= SAMPLE;
 
-                chipEnable = 1;
-                busClkEnable = 0;
+                chipEnableInternal = 1;
+                busClkEnable = 1;
                 dataInEnable = 0;
             end
 
@@ -82,7 +88,7 @@ module Fsm #(
                 end
 
                 dataInEnable = 0;
-                chipEnable = 0;
+                chipEnableInternal = 0;
                 busClkEnable = 1;
             end
 
@@ -95,7 +101,7 @@ module Fsm #(
                 end
 
                 dataInEnable = 1;
-                chipEnable = 0;
+                chipEnableInternal = 0;
                 busClkEnable = 1;
             end
 
