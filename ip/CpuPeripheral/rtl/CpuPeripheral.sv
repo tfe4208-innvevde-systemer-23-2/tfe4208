@@ -7,26 +7,28 @@
 
 module CpuPeripheral #(
     // -- Parameters --
-    parameter NUM_SLAVES = 5,                // Number of SPI channels
-    parameter NUM_BITS = 12,                 // Number of bits in SPI word
-    parameter SAMPLE_TIME = 2,               // Number of cycles to wait for ADCs to sample data
-    parameter FREQ_SCALE = 10                // Board-to-SPI clock frequency scale 
-    parameter MAX_LAGS = 17                  // Maximum Correlation delay in num of samples
+    parameter NUM_SLAVES = 4,                // Number of SPI channels
+    parameter MAX_LAGS = 17,                 // Maximum Correlation delay in num of samples (has to be < 32)
     parameter CPU_BITS = 32                  // Number of bits used for CPU communication
 ) (
     // -- Clock and reset
     input  logic                                        clk,
-    input  logic                                        rst,
+    input  logic                                        reset,          // Avalon Slave uses "reset" instead of "rst" :(
 
     // -- CPU interface (Avalon--MM Slave)
-    output logic[CPU_BITS-1:0]                          result,
+    output logic[31:0]                                  readdata,
     
     // -- FPGA interface
-    input  logic[NUM_SLAVES-1:0][$clog2(MAX_LAGS):0]    lags,
-    input  logic                                        //Something here
+    input  logic[23:0]                                  dataIn,         // Avalog Slaves does not support 2D signals, merge into 1D.
+                                                                        // ^ Also does not support parametrized signal width,
+                                                                        //   we need 24 bit wide signal for MAX_LAGS < 32
+    input  logic                                        dataInValid       
 );
 
     // -- Assign statements
+    assign readdata = {dataInValid, {(CPU_BITS-NUM_SLAVES*$clog2(2*MAX_LAGS)-1){1'b0}}, dataIn};
+    // This solution might be too simple
+    // Might have to have edge detectors and syncronizers
     
 
 endmodule
