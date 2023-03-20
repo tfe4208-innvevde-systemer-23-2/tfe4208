@@ -101,7 +101,7 @@
  </parameter>
  <parameter name="projectName">
   <type>java.lang.String</type>
-  <value>Lab7.qpf</value>
+  <value>Turret.qpf</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
