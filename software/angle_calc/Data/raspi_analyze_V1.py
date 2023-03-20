@@ -20,7 +20,7 @@ def theta(lags):  # Calculate the incident angle
 
 
 sample_period, data = raspi_import(
-    'rett_4.bin')  # Import data from binary file
+    'førtifem5_t.bin')  # Import data from binary file
 
 data = signal.detrend(data, axis=0)  # removes DC component for each channel
 num_of_samples = data.shape[0]  # returns shape of matrix
