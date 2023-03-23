@@ -1,20 +1,20 @@
 // Copyright
 
 module Peak #(
-    parameter NUM_BITS_SAMPLE           = 12;
-    parameter NUM_SAMPLES               = 1024;
-    parameter MAX_LAGS                  = 17;
-    parameter NUM_XCORRS                = 6;
-    parameter NUM_XCORRS                = 6;
-    parameter NUM_BITS_XCORRS           = 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES);
+    parameter NUM_BITS_SAMPLE           = 12,
+    parameter NUM_SAMPLES               = 1024,
+    parameter MAX_LAGS                  = 17,
+    parameter NUM_XCORRS                = 6,
+    parameter NUM_BITS_XCORRS           = 32,           // 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES)
+    parameter MIN_XCORR_VAL             = 1000
 ) (
-    input  logic                                                    clk;
-    input  logic                                                    rst;
+    input  logic                                                    clk,
+    input  logic                                                    rst,
 
-    input  logic[NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0] dataIn;
-    input  logic                                                    dataInValid;
+    input  logic[NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0] dataIn,
+    input  logic                                                    dataInValid,
 
-    output logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS)-1:0]            dataOut;
+    output logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS)-1:0]            dataOut,
     output logic                                                    dataOutValid
 );
 

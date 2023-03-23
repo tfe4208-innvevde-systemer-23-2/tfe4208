@@ -15,7 +15,6 @@ module Fsm #(
     output logic[$clog2(2*MAX_LAGS)-1:0]    iterator,
     output logic                            dataOutValid,
     output logic                            rstInternal
-
 );
 
     // -- FSM States --
@@ -66,7 +65,7 @@ module Fsm #(
 
             CALCULATING: begin
                 if (cnt == (2*MAX_LAGS-1)) begin
-                    nextState <= NEXTCORR;
+                    nextState <= DONE;
                 end
                 else begin
                     nextState <= CALCULATING;
