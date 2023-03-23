@@ -59,6 +59,7 @@ module Peak_test;
         @(negedge clk50M) rst=1'b1;
         @(negedge clk50M) rst=1'b0;
         
+        // TODO: Make random procedural data instead
         // File management
         fd_r = $fopen("data/test.csv", "r");        // File path relative to sim-folder
         if (!fd_r) begin
@@ -89,6 +90,10 @@ module Peak_test;
 
         end
         $fclose(fd_r);
+
+    endtask
+
+    task max();
 
     endtask
 

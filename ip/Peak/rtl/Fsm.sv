@@ -8,10 +8,10 @@ module Fsm #(
     input  logic                            clk,
     input  logic                            rst,
 
-    // --
+    // -- Inputs
     input  logic                            enable,
 
-    // --
+    // -- Outputs
     output logic[$clog2(2*MAX_LAGS+1)-1:0]  iterator,
     output logic                            dataOutValid,
     output logic                            rstFsm
@@ -57,36 +57,36 @@ module Fsm #(
         case (state)
             IDLE: begin
                 if (enable) begin
-                    nextState <= CALCULATING;
+                    nextState = CALCULATING;
                 end
                 else begin
-                    nextState <= IDLE;
+                    nextState = IDLE;
                 end
-
-                dataOutValid <= 1'b0;
-                rstFsm <= 1'b1;
-                cntEnable <= 1'b0;
+                
+                dataOutValid = 1'b0;
+                rstFsm = 1'b1;
+                cntEnable = 1'b0;
             end
 
             CALCULATING: begin
                 if (cnt == (2*MAX_LAGS-1)) begin
-                    nextState <= DONE;
+                    nextState = DONE;
                 end
                 else begin
-                    nextState <= CALCULATING;
+                    nextState = CALCULATING;
                 end
 
-                dataOutValid <= 1'b0;
-                rstFsm <= 1'b0;
-                cntEnable <= 1'b1;
+                dataOutValid = 1'b0;
+                rstFsm = 1'b0;
+                cntEnable = 1'b1;
             end
 
             DONE: begin
                 nextState <= IDLE;
 
-                dataOutValid <= 1'b1;
-                rstFsm <= 1'b0;
-                cntEnable <= 1'b0;
+                dataOutValid = 1'b1;
+                rstFsm = 1'b0;
+                cntEnable = 1'b0;
             end
 
             default: nextState = IDLE;
