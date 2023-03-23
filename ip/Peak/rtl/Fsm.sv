@@ -12,9 +12,9 @@ module Fsm #(
     input  logic                            enable,
 
     // --
-    output logic[$clog2(2*MAX_LAGS)-1:0]    iterator,
+    output logic[$clog2(2*MAX_LAGS+1)-1:0]  iterator,
     output logic                            dataOutValid,
-    output logic                            rstInternal
+    output logic                            rstFsm
 );
 
     // -- FSM States --
@@ -23,7 +23,11 @@ module Fsm #(
     states nextState;
 
     // -- Internal signals --
-    logic[$clog2(2*MAX_LAGS)-1:0]   cnt;                        // Counter for multi-cycle states
+    logic[$clog2(2*MAX_LAGS+1)-1:0]   cnt;                        // Counter for multi-cycle states
+    logic                             cntEnable;  
+
+    // -- Assign statements
+    assign iterator = cnt;
 
     // -- Main counter --
     always_ff @(posedge clk or posedge rst) begin
@@ -31,11 +35,11 @@ module Fsm #(
             cnt <= '0;
         end
         else begin
-            if (state != nextState) begin
-                cnt <= '0;
+            if (cntEnable) begin
+                cnt <= cnt + 1'b1;
             end
             else begin
-                cnt <= cnt + 1'b1;
+                cnt <= '0;
             end
         end
     end
@@ -60,7 +64,8 @@ module Fsm #(
                 end
 
                 dataOutValid <= 1'b0;
-                rstInternal <= 1'b0;
+                rstFsm <= 1'b1;
+                cntEnable <= 1'b0;
             end
 
             CALCULATING: begin
@@ -72,14 +77,16 @@ module Fsm #(
                 end
 
                 dataOutValid <= 1'b0;
-                rstInternal <= 1'b0;
+                rstFsm <= 1'b0;
+                cntEnable <= 1'b1;
             end
 
             DONE: begin
                 nextState <= IDLE;
 
                 dataOutValid <= 1'b1;
-                rstInternal <= 1'b1;
+                rstFsm <= 1'b0;
+                cntEnable <= 1'b0;
             end
 
             default: nextState = IDLE;

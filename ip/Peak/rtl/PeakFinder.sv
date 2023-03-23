@@ -14,18 +14,18 @@ module PeakFinder #(
 
     // --
     input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]     dataIn,
-    input  logic[$clog2(2*MAX_LAGS)-1:0]                iterator,
+    input  logic[$clog2(2*MAX_LAGS+1)-1:0]              iterator,
 
     // -- 
-    output logic[$clog2(2*MAX_LAGS)-1:0]                dataOut
+    output logic[$clog2(2*MAX_LAGS+1)-1:0]              dataOut
 );
 
     // -- Internal signals
     logic[NUM_BITS_XCORRS-1:0]          maxValue;
-    logic[$clog2(2*MAX_LAGS)-1:0]       lagIterator;
+    logic[$clog2(2*MAX_LAGS+1)-1:0]     lagIterator;
 
     // -- Assign statements
-    assign dataOut = ((maxValue > MIN_XCORR_VAL) ? lagIterator : {1'b1, {($clog2(2*MAX_LAGS)-1){1'b0}}});
+    assign dataOut = ((maxValue > MIN_XCORR_VAL) ? lagIterator : {1'b1, {($clog2(2*MAX_LAGS)){1'b0}}});
 
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin

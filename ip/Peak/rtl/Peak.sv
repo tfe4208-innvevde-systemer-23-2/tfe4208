@@ -14,17 +14,19 @@ module Peak #(
     input  logic[NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0] dataIn,
     input  logic                                                    dataInValid,
 
-    output logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS)-1:0]            dataOut,
+    output logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS+1)-1:0]          dataOut,
     output logic                                                    dataOutValid
 );
 
-// Need edge detector???
+    // Need edge detector???
 
-// Internal signals
-logic[$clog2(2*MAX_LAGS)-1:0]   iterator;
-logic                           rstInternal;
+    // Internal signals
+    logic[$clog2(2*MAX_LAGS+1)-1:0] iterator;
+    logic                           rstInternal;
+    logic                           rstFsm;
 
-// Assign statements
+    // Assign statements
+    assign rstInternal = rst | rstFsm;
 
     // -- Generate functional units
     genvar i;
@@ -55,7 +57,7 @@ logic                           rstInternal;
         .enable(dataInValid),
         .iterator(iterator),
         .dataOutValid(dataOutValid),
-        .rstInternal(rstInternal)
+        .rstFsm(rstFsm)
     );
 
 endmodule
