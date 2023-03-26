@@ -25,7 +25,7 @@ float** transpose_vector(int length, float* vec){
     
 }
 
-void destroy_array(float** arr){
+void destroy_matrix(float** arr){
     free(*arr);
     free( arr);
 }
@@ -34,7 +34,18 @@ int least_square(){
     return 0;
 }
 
-float** matrix_mult(float** mat_a, float** mat_b){
+
+void print_matrix(float** result, int m, int n, int p){
+    printf("Result:\n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < p; j++) {
+            printf("%d ", result[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+float** matrix_mult(float** mat_a, float** mat_b, int m, int n, int p){
     return NULL;
 }
 
@@ -61,7 +72,7 @@ void setup_constants(){
     struct vector r43 = {0.5*a, sqrt(3)*a/6, sqrt(2*a/3)};
 }
 
-
+void init(){}
 
 int main(){
     setup_constants();
