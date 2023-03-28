@@ -14,6 +14,7 @@ module CpuPeripheral_test;
     ) dut (
         .clk            (),
         .reset          (),
+        .n              (),
         .readdata       (),
         .dataIn         (),
         .dataInValid    ()
