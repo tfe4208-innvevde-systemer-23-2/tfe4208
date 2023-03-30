@@ -28,3 +28,6 @@ software/.metadata/
 *.xml
 *.log
 *.txt
+
+# MacOS Specific
+*.DS_Store
