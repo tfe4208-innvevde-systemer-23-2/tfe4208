@@ -2,10 +2,10 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>29.mar.2023 20:55:08</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1680116108684</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>30.mar.2023 19:05:22</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1680195922649</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\Maths\Desktop\tfe4208\software\Peripheral_bsp</BspGeneratedLocation>
-        <BspSettingsFile>.\settings.bsp</BspSettingsFile>
+        <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\DE2_115_SOPC.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu</Cpu>
@@ -899,34 +899,34 @@
                 <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
         <MemoryMap>
-                <slaveDescriptor>peripheral_0</slaveDescriptor>
-                <addressRange>0x00000000 - 0x00000007</addressRange>
-                <addressSpan>8</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
                 <slaveDescriptor>onchip_memory2</slaveDescriptor>
                 <addressRange>0x00040000 - 0x00071FFF</addressRange>
                 <addressSpan>204800</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x00081010 - 0x00081017</addressRange>
-                <addressSpan>8</addressSpan>
-                <attributes>printable</attributes>
-        </MemoryMap>
-        <MemoryMap>
                 <slaveDescriptor>pwm_1</slaveDescriptor>
-                <addressRange>0x00099010 - 0x0009901F</addressRange>
+                <addressRange>0x00081000 - 0x0008100F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>pwm_0</slaveDescriptor>
-                <addressRange>0x00099020 - 0x0009902F</addressRange>
+                <addressRange>0x00081010 - 0x0008101F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>peripheral_0</slaveDescriptor>
+                <addressRange>0x00081020 - 0x00081027</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>jtag_uart</slaveDescriptor>
+                <addressRange>0x00081028 - 0x0008102F</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes>printable</attributes>
         </MemoryMap>
         <LinkerSection>
                 <sectionName>.text</sectionName>

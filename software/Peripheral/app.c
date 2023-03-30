@@ -14,11 +14,31 @@
  *
  */
 
+#include <stdlib.h>
+#include <io.h>
 #include <stdio.h>
+#include <inttypes.h>
+#include <stdbool.h>
+#include <unistd.h>
 
-int main()
-{
-  printf("Hello from Nios II!\n");
+#include "system.h"
+#include "peripheral/peripheral.h"
 
-  return 0;
+int main() {
+	// Hardware control structures
+	peripheral_dev peripheral = peripheral_inst((void *) PERIPHERAL_0_BASE);
+
+	printf("Hello from Nios II!\n");
+	printf("%d\n", PERIPHERAL_MASK_SECOND);
+	printf("%d\n", PERIPHERAL_MASK_THIRD);
+
+	while (true) {
+		printf("Current values 1, 2, 3: %d\n", peripheral_read(&peripheral, 0));
+		printf("Second value in this: %d\n", peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_SECOND);
+		printf("Current value 4, 5, 6: %d\n", peripheral_read(&peripheral, 0));
+		printf("Third value in this: %d\n\n", peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_THIRD);
+		usleep(5000000);
+	}
+
+	return 0;
 }

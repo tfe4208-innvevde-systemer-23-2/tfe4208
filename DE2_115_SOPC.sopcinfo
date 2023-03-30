@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="DE2_115_SOPC" kind="DE2_115_SOPC" version="1.0" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2023.03.29.20:40:26 -->
+ <!-- 2023.03.30.19:00:36 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1680115226</value>
+  <value>1680195636</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -2064,7 +2064,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="dataSlaveMapParam">
    <type>java.lang.String</type>
-   <value><![CDATA[<address-map><slave name='peripheral_0.avalon_slave_0' start='0x0' end='0x8' type='peripheral.avalon_slave_0' /><slave name='onchip_memory2.s1' start='0x40000' end='0x72000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x80800' end='0x81000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x81010' end='0x81018' type='altera_avalon_jtag_uart.avalon_jtag_slave' /><slave name='pwm_1.avalon_slave_0' start='0x99010' end='0x99020' type='pwm.avalon_slave_0' /><slave name='pwm_0.avalon_slave_0' start='0x99020' end='0x99030' type='pwm.avalon_slave_0' /></address-map>]]></value>
+   <value><![CDATA[<address-map><slave name='onchip_memory2.s1' start='0x40000' end='0x72000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x80800' end='0x81000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='pwm_1.avalon_slave_0' start='0x81000' end='0x81010' type='pwm.avalon_slave_0' /><slave name='pwm_0.avalon_slave_0' start='0x81010' end='0x81020' type='pwm.avalon_slave_0' /><slave name='peripheral_0.avalon_slave_0' start='0x81020' end='0x81028' type='peripheral.avalon_slave_0' /><slave name='jtag_uart.avalon_jtag_slave' start='0x81028' end='0x81030' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -2741,7 +2741,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>jtag_uart</moduleName>
     <slaveName>avalon_jtag_slave</slaveName>
     <name>jtag_uart.avalon_jtag_slave</name>
-    <baseAddress>528400</baseAddress>
+    <baseAddress>528424</baseAddress>
     <span>8</span>
    </memoryBlock>
    <memoryBlock>
@@ -2749,7 +2749,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>pwm_0</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>pwm_0.avalon_slave_0</name>
-    <baseAddress>626720</baseAddress>
+    <baseAddress>528400</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -2757,7 +2757,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>pwm_1</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>pwm_1.avalon_slave_0</name>
-    <baseAddress>626704</baseAddress>
+    <baseAddress>528384</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -2765,7 +2765,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>peripheral_0</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>peripheral_0.avalon_slave_0</name>
-    <baseAddress>0</baseAddress>
+    <baseAddress>528416</baseAddress>
     <span>8</span>
    </memoryBlock>
    <memoryBlock>
@@ -6878,7 +6878,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x00081010</value>
+   <value>0x00081028</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -6929,7 +6929,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x00099020</value>
+   <value>0x00081010</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -6980,7 +6980,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x00099010</value>
+   <value>0x00081000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -7031,7 +7031,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x0000</value>
+   <value>0x00081020</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>

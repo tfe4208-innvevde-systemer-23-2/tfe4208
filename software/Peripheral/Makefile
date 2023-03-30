@@ -142,7 +142,8 @@ ACDS_VERSION := 18.1
 ELF := Peripheral.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS := app.c
+C_SRCS += app.c
+C_SRCS += peripheral/peripheral.c
 CXX_SRCS :=
 ASM_SRCS :=
 
