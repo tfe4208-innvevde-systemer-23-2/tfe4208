@@ -49,11 +49,6 @@ generate
             end else begin
                 // Shift in new sample
                 inputBuffer[slave] <= {dataIn[slave], inputBuffer[slave][NUM_SAMPLES-2:0]};
-                // inputBuffer[slave][0] <= dataIn[slave];
-                // // Shift all other samples down
-                // for (bufferLine = 0; bufferLine < NUM_SAMPLES; bufferLine = bufferLine + 1) begin
-                //     inputBuffer[slave][bufferLine+1] <= inputBuffer[slave][bufferLine];
-                // end
             end
         end
 
