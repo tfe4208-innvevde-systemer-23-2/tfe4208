@@ -3,9 +3,13 @@
 module Correlation_test;
 
     // Parameters 
-    parameter NUM_SLAVES = 4;                // Number of SPI channels
-    parameter NUM_BITS = 12;                 // Number of bits in SPI word
-    parameter FREQ_SCALE = 4;               // Board-to-SPI clock frequency scale 
+    parameter FREQ_SCALE                = 4;    // Board-to-SPI clock frequency scale 
+    parameter NUM_BITS_SAMPLE           = 12;   // Number of bits in SPI word
+    parameter NUM_SLAVES                = 4;
+    parameter NUM_SAMPLES               = 100;
+    parameter MAX_SAMPLES_DELAY         = 11;
+    parameter NUM_BITS_XCORR            = 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES);
+    parameter NUM_XCORRS                = 6;
 
     // Clock and reset
     logic                                   clk50M;     // Main clock
@@ -15,14 +19,24 @@ module Correlation_test;
     int fd_r;
     string line;
 
-    logic[NUM_SLAVES-1:0][NUM_BITS-1:0]     dataIn;
+    logic[NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0]     dataIn;
+    logic[NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut;
 
-    /*// Instantiate DUT
+    // Instantiate DUT
     Correlation #(
-        // Parameters
+        .NUM_BITS_SAMPLE(NUM_BITS_SAMPLE),
+        .NUM_SLAVES(NUM_SLAVES),
+        .NUM_SAMPLES(NUM_SAMPLES),
+        .MAX_SAMPLES_DELAY(MAX_SAMPLES_DELAY),
+        .NUM_BITS_XCORR(NUM_BITS_XCORR),
+        .NUM_XCORRS(NUM_XCORRS)
     ) dut (
         // Signals
-    )*/
+        .clk(clk50M),
+        .rst(rst),
+        .dataIn(dataIn),
+        .xCorrOut(xCorrOut)
+    );
 
     // Instantiate golden model
     // import pysv::Correlate;
