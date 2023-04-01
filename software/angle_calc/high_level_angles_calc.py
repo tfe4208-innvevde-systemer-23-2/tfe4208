@@ -62,9 +62,6 @@ def phi():
    return np.rad2deg(np.arctan( r_t[0][0] / r_t[0][1] ))
 """
 
-
-
-
 #print("r-vec: ", r)
 #print("T-vec: ", T)
 print("Value of theta: ", theta())
