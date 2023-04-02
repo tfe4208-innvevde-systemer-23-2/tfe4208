@@ -28,3 +28,7 @@ software/.metadata/
 *.xml
 *.log
 *.txt
+*.vscode
+
+# MacOS Specific
+*.DS_Store
