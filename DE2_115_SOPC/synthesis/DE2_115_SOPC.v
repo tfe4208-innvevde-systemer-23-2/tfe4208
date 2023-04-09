@@ -4,10 +4,12 @@
 
 `timescale 1 ps / 1 ps
 module DE2_115_SOPC (
-		input  wire  clk_clk,               //               clk.clk
-		output wire  pwm_0_conduit_end_pwm, // pwm_0_conduit_end.pwm
-		output wire  pwm_1_conduit_end_pwm, // pwm_1_conduit_end.pwm
-		input  wire  reset_reset_n          //             reset.reset_n
+		input  wire        clk_clk,                              //                      clk.clk
+		input  wire [35:0] peripheral_0_conduit_end_lagsin,      // peripheral_0_conduit_end.lagsin
+		input  wire        peripheral_0_conduit_end_lagsinvalid, //                         .lagsinvalid
+		output wire        pwm_0_conduit_end_pwm,                //        pwm_0_conduit_end.pwm
+		output wire        pwm_1_conduit_end_pwm,                //        pwm_1_conduit_end.pwm
+		input  wire        reset_reset_n                         //                    reset.reset_n
 	);
 
 	wire  [31:0] cpu_data_master_readdata;                                  // mm_interconnect_0:cpu_data_master_readdata -> cpu:d_readdata
@@ -41,6 +43,8 @@ module DE2_115_SOPC (
 	wire         mm_interconnect_0_pwm_1_avalon_slave_0_read;               // mm_interconnect_0:pwm_1_avalon_slave_0_read -> pwm_1:read
 	wire         mm_interconnect_0_pwm_1_avalon_slave_0_write;              // mm_interconnect_0:pwm_1_avalon_slave_0_write -> pwm_1:write
 	wire  [31:0] mm_interconnect_0_pwm_1_avalon_slave_0_writedata;          // mm_interconnect_0:pwm_1_avalon_slave_0_writedata -> pwm_1:writedata
+	wire  [31:0] mm_interconnect_0_peripheral_0_avalon_slave_0_readdata;    // peripheral_0:readdata -> mm_interconnect_0:peripheral_0_avalon_slave_0_readdata
+	wire   [0:0] mm_interconnect_0_peripheral_0_avalon_slave_0_address;     // mm_interconnect_0:peripheral_0_avalon_slave_0_address -> peripheral_0:address
 	wire  [31:0] mm_interconnect_0_cpu_debug_mem_slave_readdata;            // cpu:debug_mem_slave_readdata -> mm_interconnect_0:cpu_debug_mem_slave_readdata
 	wire         mm_interconnect_0_cpu_debug_mem_slave_waitrequest;         // cpu:debug_mem_slave_waitrequest -> mm_interconnect_0:cpu_debug_mem_slave_waitrequest
 	wire         mm_interconnect_0_cpu_debug_mem_slave_debugaccess;         // mm_interconnect_0:cpu_debug_mem_slave_debugaccess -> cpu:debug_mem_slave_debugaccess
@@ -58,7 +62,7 @@ module DE2_115_SOPC (
 	wire         mm_interconnect_0_onchip_memory2_s1_clken;                 // mm_interconnect_0:onchip_memory2_s1_clken -> onchip_memory2:clken
 	wire         irq_mapper_receiver0_irq;                                  // jtag_uart:av_irq -> irq_mapper:receiver0_irq
 	wire  [31:0] cpu_irq_irq;                                               // irq_mapper:sender_irq -> cpu:irq
-	wire         rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [cpu:reset_n, irq_mapper:reset, jtag_uart:rst_n, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_memory2:reset, pwm_0:reset, pwm_1:reset, rst_translator:in_reset]
+	wire         rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [cpu:reset_n, irq_mapper:reset, jtag_uart:rst_n, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_memory2:reset, peripheral_0:reset, pwm_0:reset, pwm_1:reset, rst_translator:in_reset]
 	wire         rst_controller_reset_out_reset_req;                        // rst_controller:reset_req -> [cpu:reset_req, onchip_memory2:reset_req, rst_translator:reset_req_in]
 
 	DE2_115_SOPC_cpu cpu (
@@ -117,6 +121,15 @@ module DE2_115_SOPC (
 		.reset      (rst_controller_reset_out_reset),                 // reset1.reset
 		.reset_req  (rst_controller_reset_out_reset_req),             //       .reset_req
 		.freeze     (1'b0)                                            // (terminated)
+	);
+
+	CpuPeripheral peripheral_0 (
+		.clk         (clk_clk),                                                //          clock.clk
+		.reset       (rst_controller_reset_out_reset),                         //          reset.reset
+		.readdata    (mm_interconnect_0_peripheral_0_avalon_slave_0_readdata), // avalon_slave_0.readdata
+		.address     (mm_interconnect_0_peripheral_0_avalon_slave_0_address),  //               .address
+		.dataIn      (peripheral_0_conduit_end_lagsin),                        //    conduit_end.lagsin
+		.dataInValid (peripheral_0_conduit_end_lagsinvalid)                    //               .lagsinvalid
 	);
 
 	pwm pwm_0 (
@@ -180,6 +193,8 @@ module DE2_115_SOPC (
 		.onchip_memory2_s1_byteenable            (mm_interconnect_0_onchip_memory2_s1_byteenable),            //                                .byteenable
 		.onchip_memory2_s1_chipselect            (mm_interconnect_0_onchip_memory2_s1_chipselect),            //                                .chipselect
 		.onchip_memory2_s1_clken                 (mm_interconnect_0_onchip_memory2_s1_clken),                 //                                .clken
+		.peripheral_0_avalon_slave_0_address     (mm_interconnect_0_peripheral_0_avalon_slave_0_address),     //     peripheral_0_avalon_slave_0.address
+		.peripheral_0_avalon_slave_0_readdata    (mm_interconnect_0_peripheral_0_avalon_slave_0_readdata),    //                                .readdata
 		.pwm_0_avalon_slave_0_address            (mm_interconnect_0_pwm_0_avalon_slave_0_address),            //            pwm_0_avalon_slave_0.address
 		.pwm_0_avalon_slave_0_write              (mm_interconnect_0_pwm_0_avalon_slave_0_write),              //                                .write
 		.pwm_0_avalon_slave_0_read               (mm_interconnect_0_pwm_0_avalon_slave_0_read),               //                                .read

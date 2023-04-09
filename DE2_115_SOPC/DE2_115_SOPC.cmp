@@ -1,9 +1,11 @@
 	component DE2_115_SOPC is
 		port (
-			clk_clk               : in  std_logic := 'X'; -- clk
-			pwm_0_conduit_end_pwm : out std_logic;        -- pwm
-			pwm_1_conduit_end_pwm : out std_logic;        -- pwm
-			reset_reset_n         : in  std_logic := 'X'  -- reset_n
+			clk_clk                              : in  std_logic                     := 'X';             -- clk
+			peripheral_0_conduit_end_lagsin      : in  std_logic_vector(35 downto 0) := (others => 'X'); -- lagsin
+			peripheral_0_conduit_end_lagsinvalid : in  std_logic                     := 'X';             -- lagsinvalid
+			pwm_0_conduit_end_pwm                : out std_logic;                                        -- pwm
+			pwm_1_conduit_end_pwm                : out std_logic;                                        -- pwm
+			reset_reset_n                        : in  std_logic                     := 'X'              -- reset_n
 		);
 	end component DE2_115_SOPC;
 
