@@ -1,5 +1,7 @@
 // Copyright
 
+`timescale 10 ns / 1 ns
+
 module Correlation_test;
 
     // Parameters 
@@ -42,14 +44,14 @@ module Correlation_test;
     // import pysv::Correlate;
     
     // Generate clock
-    always #10 clk50M=!clk50M;
+    always #1 clk50M=!clk50M;
     
     // Set up stimulus
     initial begin
         clk50M = 1'b0;
 
         // File management
-        fd_r = $fopen("data/test.csv", "r");        // File path relative to sim-folder
+        fd_r = $fopen("data/nepe0.csv", "r");        // File path relative to sim-folder
         if (fd_r) begin
              $display("File was opened successfully : %0h", fd_r);
         end
@@ -66,13 +68,14 @@ module Correlation_test;
                 // Probably some more formatting required
                 $display("Element %d: %d", i, dataIn[i]);
             end
+            // Correlate();
 
             // Do checks on DUT with new values
 
         end
 
         $fclose(fd_r);
+        // $finish;
     end
-    //$finish;
 
 endmodule
