@@ -89,4 +89,6 @@ generate
     end
 endgenerate
 
+assign xCorrOut = xCorr;
+
 endmodule
