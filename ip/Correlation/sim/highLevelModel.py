@@ -9,7 +9,7 @@ def Correlate():
     num_delays = 23
     window_length = 100
     input_filepath = 'data/nepe0.csv'
-    ouput_filepath = input_filepath.split('.')[0] + '_model_result.csv'
+    ouput_filepath = input_filepath.split('.')[0] + '_model_result' # add .csv later in program
 
     input = np.genfromtxt(input_filepath, dtype=int, delimiter=',')
     input = np.swapaxes(input, 0, 1)
@@ -57,7 +57,7 @@ def Correlate():
     print(output.shape)
 
     for i in range(output.shape[0]):
-        np.savetxt(ouput_filepath+str(i), output[i], fmt='%.1d', delimiter=",")
+        np.savetxt(ouput_filepath+str(i)+".csv", output[i], fmt='%.1d', delimiter=",")
 
 
 Correlate()
