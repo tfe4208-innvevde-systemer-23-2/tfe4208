@@ -29,7 +29,7 @@ genvar delay;
 generate 
     for (delay = 0; delay < 2*MAX_SAMPLES_DELAY+1; delay = delay + 1) begin
         // Crosscorrelation calculations
-        always_ff @(posedge clk) begin
+        always_ff @(posedge clk or posedge rst) begin
             if (rst) begin
                 xCorr[delay] <= '0;
             end else begin
