@@ -55,7 +55,7 @@ generate
         // Assign the f- and g-values for the crosscorrelation calculations
         assign xCorrInputAddf[slave] = inputBuffer[slave][MAX_SAMPLES_DELAY];
         assign xCorrInputSubf[slave] = inputBuffer[slave][NUM_SAMPLES - MAX_SAMPLES_DELAY - 1];
-        for (bufferLine = 0; bufferLine <= 2*MAX_SAMPLES_DELAY; bufferLine = bufferLine + 1) begin
+        for (bufferLine = 0; bufferLine <= 2*MAX_SAMPLES_DELAY; bufferLine++) begin
             assign xCorrInputAddg[slave][bufferLine] = inputBuffer[slave][bufferLine];
             assign xCorrInputSubg[slave][bufferLine] = inputBuffer[slave][NUM_SAMPLES - 2*MAX_SAMPLES_DELAY - 1 + bufferLine];
         end
@@ -68,8 +68,8 @@ endgenerate
 genvar fIndex, gIndex;
 generate
     // xCorrIndex = 0;
-    for (fIndex = 0; fIndex < NUM_SLAVES; fIndex = fIndex + 1) begin
-        for (gIndex = fIndex + 1; gIndex < NUM_SLAVES; gIndex = gIndex + 1) begin
+    for (fIndex = 0; fIndex < NUM_SLAVES; fIndex++) begin
+        for (gIndex = fIndex + 1; gIndex < NUM_SLAVES; gIndex++) begin
             CrossorrelationIterator #(
                 .NUM_BITS_SAMPLE    (NUM_BITS_SAMPLE),
                 .NUM_SAMPLES        (NUM_SAMPLES),

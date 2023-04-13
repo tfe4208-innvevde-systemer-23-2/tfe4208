@@ -27,7 +27,7 @@ module CrossorrelationIterator #(
 
 genvar delay;
 generate 
-    for (delay = 0; delay < 2*MAX_SAMPLES_DELAY+1; delay = delay + 1) begin
+    for (delay = 0; delay < 2*MAX_SAMPLES_DELAY+1; delay++) begin
         // Crosscorrelation calculations
         always_ff @(posedge clk or posedge rst) begin
             if (rst) begin
