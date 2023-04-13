@@ -18,8 +18,8 @@ module CrossorrelationIterator #(
     // The add-values are used when introducing a new value to crosscorrelation estimate, and the sub-values are used when they are removed.
     input logic [NUM_BITS_SAMPLE-1:0] xCorrInputAddf,
     input logic [NUM_BITS_SAMPLE-1:0] xCorrInputSubf,
-    input logic [MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputAddg,
-    input logic [MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputSubg,
+    input logic [2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputAddg,
+    input logic [2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputSubg,
 
     // Has the crosscorrelation values
     output logic [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr 

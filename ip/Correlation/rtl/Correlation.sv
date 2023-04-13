@@ -15,6 +15,7 @@ module Correlation #(
 ) (
     input  logic                                            clk,
     input  logic                                            rst,
+    input  logic                                            validIn,
     input  logic[NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0]       dataIn,
 
     output logic[NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut
@@ -29,8 +30,8 @@ logic [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
 // The add-values are used when introducing a new value to crosscorrelation estimate, and the sub-values are used when they are removed.
 logic [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] xCorrInputAddf;
 logic [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] xCorrInputSubf;
-logic [NUM_SLAVES-1:0][MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputAddg;
-logic [NUM_SLAVES-1:0][MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputSubg;
+logic [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputAddg;
+logic [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputSubg;
 
 // Registers for storing the crosscorrelation values
 logic [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
@@ -46,9 +47,12 @@ generate
         always @(posedge clk or posedge rst) begin
             if (rst) begin
                 inputBuffer[slave] <= '0;
-            end else begin
+            end else if (validIn) begin
                 // Shift in new sample
-                inputBuffer[slave] <= {dataIn[slave], inputBuffer[slave][NUM_SAMPLES-2:0]};
+                inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataIn[slave]};
+            end else begin
+                // Keep old values
+                inputBuffer[slave] <= inputBuffer[slave];
             end
         end
 

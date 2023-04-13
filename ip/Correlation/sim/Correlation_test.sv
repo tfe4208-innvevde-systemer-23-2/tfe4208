@@ -17,6 +17,7 @@ module Correlation_test;
     logic                                   clk50M;     // Main clock
     logic                                   busClk;     // SPI bus clock
     logic                                   rst;
+    logic                                   validIn;
 
     int fd_r;
     int file_result[NUM_XCORRS];
@@ -40,6 +41,7 @@ module Correlation_test;
         // Signals
         .clk(clk50M),
         .rst(rst),
+        .validIn(validIn),
         .dataIn(dataIn),
         .xCorrOut(xCorrOut)
     );
@@ -76,9 +78,11 @@ module Correlation_test;
 
         @(negedge clk50M);
         rst = 1'b1;
+        validIn = 1'b0;
         @(negedge clk50M);
         @(negedge clk50M);
         rst = 1'b0;
+        @(negedge clk50M);
 
         while (!$feof(fd_r)) begin
             @(negedge clk50M);
@@ -87,21 +91,38 @@ module Correlation_test;
             line_num = line_num + 1;
             $display("\nLine: %s", line);
             $sscanf(line, "%d, %d, %d, %d", dataIn[0], dataIn[1], dataIn[2], dataIn[3]);    // Parse line and put it on dataIn-bus
+            validIn = 1'b1;
             for (int i = 0; i < NUM_SLAVES; i++) begin
                 // Probably some more formatting required
                 $display("Element %d: %d", i, dataIn[i]);          
             end
 
+            // $display("Buffer: %x", dut.inputBuffer);
+
+            // Print dut.inputBuffer
+            for (int i = 0; i < NUM_SLAVES; i++) begin
+                $write("Slave %d: ", i);
+                for (int j = 0; j < NUM_SAMPLES; j++) begin
+                    $write("%d,", dut.inputBuffer[i][j]);
+                end
+                $write("\n");
+            end
+
             for (int i = 0; i < NUM_XCORRS; i++) begin
                 $fgets(line_result, file_result[i]);
                 $display("xCorrLine%d: %s", i, line_result);
+                for (int j = 0; j<2*MAX_SAMPLES_DELAY+1; j++) begin
+                    $write("%d,", xCorrOut[i][j]);
+                end
+                $write("\n");
+
             
                 // I am sorry
                 $sscanf(line_result, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", xCorrModel[i][0], xCorrModel[i][1], xCorrModel[i][2], xCorrModel[i][3], xCorrModel[i][4], xCorrModel[i][5], xCorrModel[i][6], xCorrModel[i][7], xCorrModel[i][8], xCorrModel[i][9], xCorrModel[i][10], xCorrModel[i][11], xCorrModel[i][12], xCorrModel[i][13], xCorrModel[i][14], xCorrModel[i][15], xCorrModel[i][16], xCorrModel[i][17], xCorrModel[i][18], xCorrModel[i][19], xCorrModel[i][20], xCorrModel[i][21], xCorrModel[i][22]);
 
                 if (line_num > NUM_SAMPLES) begin
                     for (int j = 0; j < 2*MAX_SAMPLES_DELAY+1; j++) begin
-                        assert(xCorrOut[i][j] == xCorrModel[i][j]) 
+                        assert(xCorrOut[i][j] == xCorrModel[i][j])
                              $display("SUCCESS: xCorrOut[%d][%d] = %d, xCorrModel[%d][%d] = %d", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j]);
                         else $display("FAIL:    xCorrOut[%d][%d] = %d, xCorrModel[%d][%d] = %d", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j]);
                     end
