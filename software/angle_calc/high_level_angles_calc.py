@@ -10,7 +10,6 @@ t42 = t_t[4]
 t43 = t_t[5]
 
 C = 343.3 # m/s 
-
 a = 0.075
 #t21, t31, t41, t32, t42, t43 = 1
 r21 = [-0.5*a, np.sqrt(3)*a/2, 0] 
@@ -31,7 +30,7 @@ r = [np.transpose(r21),np.transpose(r31), np.transpose(r41),np.transpose(r32) , 
 X = np.transpose(r) / C
 X = np.transpose(X)
 
-# lstsq leverer en yuple som svar, så hent ut riktig r_t! (første rad)
+# lstsq leverer en tuple som svar, så hent ut riktig r_t! (første rad)
 r_t = np.linalg.lstsq(X,T, rcond = None)
 
 r = np.transpose(r_t[0])
@@ -49,8 +48,7 @@ length_z = 1
 
 def theta():
   return np.rad2deg(np.arccos((np.dot(r,z_axis)) / ((length_r * length_z))))
-
-                   
+                  
 def phi():
    return np.rad2deg(np.arctan2( r[0] , r[1] ))
 
