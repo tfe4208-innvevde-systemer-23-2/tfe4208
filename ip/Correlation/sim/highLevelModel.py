@@ -8,8 +8,10 @@ def Correlate():
     num_xCorrs = int(num_channels * (num_channels - 1) / 2)
     num_delays = 23
     window_length = 100
+    input_filepath = 'data/nepe0.csv'
+    ouput_filepath = input_filepath.split('.')[0] + '_model_result.csv'
 
-    input = np.genfromtxt('data/nepe1.csv', dtype=int, delimiter=',')
+    input = np.genfromtxt(input_filepath, dtype=int, delimiter=',')
     input = np.swapaxes(input, 0, 1)
     input = input[0:num_channels]
 
@@ -34,11 +36,9 @@ def Correlate():
         # 4 1 3
         # 5 2 3
 
-        for i in range(num_delays, input.shape[1]):
+        for i in range(window_length, input.shape[1]):
 
-            starting_sample = (
-                i - window_length) if ((i - window_length) >= 0) else 0
-
+            starting_sample = i - window_length
 
             correlation = signal.correlate(
                 input[a, starting_sample:i], input[b, starting_sample:i], method="direct")
@@ -48,11 +48,15 @@ def Correlate():
 
 
 
-    # print(input.shape)
+    output = output.astype(int)
+    # Reshape to 2D array
+    output = output.reshape((output.shape[0] * output.shape[1],  output.shape[2]))
 
     print(input)
     print(output)
     print(output.shape)
+
+    np.savetxt(ouput_filepath, output, fmt='%.1d', delimiter=",")
 
 
 Correlate()
