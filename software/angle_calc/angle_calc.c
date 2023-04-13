@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+#include <conio.h>
 #include <stdlib.h>
 
 
@@ -73,6 +74,9 @@ float** matrix_mult(float** mat_a, float** mat_b, int m, int n){
 
 // Functions above are tested and works! 
 
+void gauss_jordan(){
+
+};
 
 int least_square(){
     return 0;
