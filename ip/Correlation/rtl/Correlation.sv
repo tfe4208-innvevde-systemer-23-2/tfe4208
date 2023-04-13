@@ -43,7 +43,7 @@ generate
     for (slave = 0; slave < NUM_SLAVES; slave = slave + 1) begin
 
         // Sets up the inputBuffer shift register
-        always @(posedge clk) begin
+        always @(posedge clk or posedge rst) begin
             if (rst) begin
                 inputBuffer[slave] <= '0;
             end else begin
