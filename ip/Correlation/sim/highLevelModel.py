@@ -50,13 +50,14 @@ def Correlate():
 
     output = output.astype(int)
     # Reshape to 2D array
-    output = output.reshape((output.shape[0] * output.shape[1],  output.shape[2]))
+    # output = output.reshape(( output.shape[0] * output.shape[1], output.shape[2]))
 
     print(input)
     print(output)
     print(output.shape)
 
-    np.savetxt(ouput_filepath, output, fmt='%.1d', delimiter=",")
+    for i in range(output.shape[0]):
+        np.savetxt(ouput_filepath+str(i), output[i], fmt='%.1d', delimiter=",")
 
 
 Correlate()
