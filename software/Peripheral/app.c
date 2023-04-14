@@ -33,10 +33,14 @@ int main() {
 	printf("%d\n", PERIPHERAL_MASK_THIRD);
 
 	while (true) {
-		printf("Current values 1, 2, 3: %d\n", peripheral_read(&peripheral, 0));
-		printf("Second value in this: %d\n", peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_SECOND);
-		printf("Current value 4, 5, 6: %d\n", peripheral_read(&peripheral, 0));
-		printf("Third value in this: %d\n\n", peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_THIRD);
+		printf("Current values 1, 2, 3: %d\n", (int)peripheral_read(&peripheral, 0));
+		printf("First value in this: %#04x\n", (int)peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_FIRST);
+		printf("Second value in this: %#04x\n", (int)(peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_SECOND) >> 6);
+		printf("Third value in this: %#04x\n", (int)(peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_THIRD) >> 12);
+		printf("Current value 4, 5, 6: %d\n", (int)peripheral_read(&peripheral, 4));
+		printf("First value in this: %#04x\n", (int)(peripheral_read(&peripheral, 4) & PERIPHERAL_MASK_FIRST));
+		printf("Second value in this: %#04x\n", (int)(peripheral_read(&peripheral, 4) & PERIPHERAL_MASK_SECOND) >> 6);
+		printf("Third value in this: %#04x\n", (int)(peripheral_read(&peripheral, 4) & PERIPHERAL_MASK_THIRD) >> 12);
 		usleep(5000000);
 	}
 

@@ -22,7 +22,7 @@ module CpuPeripheral (
     output logic[31:0]                                  readdata,       // Avalon slave Data output
     
     // -- FPGA interface
-    input  logic[35:0]                                  dataIn,         // Avalog slaves does not support 2D signals, merge into 1D.
+    input  logic[35:0]                                  dataIn,         // Avalon slaves does not support 2D signals, merge into 1D.
                                                                         // ^ Also does not support parametrized signal width,
                                                                         //   we need 36 bit wide signal for MAX_LAGS < 32
     input  logic                                        dataInValid     // Data input is valid
@@ -53,7 +53,7 @@ module CpuPeripheral (
         end
         else begin
             if (dataInValid) begin
-                dataInInternal <= dataIn;           // Not sure this is allowed
+                dataInInternal <= dataIn;
             end
             else begin
                 dataInInternal <= dataInInternal;
