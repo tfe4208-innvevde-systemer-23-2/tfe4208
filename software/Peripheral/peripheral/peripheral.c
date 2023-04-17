@@ -22,11 +22,11 @@ uint32_t peripheral_read(peripheral_dev *dev, uint8_t address) {
 }
 
 uint32_t peripheral_read_upper(peripheral_dev *dev) {
-	return peripheral_read(dev->base, 1);
+	return peripheral_read(dev->base, PERIPHERAL_UPPER);
 }
 
 uint32_t peripheral_read_lower(peripheral_dev *dev) {
-	return peripheral_read(dev->base, 0);
+	return peripheral_read(dev->base, PERIPHERAL_LOWER);
 }
 
 
