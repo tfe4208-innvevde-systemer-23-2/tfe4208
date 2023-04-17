@@ -1,6 +1,6 @@
 // Copyright
 
-module Fsm #(
+module PeakFsm #(
     // -- Parameters
     parameter MAX_LAGS = 17
 ) (
