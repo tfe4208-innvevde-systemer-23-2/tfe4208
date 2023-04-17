@@ -1,0 +1,14 @@
+//////////////////////////////////////////////////
+// Title:           PeakVerifier
+// Author:          Mathias Støle
+// Date:            17.04.2023
+// Description:     
+////////////////////////////////////////////////////
+
+module PeakVerifier #(
+
+) (
+
+);
+
+endmodule

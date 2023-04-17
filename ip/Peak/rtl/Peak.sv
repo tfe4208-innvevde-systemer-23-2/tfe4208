@@ -12,27 +12,34 @@ module Peak #(
     input  logic                                                    clk,
     input  logic                                                    rst,
 
-    input  logic[NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0] dataIn,
+    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn0,
+    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn1,
+    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn2,
+    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn3,
+    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn4,
+    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn5,
     input  logic                                                    dataInValid,
 
     output logic[(NUM_XCORRS * BITS_PER_XCORR)-1:0]                 dataOut,
     output logic                                                    dataOutValid
 );
 
-    // Internal signals
-    logic[$clog2(2*MAX_LAGS+1)-1:0]                     iterator;
-    logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS+1)-1:0]     dataOutInternal;
-    logic                                               rstInternal;
-    logic                                               rstFsm;
+    // -- Internal signals
+    logic[$clog2(2*MAX_LAGS+1)-1:0]                             iterator;
+    logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS+1)-1:0]             dataOutInternal;
+    logic                                                       rstInternal;
+    logic                                                       rstFsm;
+    logic[NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]    dataInInternal;
 
-    // Assign statements
-    assign rstInternal = rst | rstFsm;
-    assign dataOut = {dataOutInternal[5], 
-                      dataOutInternal[4], 
-                      dataOutInternal[3], 
-                      dataOutInternal[2], 
-                      dataOutInternal[1], 
-                      dataOutInternal[0]};
+    // -- Assign statements
+    assign rstInternal       =  rst | rstFsm;
+    assign dataInInternal    = {dataIn5, dataIn4, dataIn3, dataIn2, dataIn1, dataIn0};     // Blame Intel...
+    assign dataOut           = {dataOutInternal[5], 
+                                dataOutInternal[4], 
+                                dataOutInternal[3], 
+                                dataOutInternal[2], 
+                                dataOutInternal[1], 
+                                dataOutInternal[0]};
 
     // -- Generate functional units
     genvar i;
@@ -47,7 +54,7 @@ module Peak #(
             ) u_PeakFinder (
                 .clk                (clk),
                 .rst                (rstInternal),
-                .dataIn             (dataIn[i]),
+                .dataIn             (dataInInternal[i]),
                 .iterator           (iterator),
                 .dataOut            (dataOutInternal[i])
             );
