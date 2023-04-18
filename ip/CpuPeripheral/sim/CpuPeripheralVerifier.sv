@@ -13,7 +13,7 @@ module CpuPeripheralVerifier #(
     parameter DATA_2                = 6'h24,
     parameter DATA_3                = 6'h28,
     parameter DATA_4                = 6'h02,
-    parameter DATA_5                = 6'h11,
+    parameter DATA_5                = 6'h11
 ) (
     // -- Inputs
     input  logic[3:0][11:0]      SpiOut,
@@ -33,7 +33,7 @@ module CpuPeripheralVerifier #(
         else begin
             // Load Parameter data to Peripheral
             assign PeripheralInValid = 1'b1;
-            assign PeripheralIn = {DATA_0, DATA_1, DATA_2, DATA_3, DATA_4, DATA_5};
+            assign PeripheralIn = {DATA_5, DATA_4, DATA_3, DATA_2, DATA_1, DATA_0};
         end
     endgenerate
 
