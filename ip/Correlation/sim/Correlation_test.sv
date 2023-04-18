@@ -8,10 +8,12 @@ module Correlation_test;
     parameter FREQ_SCALE                = 4;    // Board-to-SPI clock frequency scale 
     parameter NUM_BITS_SAMPLE           = 12;   // Number of bits in SPI word
     parameter NUM_SLAVES                = 4;
-    parameter NUM_SAMPLES               = 100;
+    parameter NUM_SAMPLES               = 200;
     parameter MAX_SAMPLES_DELAY         = 11;
     parameter NUM_BITS_XCORR            = 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES);
     parameter NUM_XCORRS                = 6;
+
+    parameter DEBUG_MODE                = 0;
 
     // Clock and reset
     logic                                   clk50M;     // Main clock
@@ -22,6 +24,9 @@ module Correlation_test;
     int fd_r;
     int file_result[NUM_XCORRS];
     int line_num;
+
+    int num_fails;
+
     string line;
     string line_result;
 
@@ -56,6 +61,7 @@ module Correlation_test;
     initial begin
         clk50M = 1'b0;
         line_num = 0;
+        num_fails = 0;
 
         // File management
         fd_r = $fopen("data/nepe0.csv", "r");        // File path relative to sim-folder
@@ -89,32 +95,45 @@ module Correlation_test;
             
             $fgets(line, fd_r);                                                             // Read next line in file
             line_num = line_num + 1;
-            $display("\nLine: %s", line);
+            if (DEBUG_MODE)
+                $display("\nLine: %s", line);
             $sscanf(line, "%d, %d, %d, %d", dataIn[0], dataIn[1], dataIn[2], dataIn[3]);    // Parse line and put it on dataIn-bus
             validIn = 1'b1;
-            for (int i = 0; i < NUM_SLAVES; i++) begin
-                // Probably some more formatting required
-                $display("Element %d: %d", i, dataIn[i]);          
+
+            if (DEBUG_MODE) begin
+                for (int i = 0; i < NUM_SLAVES; i++) begin
+                    // Probably some more formatting required
+                    $display("Element %d: %d", i, dataIn[i]);          
+                end
             end
 
-            // $display("Buffer: %x", dut.inputBuffer);
+            // if (DEBUG_MODE)
+            //     $display("Buffer: %x", dut.inputBuffer);
 
             // Print dut.inputBuffer
-            for (int i = 0; i < NUM_SLAVES; i++) begin
-                $write("Slave %d: ", i);
-                for (int j = 0; j < NUM_SAMPLES; j++) begin
-                    $write("%d,", dut.inputBuffer[i][j]);
+            if (DEBUG_MODE) begin
+                for (int i = 0; i < NUM_SLAVES; i++) begin
+                    $write("Slave %d: ", i);
+                    for (int j = 0; j < NUM_SAMPLES; j++) begin
+                        $write("%d,", dut.inputBuffer[i][j]);
+                    end
+                    $write("\n");
                 end
-                $write("\n");
-            end
+            end 
 
             for (int i = 0; i < NUM_XCORRS; i++) begin
                 $fgets(line_result, file_result[i]);
-                $display("xCorrLine%d: %s", i, line_result);
-                for (int j = 0; j<2*MAX_SAMPLES_DELAY+1; j++) begin
-                    $write("%d,", xCorrOut[i][j]);
+
+                if (DEBUG_MODE)
+                    $display("xCorrLine%d: %s", i, line_result);
+
+                if (DEBUG_MODE) begin
+                    $write("xCorrOut: ");
+                    for (int j = 0; j<2*MAX_SAMPLES_DELAY+1; j++) begin
+                        $write("%d,", xCorrOut[i][j]);
+                    end
+                    $write("\n");
                 end
-                $write("\n");
 
             
                 // I am sorry
@@ -122,9 +141,13 @@ module Correlation_test;
 
                 if (line_num > NUM_SAMPLES) begin
                     for (int j = 0; j < 2*MAX_SAMPLES_DELAY+1; j++) begin
-                        assert(xCorrOut[i][j] == xCorrModel[i][j])
-                             $display("SUCCESS: xCorrOut[%d][%d] = %d, xCorrModel[%d][%d] = %d", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j]);
-                        else $display("FAIL:    xCorrOut[%d][%d] = %d, xCorrModel[%d][%d] = %d", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j]);
+                        assert(xCorrOut[i][j] == xCorrModel[i][j]) begin
+                        if (DEBUG_MODE)
+                            $display("SUCCESS: xCorrOut[%d][%d] = %d, xCorrModel[%d][%d] = %d", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j]);
+                        end else begin
+                            $display("FAIL:    xCorrOut[%d][%d] = %d, xCorrModel[%d][%d] = %d, diff = %d", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j],  int'(xCorrOut[i][j]) - int'(xCorrModel[i][j]));
+                            num_fails++;
+                        end
                     end
                 end
             end
@@ -133,6 +156,8 @@ module Correlation_test;
             // Do checks on DUT with new values
 
         end
+
+        $display("Number of fails: %d", num_fails);
 
         $fclose(fd_r);
         // $finish;
