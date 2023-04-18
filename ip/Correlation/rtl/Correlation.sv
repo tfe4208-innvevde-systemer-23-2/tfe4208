@@ -41,7 +41,7 @@ typedef enum logic [2:0] {xCorr01 = 0, xCorr02 = 1, xCorr03 = 2, xCorr12 = 3, xC
 
 genvar slave, bufferLine;
 generate
-    for (slave = 0; slave < NUM_SLAVES; slave = slave + 1) begin
+    for (slave = 0; slave < NUM_SLAVES; slave++) begin
 
         // Sets up the inputBuffer shift register
         always @(posedge clk or posedge rst) begin
