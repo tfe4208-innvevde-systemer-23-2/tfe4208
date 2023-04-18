@@ -18,23 +18,26 @@ module Correlation #(
     input  logic                                            validIn,
     input  logic[NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0]       dataIn,
 
-    output logic[NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut
+    output logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut
 );
 
 // Need edge detector???
 
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInNormalized;
+
 // Shift register for storing the input data
-logic [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
+logic signed [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
 
 // Values used for crosscorrelation calculations. The f and g refer to the symbols in the crosscorrelation formula.
 // The add-values are used when introducing a new value to crosscorrelation estimate, and the sub-values are used when they are removed.
-logic [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] xCorrInputAddf;
-logic [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] xCorrInputSubf;
-logic [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputAddg;
-logic [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputSubg;
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] xCorrInputAddf;
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] xCorrInputSubf;
+logic signed [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputAddg;
+logic signed [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrInputSubg;
 
 // Registers for storing the crosscorrelation values
-logic [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
+logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
+
 
 // Eunmeration for the different crosscorrelations
 typedef enum logic [2:0] {xCorr01 = 0, xCorr02 = 1, xCorr03 = 2, xCorr12 = 3, xCorr13 = 4, xCorr23 = 5} xCorrIndex_t;
@@ -43,13 +46,15 @@ genvar slave, bufferLine;
 generate
     for (slave = 0; slave < NUM_SLAVES; slave++) begin
 
+        assign dataInNormalized[slave] = signed'(dataIn[slave]) - (2**(NUM_BITS_SAMPLE-1));
+
         // Sets up the inputBuffer shift register
         always @(posedge clk or posedge rst) begin
             if (rst) begin
                 inputBuffer[slave] <= '0;
             end else if (validIn) begin
                 // Shift in new sample
-                inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataIn[slave]};
+                inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataInNormalized[slave]};
             end else begin
                 // Keep old values
                 inputBuffer[slave] <= inputBuffer[slave];

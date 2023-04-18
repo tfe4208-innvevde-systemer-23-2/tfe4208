@@ -8,12 +8,12 @@ module Correlation_test;
     parameter FREQ_SCALE                = 4;    // Board-to-SPI clock frequency scale 
     parameter NUM_BITS_SAMPLE           = 12;   // Number of bits in SPI word
     parameter NUM_SLAVES                = 4;
-    parameter NUM_SAMPLES               = 200;
+    parameter NUM_SAMPLES               = 100;
     parameter MAX_SAMPLES_DELAY         = 11;
-    parameter NUM_BITS_XCORR            = 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES);
+    parameter NUM_BITS_XCORR            = 32; //2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES);
     parameter NUM_XCORRS                = 6;
 
-    parameter DEBUG_MODE                = 0;
+    parameter DEBUG_MODE                = 1;
 
     // Clock and reset
     logic                                   clk50M;     // Main clock
@@ -31,7 +31,7 @@ module Correlation_test;
     string line_result;
 
     logic[NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0]     dataIn;
-    logic[NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut;
+    logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut;
     logic[NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrModel;
 
     // Instantiate DUT
@@ -143,9 +143,9 @@ module Correlation_test;
                     for (int j = 0; j < 2*MAX_SAMPLES_DELAY+1; j++) begin
                         assert(xCorrOut[i][j] == xCorrModel[i][j]) begin
                         if (DEBUG_MODE)
-                            $display("SUCCESS: xCorrOut[%d][%d] = %d, xCorrModel[%d][%d] = %d", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j]);
+                            $display("SUCCESS: xCorrOut[%d][%d] = %h, xCorrModel[%d][%d] = %h", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j]);
                         end else begin
-                            $display("FAIL:    xCorrOut[%d][%d] = %d, xCorrModel[%d][%d] = %d, diff = %d", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j],  int'(xCorrOut[i][j]) - int'(xCorrModel[i][j]));
+                            $display("FAIL:    xCorrOut[%d][%d] = %h, xCorrModel[%d][%d] = %h, diff = %h", i, j, xCorrOut[i][j], i, j, xCorrModel[i][j],  int'(xCorrOut[i][j]) - int'(xCorrModel[i][j]));
                             num_fails++;
                         end
                     end

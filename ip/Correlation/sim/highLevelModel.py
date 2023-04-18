@@ -7,13 +7,14 @@ def Correlate():
     num_channels = 4
     num_xCorrs = int(num_channels * (num_channels - 1) / 2)
     num_delays = 23
-    window_length = 200
+    window_length = 100
     input_filepath = 'data/nepe0.csv'
     ouput_filepath = input_filepath.split('.')[0] + '_model_result' # add .csv later in program
 
     input = np.genfromtxt(input_filepath, dtype=int, delimiter=',')
     input = np.swapaxes(input, 0, 1)
     input = input[0:num_channels]
+    input -= 2**11
 
     print(num_xCorrs)
 
