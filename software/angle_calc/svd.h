@@ -1,6 +1,8 @@
 #ifndef SVD
 #define SVD
 
+#include <stdint.h>
+
 #define NR_END 1
 #define FREE_ARG char*
 #define SIGN(a,b) ((b) >= 0.0 ? fabs(a) : -fabs(a))
