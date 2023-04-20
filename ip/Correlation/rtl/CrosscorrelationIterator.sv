@@ -8,7 +8,7 @@
 module CrossorrelationIterator #(
     parameter NUM_BITS_SAMPLE           = 12,
     parameter NUM_SAMPLES               = 1024,
-    parameter MAX_SAMPLES_DELAY         = 11,
+    parameter MAX_SAMPLES_DELAY         = 9,
     parameter NUM_BITS_XCORR            = 32 // 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES)
 ) (
     input  logic clk,

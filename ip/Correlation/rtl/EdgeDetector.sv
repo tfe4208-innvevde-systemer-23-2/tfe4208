@@ -1,7 +1,7 @@
 // Based on https://www.chipverify.com/verilog/verilog-positive-edge-detector
 
 
-module edgeDetector #() (
+module edgeDetector (
     input  logic    in, // The signal we are looking for positive edges in
     input  logic    clk,
 

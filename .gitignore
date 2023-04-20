@@ -11,6 +11,7 @@
 *.done
 *.sof
 *.tmw_info
+*.bak
 db/
 incremental_db/
 software/.metadata/
