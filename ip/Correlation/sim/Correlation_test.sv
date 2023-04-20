@@ -30,7 +30,8 @@ module Correlation_test;
     string line;
     string line_result;
 
-    logic[NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0]     dataIn;
+    logic[NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataIn;
+    logic validOut;
     logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
     logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut0;
     logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut1;
@@ -54,6 +55,7 @@ module Correlation_test;
         .rst(rst),
         .validIn(validIn),
         .dataIn(dataIn),
+        .validOut(validOut),
         .xCorrOut0(xCorrOut0),
         .xCorrOut1(xCorrOut1),
         .xCorrOut2(xCorrOut2),

@@ -18,6 +18,7 @@ module Correlation #(
     input  logic                                            validIn,
     input  logic[NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0]       dataIn,
 
+    output logic                                                    validOut,
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut0,
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut1,
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut2,
@@ -78,6 +79,14 @@ edgeDetector #() u_edgeDetector (
     .clk(clk),
     .positiveEdge(positiveEdge)
 );
+
+always @(posedge clk or posedge rst) begin
+    if (rst) begin
+        validOut <= '0;
+    end else begin
+        validOut <= positiveEdge;
+    end
+end
 
 // Instantiate the crosscorrelation iterators
 // Will set up calculations for xcorr(0,1), xcorr(0,2), xcorr(0,3), xcorr(1,2), xcorr(1,3) and xcorr(2,3)
