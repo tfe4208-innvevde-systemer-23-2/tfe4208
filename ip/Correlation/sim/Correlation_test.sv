@@ -93,22 +93,24 @@ module Correlation_test;
         end
 
         @(negedge clk50M);
-        rst = 1'b1;
         validIn = 1'b0;
+        @(negedge clk50M);
+        rst = 1'b1;
         @(negedge clk50M);
         @(negedge clk50M);
         rst = 1'b0;
         @(negedge clk50M);
 
         while (!$feof(fd_r)) begin
-            @(negedge clk50M);
+            @(posedge clk50M);
             
             $fgets(line, fd_r);                                                             // Read next line in file
             line_num = line_num + 1;
             if (DEBUG_MODE)
                 $display("\nLine: %s", line);
+                validIn = 1'b1;
+            // @(posedge clk50M);
             $sscanf(line, "%d, %d, %d, %d", dataIn[0], dataIn[1], dataIn[2], dataIn[3]);    // Parse line and put it on dataIn-bus
-            validIn = 1'b1;
 
             if (DEBUG_MODE) begin
                 for (int i = 0; i < NUM_SLAVES; i++) begin
@@ -161,6 +163,13 @@ module Correlation_test;
                     end
                 end
             end
+            
+            @(negedge clk50M);
+            @(negedge clk50M);
+            validIn = 1'b0;
+            @(negedge clk50M);
+            @(negedge clk50M);
+            
             // Correlate();
 
             // Do checks on DUT with new values

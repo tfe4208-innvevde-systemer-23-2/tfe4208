@@ -12,6 +12,7 @@ module CrossorrelationIterator #(
     parameter NUM_BITS_XCORR            = 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES)
 ) (
     input  logic clk,
+    input  logic enable,
     input  logic rst,
 
     // Values used for crosscorrelation calculations. The f and g refer to the symbols in the crosscorrelation formula.
@@ -50,11 +51,13 @@ generate
         always_ff @(posedge clk or posedge rst) begin
             if (rst) begin
                 xCorr[delay] <= '0;
-            end else begin
+            end else if (enable) begin
                 // Add and subtract new samples to the crosscorrelation estimate
                 xCorr[delay] <= xCorr[delay] 
                                 + xCorrInputAddFactor[delay]
                                 - xCorrInputSubFactor[delay];
+            end else begin
+                xCorr[delay] <= xCorr[delay];
             end
         end
     end

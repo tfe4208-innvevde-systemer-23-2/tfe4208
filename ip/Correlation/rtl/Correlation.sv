@@ -26,7 +26,7 @@ module Correlation #(
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut5
 );
 
-// Need edge detector???
+logic positiveEdge;
 
 logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInDetrended;
 
@@ -53,7 +53,7 @@ generate
         always @(posedge clk or posedge rst) begin
             if (rst) begin
                 inputBuffer[slave] <= '0;
-            end else if (validIn) begin
+            end else if (positiveEdge) begin
                 // Shift in new sample
                 inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataInDetrended[slave]};
             end else begin
@@ -73,6 +73,12 @@ generate
     end
 endgenerate
 
+edgeDetector #() u_edgeDetector (
+    .in(validIn),
+    .clk(clk),
+    .positiveEdge(positiveEdge)
+);
+
 // Instantiate the crosscorrelation iterators
 // Will set up calculations for xcorr(0,1), xcorr(0,2), xcorr(0,3), xcorr(1,2), xcorr(1,3) and xcorr(2,3)
 genvar fIndex, gIndex;
@@ -87,6 +93,7 @@ generate
                 .NUM_BITS_XCORR     (NUM_BITS_XCORR)
             ) u_CrossorrelationIterator (
                 .clk                (clk),
+                .enable             (positiveEdge),
                 .rst                (rst),
                 .xCorrInputAddf     (xCorrInputAddf[fIndex]),
                 .xCorrInputSubf     (xCorrInputSubf[fIndex]),
