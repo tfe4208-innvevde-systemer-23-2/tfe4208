@@ -8,9 +8,9 @@
 module Correlation #(
     parameter NUM_BITS_SAMPLE           = 12,
     parameter NUM_SLAVES                = 4,
-    parameter NUM_SAMPLES               = 100,
+    parameter NUM_SAMPLES               = 1024,
     parameter MAX_SAMPLES_DELAY         = 11,
-    parameter NUM_BITS_XCORR            = 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES),
+    parameter NUM_BITS_XCORR            = 32, // 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES),
     parameter NUM_XCORRS                = 6
 ) (
     input  logic                                            clk,
@@ -45,7 +45,7 @@ logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
 
 genvar slave, bufferLine;
 generate
-    for (slave = 0; slave < NUM_SLAVES; slave++) begin
+    for (slave = 0; slave < NUM_SLAVES; slave++) begin : slaveBuffer
 
         assign dataInDetrended[slave] = signed'(dataIn[slave]) - (2**(NUM_BITS_SAMPLE-1));
 
@@ -65,7 +65,7 @@ generate
         // Assign the f- and g-values for the crosscorrelation calculations
         assign xCorrInputAddf[slave] = inputBuffer[slave][MAX_SAMPLES_DELAY];
         assign xCorrInputSubf[slave] = inputBuffer[slave][NUM_SAMPLES - MAX_SAMPLES_DELAY - 1];
-        for (bufferLine = 0; bufferLine <= 2*MAX_SAMPLES_DELAY; bufferLine++) begin
+        for (bufferLine = 0; bufferLine <= 2*MAX_SAMPLES_DELAY; bufferLine++) begin : bufferLineAssign
             assign xCorrInputAddg[slave][bufferLine] = inputBuffer[slave][bufferLine];
             assign xCorrInputSubg[slave][bufferLine] = inputBuffer[slave][NUM_SAMPLES - 2*MAX_SAMPLES_DELAY - 1 + bufferLine];
         end
@@ -84,8 +84,8 @@ edgeDetector #() u_edgeDetector (
 genvar fIndex, gIndex;
 generate
     // xCorrIndex = 0;
-    for (fIndex = 0; fIndex < NUM_SLAVES; fIndex++) begin
-        for (gIndex = fIndex + 1; gIndex < NUM_SLAVES; gIndex++) begin
+    for (fIndex = 0; fIndex < NUM_SLAVES; fIndex++) begin : CrosscorrelationIteratorInitf
+        for (gIndex = fIndex + 1; gIndex < NUM_SLAVES; gIndex++) begin : CrosscorrelationIteratorInitg
             CrossorrelationIterator #(
                 .NUM_BITS_SAMPLE    (NUM_BITS_SAMPLE),
                 .NUM_SAMPLES        (NUM_SAMPLES),

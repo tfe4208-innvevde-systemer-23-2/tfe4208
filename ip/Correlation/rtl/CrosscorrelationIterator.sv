@@ -7,9 +7,9 @@
 
 module CrossorrelationIterator #(
     parameter NUM_BITS_SAMPLE           = 12,
-    parameter NUM_SAMPLES               = 100,
+    parameter NUM_SAMPLES               = 1024,
     parameter MAX_SAMPLES_DELAY         = 11,
-    parameter NUM_BITS_XCORR            = 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES)
+    parameter NUM_BITS_XCORR            = 32 // 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES)
 ) (
     input  logic clk,
     input  logic enable,
@@ -40,7 +40,7 @@ assign xCorrInputSubfPadded = {{NUM_BITS_XCORR - NUM_BITS_SAMPLE{xCorrInputSubf[
 
 genvar delay;
 generate 
-    for (delay = 0; delay <= 2*MAX_SAMPLES_DELAY; delay++) begin
+    for (delay = 0; delay <= 2*MAX_SAMPLES_DELAY; delay++) begin : xCorrelationCalculation
         assign xCorrInputAddgPadded[delay] = {{NUM_BITS_XCORR - NUM_BITS_SAMPLE{xCorrInputAddg[delay][NUM_BITS_SAMPLE-1]}}, xCorrInputAddg[delay]};
         assign xCorrInputSubgPadded[delay] = {{NUM_BITS_XCORR - NUM_BITS_SAMPLE{xCorrInputSubg[delay][NUM_BITS_SAMPLE-1]}}, xCorrInputSubg[delay]};
 
