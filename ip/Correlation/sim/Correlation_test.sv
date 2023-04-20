@@ -172,16 +172,11 @@ module Correlation_test;
             @(negedge clk50M);
             @(negedge clk50M);
             
-            // Correlate();
-
-            // Do checks on DUT with new values
-
         end
 
         $display("Number of fails: %d", num_fails);
 
         $fclose(fd_r);
-        // $finish;
     end
 
 endmodule
