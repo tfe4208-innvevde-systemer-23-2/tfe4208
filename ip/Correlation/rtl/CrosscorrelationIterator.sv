@@ -33,9 +33,9 @@ logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrInputSubgPadded;
 logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrInputAddFactor;
 logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrInputSubFactor;
 
+
 assign xCorrInputAddfPadded = {{NUM_BITS_XCORR - NUM_BITS_SAMPLE{xCorrInputAddf[NUM_BITS_SAMPLE-1]}}, xCorrInputAddf};
 assign xCorrInputSubfPadded = {{NUM_BITS_XCORR - NUM_BITS_SAMPLE{xCorrInputSubf[NUM_BITS_SAMPLE-1]}}, xCorrInputSubf};
-
 
 genvar delay;
 generate 

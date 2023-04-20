@@ -18,12 +18,17 @@ module Correlation #(
     input  logic                                            validIn,
     input  logic[NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0]       dataIn,
 
-    output logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut
+    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut0,
+    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut1,
+    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut2,
+    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut3,
+    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut4,
+    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut5
 );
 
 // Need edge detector???
 
-logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInNormalized;
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInDetrended;
 
 // Shift register for storing the input data
 logic signed [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
@@ -38,15 +43,11 @@ logic signed [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrI
 // Registers for storing the crosscorrelation values
 logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
 
-
-// Eunmeration for the different crosscorrelations
-typedef enum logic [2:0] {xCorr01 = 0, xCorr02 = 1, xCorr03 = 2, xCorr12 = 3, xCorr13 = 4, xCorr23 = 5} xCorrIndex_t;
-
 genvar slave, bufferLine;
 generate
     for (slave = 0; slave < NUM_SLAVES; slave++) begin
 
-        assign dataInNormalized[slave] = signed'(dataIn[slave]) - (2**(NUM_BITS_SAMPLE-1));
+        assign dataInDetrended[slave] = signed'(dataIn[slave]) - (2**(NUM_BITS_SAMPLE-1));
 
         // Sets up the inputBuffer shift register
         always @(posedge clk or posedge rst) begin
@@ -54,7 +55,7 @@ generate
                 inputBuffer[slave] <= '0;
             end else if (validIn) begin
                 // Shift in new sample
-                inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataInNormalized[slave]};
+                inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataInDetrended[slave]};
             end else begin
                 // Keep old values
                 inputBuffer[slave] <= inputBuffer[slave];
@@ -98,6 +99,13 @@ generate
     end
 endgenerate
 
-assign xCorrOut = xCorr;
+
+// Assign the outputs, Quartus only supports 2D arrays
+assign xCorrOut0 = xCorr[0];
+assign xCorrOut1 = xCorr[1];
+assign xCorrOut2 = xCorr[2];
+assign xCorrOut3 = xCorr[3];
+assign xCorrOut4 = xCorr[4];
+assign xCorrOut5 = xCorr[5];
 
 endmodule
