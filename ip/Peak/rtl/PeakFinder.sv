@@ -13,7 +13,7 @@ module PeakFinder #(
     input logic rst,
 
     // --
-    input logic signed[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]   dataIn,
+    input logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]   dataIn,
     input logic[$clog2(2*MAX_LAGS+1)-1:0]                   iterator,
 
     // -- 

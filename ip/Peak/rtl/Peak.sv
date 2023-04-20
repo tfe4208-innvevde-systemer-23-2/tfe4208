@@ -29,7 +29,7 @@ module Peak #(
     logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS+1)-1:0]             dataOutInternal;
     logic                                                       rstInternal;
     logic                                                       rstFsm;
-    logic[NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]    dataInInternal;
+    logic signed [NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]    dataInInternal;
 
     // -- Assign statements
     assign rstInternal       =  rst | rstFsm;
