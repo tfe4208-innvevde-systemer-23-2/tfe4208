@@ -53,7 +53,7 @@ module Spi #(
     endgenerate
 
     // -- FSM
-    Fsm #(
+    SpiFsm #(
         .SAMPLE_TIME        (SAMPLE_TIME),
         .NUM_BITS           (NUM_BITS)
     ) u_fsm (

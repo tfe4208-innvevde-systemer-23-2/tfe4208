@@ -1,0 +1,119 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 352 192)
+	(text "PeakVerifier" (rect 5 0 55 12)(font "Arial" ))
+	(text "inst" (rect 8 160 20 172)(font "Arial" ))
+	(port
+		(pt 336 32)
+		(output)
+		(text "dataOut0[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 228 12)(font "Arial" ))
+		(text "dataOut0[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 87 27 315 39)(font "Arial" ))
+		(line (pt 336 32)(pt 320 32)(line_width 3))
+	)
+	(port
+		(pt 336 48)
+		(output)
+		(text "dataOut1[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 227 12)(font "Arial" ))
+		(text "dataOut1[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 88 43 315 55)(font "Arial" ))
+		(line (pt 336 48)(pt 320 48)(line_width 3))
+	)
+	(port
+		(pt 336 64)
+		(output)
+		(text "dataOut2[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 228 12)(font "Arial" ))
+		(text "dataOut2[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 87 59 315 71)(font "Arial" ))
+		(line (pt 336 64)(pt 320 64)(line_width 3))
+	)
+	(port
+		(pt 336 80)
+		(output)
+		(text "dataOut3[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 228 12)(font "Arial" ))
+		(text "dataOut3[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 87 75 315 87)(font "Arial" ))
+		(line (pt 336 80)(pt 320 80)(line_width 3))
+	)
+	(port
+		(pt 336 96)
+		(output)
+		(text "dataOut4[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 230 12)(font "Arial" ))
+		(text "dataOut4[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 85 91 315 103)(font "Arial" ))
+		(line (pt 336 96)(pt 320 96)(line_width 3))
+	)
+	(port
+		(pt 336 112)
+		(output)
+		(text "dataOut5[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 228 12)(font "Arial" ))
+		(text "dataOut5[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 87 107 315 119)(font "Arial" ))
+		(line (pt 336 112)(pt 320 112)(line_width 3))
+	)
+	(port
+		(pt 336 128)
+		(output)
+		(text "dataOutValid" (rect 0 0 50 12)(font "Arial" ))
+		(text "dataOutValid" (rect 265 123 315 135)(font "Arial" ))
+		(line (pt 336 128)(pt 320 128)(line_width 1))
+	)
+	(parameter
+		"NUM_BITS_XCORRS"
+		"32"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"MAX_LAGS"
+		"17"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"XCORR5_MAX"
+		"19"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"XCORR4_MAX"
+		"6"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"XCORR3_MAX"
+		"17"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"XCORR2_MAX"
+		"24"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"XCORR1_MAX"
+		"31"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"XCORR0_MAX"
+		"2"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 320 160)(line_width 1))
+	)
+	(annotation_block (parameter)(rect 352 -64 452 16))
+)

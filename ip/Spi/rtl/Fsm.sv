@@ -1,6 +1,6 @@
 // Copyright
 
-module Fsm #(
+module SpiFsm #(
     parameter SAMPLE_TIME       = 2,                // Clock cycles needed for ADC sampling
     parameter NUM_BITS          = 12                // Excluding Null bit
 ) (
