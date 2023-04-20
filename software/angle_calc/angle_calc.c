@@ -29,11 +29,20 @@ void print_nxnmatrix(double** mat, int n){
     }
 }
 
+void create_r(double** r){
+    r[1][1] = -0.5*a / C; r[1][2] = sqrt(3)*a/2 / C; r[1][3] = 0;
+    r[2][1] = -a     / C; r[2][2] = 0           / C; r[2][3] = 0;
+    r[3][1] = -0.5*a / C; r[3][2] = a*sqrt(3)/6 / C; r[3][3] = sqrt(2*a/3) / C;
+    r[4][1] = -0.5*a / C; r[4][2] = sqrt(3)*a/2 / C; r[4][3] = 0;
+    r[5][1] = 0      / C; r[5][2] = sqrt(3)*a/3 / C; r[5][3] = sqrt(2*a/3) / C;
+    r[6][1] = 0.5*a  / C; r[6][2] = sqrt(3)*a/6 / C; r[6][3] = sqrt(2*a/3) / C;
+}
 
 int main(){
     printf("Nepe\n");
 
     double** r = dmatrix(1,6,1,3);
+    create_r(r);
     double* sigma =dvector(1,6);
     //Matrix* r = mXcreate(6,3);
     //create_r(r);
