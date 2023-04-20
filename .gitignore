@@ -11,6 +11,7 @@
 *.done
 *.sof
 *.tmw_info
+*.bak
 db/
 incremental_db/
 software/.metadata/
@@ -23,6 +24,14 @@ software/.metadata/
 *.map
 *libhal_bsp.a
 
+# Model results
+ip/Correlation/sim/data/nepe0_model_result0.csv
+ip/Correlation/sim/data/nepe0_model_result1.csv
+ip/Correlation/sim/data/nepe0_model_result2.csv
+ip/Correlation/sim/data/nepe0_model_result3.csv
+ip/Correlation/sim/data/nepe0_model_result4.csv
+ip/Correlation/sim/data/nepe0_model_result5.csv
+
 # Other useful ignores
 *.html
 *.xml
@@ -32,3 +41,4 @@ software/.metadata/
 
 # MacOS Specific
 *.DS_Store
+

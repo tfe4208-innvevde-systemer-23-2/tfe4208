@@ -3,7 +3,7 @@
 module Peak #(
     parameter NUM_BITS_SAMPLE           = 12,
     parameter NUM_SAMPLES               = 1024,
-    parameter MAX_LAGS                  = 17,
+    parameter MAX_LAGS                  = 9,
     parameter BITS_PER_XCORR            = 6,            // $clog2(2*MAX_LAGS+1) 
     parameter NUM_XCORRS                = 6,
     parameter NUM_BITS_XCORRS           = 32,           // 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES)
