@@ -1,0 +1,137 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 688 240)
+	(text "Correlation" (rect 5 0 58 12)(font "Arial" ))
+	(text "inst" (rect 8 160 25 172)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "rst" (rect 0 0 12 12)(font "Arial" ))
+		(text "rst" (rect 21 43 33 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "validIn" (rect 0 0 33 12)(font "Arial" ))
+		(text "validIn" (rect 21 59 54 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "dataIn[NUM_SLAVES-1..0][NUM_BITS_SAMPLE-1..0]" (rect 0 0 264 12)(font "Arial" ))
+		(text "dataIn[NUM_SLAVES-1..0][NUM_BITS_SAMPLE-1..0]" (rect 21 75 285 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 624 128)
+		(output)
+		(text "validOut" (rect 0 0 41 12)(font "Arial" ))
+		(text "validOut" (rect 568 120 609 132)(font "Arial" ))
+		(line (pt 624 128)(pt 608 128))
+	)
+	(port
+		(pt 624 32)
+		(output)
+		(text "xCorrOut0[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 0 0 329 12)(font "Arial" ))
+		(text "xCorrOut0[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 325 27 603 39)(font "Arial" ))
+		(line (pt 624 32)(pt 608 32)(line_width 3))
+	)
+	(port
+		(pt 624 48)
+		(output)
+		(text "xCorrOut1[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 0 0 329 12)(font "Arial" ))
+		(text "xCorrOut1[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 325 43 603 55)(font "Arial" ))
+		(line (pt 624 48)(pt 608 48)(line_width 3))
+	)
+	(port
+		(pt 624 64)
+		(output)
+		(text "xCorrOut2[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 0 0 329 12)(font "Arial" ))
+		(text "xCorrOut2[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 325 59 603 71)(font "Arial" ))
+		(line (pt 624 64)(pt 608 64)(line_width 3))
+	)
+	(port
+		(pt 624 80)
+		(output)
+		(text "xCorrOut3[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 0 0 329 12)(font "Arial" ))
+		(text "xCorrOut3[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 325 75 603 87)(font "Arial" ))
+		(line (pt 624 80)(pt 608 80)(line_width 3))
+	)
+	(port
+		(pt 624 96)
+		(output)
+		(text "xCorrOut4[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 0 0 329 12)(font "Arial" ))
+		(text "xCorrOut4[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 325 91 603 103)(font "Arial" ))
+		(line (pt 624 96)(pt 608 96)(line_width 3))
+	)
+	(port
+		(pt 624 112)
+		(output)
+		(text "xCorrOut5[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 0 0 329 12)(font "Arial" ))
+		(text "xCorrOut5[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 325 107 603 119)(font "Arial" ))
+		(line (pt 624 112)(pt 608 112)(line_width 3))
+	)
+	(parameter
+		"NUM_BITS_SAMPLE"
+		"12"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_SLAVES"
+		"4"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_SAMPLES"
+		"1024"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"MAX_SAMPLES_DELAY"
+		"9"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_BITS_XCORR"
+		"32"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_XCORRS"
+		"6"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 608 160))
+	)
+	(annotation_block (parameter)(rect 640 -120 880 16))
+)
