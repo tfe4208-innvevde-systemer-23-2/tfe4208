@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'DE2_115_SOPC'
  * SOPC Builder design path: ../../DE2_115_SOPC.sopcinfo
  *
- * Generated: Fri Mar 17 23:21:38 CET 2023
+ * Generated: Thu Apr 20 15:39:39 CEST 2023
  */
 
 /*
@@ -144,6 +144,7 @@
 #define __ALTERA_AVALON_JTAG_UART
 #define __ALTERA_AVALON_ONCHIP_MEMORY2
 #define __ALTERA_NIOS2_GEN2
+#define __PERIPHERAL
 #define __PWM
 
 
@@ -163,19 +164,19 @@
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
 #define ALT_STDERR "/dev/jtag_uart"
-#define ALT_STDERR_BASE 0x81010
+#define ALT_STDERR_BASE 0x81028
 #define ALT_STDERR_DEV jtag_uart
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDIN "/dev/jtag_uart"
-#define ALT_STDIN_BASE 0x81010
+#define ALT_STDIN_BASE 0x81028
 #define ALT_STDIN_DEV jtag_uart
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDOUT "/dev/jtag_uart"
-#define ALT_STDOUT_BASE 0x81010
+#define ALT_STDOUT_BASE 0x81028
 #define ALT_STDOUT_DEV jtag_uart
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
@@ -200,7 +201,7 @@
  */
 
 #define ALT_MODULE_CLASS_jtag_uart altera_avalon_jtag_uart
-#define JTAG_UART_BASE 0x81010
+#define JTAG_UART_BASE 0x81028
 #define JTAG_UART_IRQ 0
 #define JTAG_UART_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_NAME "/dev/jtag_uart"
@@ -242,12 +243,26 @@
 
 
 /*
+ * peripheral_0 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_peripheral_0 peripheral
+#define PERIPHERAL_0_BASE 0x81020
+#define PERIPHERAL_0_IRQ -1
+#define PERIPHERAL_0_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PERIPHERAL_0_NAME "/dev/peripheral_0"
+#define PERIPHERAL_0_SPAN 8
+#define PERIPHERAL_0_TYPE "peripheral"
+
+
+/*
  * pwm_0 configuration
  *
  */
 
 #define ALT_MODULE_CLASS_pwm_0 pwm
-#define PWM_0_BASE 0x99020
+#define PWM_0_BASE 0x81010
 #define PWM_0_IRQ -1
 #define PWM_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define PWM_0_NAME "/dev/pwm_0"
@@ -261,11 +276,25 @@
  */
 
 #define ALT_MODULE_CLASS_pwm_1 pwm
-#define PWM_1_BASE 0x99010
+#define PWM_1_BASE 0x81000
 #define PWM_1_IRQ -1
 #define PWM_1_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define PWM_1_NAME "/dev/pwm_1"
 #define PWM_1_SPAN 16
 #define PWM_1_TYPE "pwm"
+
+
+/*
+ * pwm_2 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_pwm_2 pwm
+#define PWM_2_BASE 0x0
+#define PWM_2_IRQ -1
+#define PWM_2_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PWM_2_NAME "/dev/pwm_2"
+#define PWM_2_SPAN 16
+#define PWM_2_TYPE "pwm"
 
 #endif /* __SYSTEM_H_ */

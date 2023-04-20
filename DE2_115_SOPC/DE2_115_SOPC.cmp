@@ -5,6 +5,7 @@
 			peripheral_0_conduit_end_lagsinvalid : in  std_logic                     := 'X';             -- lagsinvalid
 			pwm_0_conduit_end_pwm                : out std_logic;                                        -- pwm
 			pwm_1_conduit_end_pwm                : out std_logic;                                        -- pwm
+			pwm_2_conduit_end_pwm                : out std_logic;                                        -- pwm
 			reset_reset_n                        : in  std_logic                     := 'X'              -- reset_n
 		);
 	end component DE2_115_SOPC;
