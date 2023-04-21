@@ -36,13 +36,13 @@ refer to the applicable agreement for further details.
 	)
 	(rotate270)
 	(text "VCC" (rect -1 136 9 156)(font "Arial" (font_size 6))(vertical))
-	(annotation_block (location)(rect 1584 -344 1640 -320))
+	(annotation_block (location)(rect 1544 -320 1600 -296))
 )
 (pin
 	(bidir)
 	(rect -16 -88 160 -72)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
-	(text "GPIO[25]" (rect 90 0 133 17)(font "Intel Clear" ))
+	(text "GPIO[25]" (rect 90 0 136 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 56 4)(pt 78 4))
@@ -54,7 +54,7 @@ refer to the applicable agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 120 -88 192 -72))
+	(annotation_block (location)(rect 120 -104 192 -80))
 )
 (pin
 	(bidir)
@@ -73,13 +73,13 @@ refer to the applicable agreement for further details.
 	)
 	(flipy)
 	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1544 -48 1616 -40))
+	(annotation_block (location)(rect 1720 -64 1792 -40))
 )
 (pin
 	(bidir)
 	(rect 1544 0 1720 16)
 	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
-	(text "GPIO[1]" (rect 49 0 86 17)(font "Intel Clear" ))
+	(text "GPIO[1]" (rect 46 0 86 12)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 120 4)(pt 98 4))
@@ -92,13 +92,13 @@ refer to the applicable agreement for further details.
 	)
 	(flipy)
 	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1544 -8 1616 0))
+	(annotation_block (location)(rect 1720 -24 1792 0))
 )
 (pin
 	(bidir)
 	(rect 1544 40 1720 56)
 	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
-	(text "GPIO[2]" (rect 5 0 45 12)(font "Arial" ))
+	(text "GPIO[2]" (rect 46 0 86 12)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 120 4)(pt 98 4))
@@ -111,13 +111,13 @@ refer to the applicable agreement for further details.
 	)
 	(flipy)
 	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1544 32 1616 40))
+	(annotation_block (location)(rect 1720 16 1792 40))
 )
 (pin
 	(bidir)
 	(rect -712 -56 -536 -40)
 	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
-	(text "GPIO[33..30]" (rect 5 0 70 12)(font "Arial" ))
+	(text "GPIO[33..30]" (rect 22 0 86 12)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 120 4)(pt 98 4))
@@ -136,7 +136,7 @@ refer to the applicable agreement for further details.
 	(bidir)
 	(rect -16 -72 160 -56)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
-	(text "GPIO[24]" (rect 90 0 133 17)(font "Intel Clear" ))
+	(text "GPIO[24]" (rect 90 0 136 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 56 4)(pt 78 4))
@@ -148,7 +148,7 @@ refer to the applicable agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 120 -72 192 -56))
+	(annotation_block (location)(rect 120 -80 192 -56))
 )
 (pin
 	(bidir)
@@ -166,13 +166,13 @@ refer to the applicable agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 128 144 200 168))
+	(annotation_block (location)(rect 88 120 160 144))
 )
 (pin
 	(bidir)
-	(rect 792 240 968 256)
+	(rect 816 296 992 312)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
-	(text "GPIO[12]" (rect 90 0 133 17)(font "Intel Clear" ))
+	(text "GPIO[12]" (rect 90 0 136 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 56 4)(pt 78 4))
@@ -184,7 +184,7 @@ refer to the applicable agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 968 256 1032 280))
+	(annotation_block (location)(rect 952 288 1024 312))
 )
 (pin
 	(bidir)
@@ -202,29 +202,12 @@ refer to the applicable agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1704 160 1776 184))
-)
-(pin
-	(bidir)
-	(rect 784 -240 960 -224)
-	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
-	(text "pin_name1" (rect 90 0 143 12)(font "Arial" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 56 4)(pt 78 4))
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 56 12)(pt 78 12))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 78 12)(pt 82 8))
-		(line (pt 56 4)(pt 52 8))
-		(line (pt 52 8)(pt 56 12))
-	)
-	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 1664 136 1728 160))
 )
 (symbol
 	(rect 904 -88 936 -56)
 	(text "GND" (rect 6 3 16 24)(font "Arial" (font_size 6))(vertical))
-	(text "inst3" (rect -6 7 11 29)(font "Intel Clear" )(vertical)(invisible))
+	(text "inst3" (rect -1 6 11 29)(font "Arial" )(vertical)(invisible))
 	(port
 		(pt 32 16)
 		(output)
@@ -242,7 +225,7 @@ refer to the applicable agreement for further details.
 (symbol
 	(rect -520 -80 -488 -48)
 	(text "GND" (rect 6 3 16 24)(font "Arial" (font_size 6))(vertical))
-	(text "inst2" (rect -6 7 11 29)(font "Intel Clear" )(vertical)(invisible))
+	(text "inst2" (rect -1 6 11 29)(font "Arial" )(vertical)(invisible))
 	(port
 		(pt 32 16)
 		(output)
@@ -350,7 +333,7 @@ refer to the applicable agreement for further details.
 (symbol
 	(rect 1704 72 1720 104)
 	(text "VCC" (rect 0 5 10 25)(font "Arial" (font_size 6))(vertical))
-	(text "inst4" (rect 5 7 22 29)(font "Intel Clear" )(vertical)(invisible))
+	(text "inst4" (rect 5 6 17 29)(font "Arial" )(vertical)(invisible))
 	(port
 		(pt 16 16)
 		(output)
@@ -364,9 +347,9 @@ refer to the applicable agreement for further details.
 	(rotate90)
 )
 (symbol
-	(rect 192 -56 224 -24)
+	(rect 200 -56 232 -24)
 	(text "GND" (rect 6 3 16 24)(font "Arial" (font_size 6))(vertical))
-	(text "inst6" (rect -6 7 11 29)(font "Intel Clear" )(vertical)(invisible))
+	(text "inst6" (rect -1 6 11 29)(font "Arial" )(vertical)(invisible))
 	(port
 		(pt 32 16)
 		(output)
@@ -410,28 +393,28 @@ refer to the applicable agreement for further details.
 		(pt 408 32)
 		(output)
 		(text "chipEnable" (rect 0 0 53 12)(font "Arial" ))
-		(text "chipEnable" (rect 343 27 396 39)(font "Arial" ))
+		(text "chipEnable" (rect 343 27 387 39)(font "Arial" ))
 		(line (pt 408 32)(pt 392 32))
 	)
 	(port
 		(pt 408 48)
 		(output)
 		(text "busClk" (rect 0 0 34 12)(font "Arial" ))
-		(text "busClk" (rect 359 43 393 55)(font "Arial" ))
+		(text "busClk" (rect 359 43 387 55)(font "Arial" ))
 		(line (pt 408 48)(pt 392 48))
 	)
 	(port
 		(pt 408 64)
 		(output)
 		(text "dataOutValid" (rect 0 0 62 12)(font "Arial" ))
-		(text "dataOutValid" (rect 335 59 397 71)(font "Arial" ))
+		(text "dataOutValid" (rect 335 59 387 71)(font "Arial" ))
 		(line (pt 408 64)(pt 392 64))
 	)
 	(port
 		(pt 408 80)
 		(output)
 		(text "dataOut[NUM_SLAVES-1..0][NUM_BITS-1..0]" (rect 0 0 224 12)(font "Arial" ))
-		(text "dataOut[NUM_SLAVES-1..0][NUM_BITS-1..0]" (rect 198 75 422 87)(font "Arial" ))
+		(text "dataOut[NUM_SLAVES-1..0][NUM_BITS-1..0]" (rect 198 75 387 87)(font "Arial" ))
 		(line (pt 408 80)(pt 392 80)(line_width 3))
 	)
 	(parameter
@@ -462,7 +445,7 @@ refer to the applicable agreement for further details.
 (symbol
 	(rect 240 -88 864 88)
 	(text "Correlation" (rect 5 0 58 12)(font "Arial" ))
-	(text "inst9" (rect 8 160 30 177)(font "Intel Clear" ))
+	(text "inst9" (rect 8 160 31 172)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -578,7 +561,7 @@ refer to the applicable agreement for further details.
 (symbol
 	(rect 968 -120 1504 88)
 	(text "Peak" (rect 5 0 29 12)(font "Arial" ))
-	(text "inst5" (rect 8 192 30 209)(font "Intel Clear" ))
+	(text "inst5" (rect 8 192 31 204)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -646,14 +629,14 @@ refer to the applicable agreement for further details.
 		(pt 536 32)
 		(output)
 		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 0 0 246 12)(font "Arial" ))
-		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 307 27 553 39)(font "Arial" ))
+		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 307 27 515 39)(font "Arial" ))
 		(line (pt 536 32)(pt 520 32)(line_width 3))
 	)
 	(port
 		(pt 536 48)
 		(output)
 		(text "dataOutValid" (rect 0 0 62 12)(font "Arial" ))
-		(text "dataOutValid" (rect 463 43 525 55)(font "Arial" ))
+		(text "dataOutValid" (rect 463 43 515 55)(font "Arial" ))
 		(line (pt 536 48)(pt 520 48))
 	)
 	(parameter
@@ -836,10 +819,6 @@ refer to the applicable agreement for further details.
 	(pt 952 -128)
 )
 (connector
-	(pt 240 -40)
-	(pt 224 -40)
-)
-(connector
 	(pt 1528 152)
 	(pt 1528 -72)
 )
@@ -850,14 +829,6 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 1528 -72)
 	(pt 1504 -72)
-)
-(connector
-	(pt 792 248)
-	(pt 776 248)
-)
-(connector
-	(pt 776 248)
-	(pt 776 144)
 )
 (connector
 	(pt 904 144)
@@ -898,6 +869,18 @@ refer to the applicable agreement for further details.
 (connector
 	(pt -80 136)
 	(pt -48 136)
+)
+(connector
+	(pt 776 304)
+	(pt 816 304)
+)
+(connector
+	(pt 776 144)
+	(pt 776 304)
+)
+(connector
+	(pt 240 -40)
+	(pt 232 -40)
 )
 (junction (pt 952 -128))
 (junction (pt 1608 -128))

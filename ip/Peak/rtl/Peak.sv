@@ -3,7 +3,7 @@
 module Peak #(
     parameter NUM_BITS_SAMPLE           = 12,
     parameter NUM_SAMPLES               = 1024,
-    parameter MAX_LAGS                  = 9,
+    parameter MAX_LAGS                  = 11,
     parameter BITS_PER_XCORR            = 6,            // $clog2(2*MAX_LAGS+1) 
     parameter NUM_XCORRS                = 6,
     parameter NUM_BITS_XCORRS           = 32,           // 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES)
@@ -25,8 +25,8 @@ module Peak #(
 );
 
     // -- Internal signals
-    logic[$clog2(2*MAX_LAGS+1)-1:0]                             iterator;
-    logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS+1)-1:0]             dataOutInternal;
+    logic[BITS_PER_XCORR-1:0]                             iterator;
+    logic[NUM_XCORRS-1:0][BITS_PER_XCORR-1:0]             dataOutInternal;
     logic                                                       rstInternal;
     logic                                                       rstFsm;
     logic[NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]    dataInInternal;

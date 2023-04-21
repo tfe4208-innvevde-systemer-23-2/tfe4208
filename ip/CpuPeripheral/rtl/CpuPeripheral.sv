@@ -9,9 +9,10 @@ module CpuPeripheral (
     // -- Parameters --
     // Avalon slaves does not support parametrized signals :(
     // Signal widths below use:
-    //  - NUM_XCORRS    = 6
-    //  - MAX_LAGS      = 17 (= 6 bits per channel)
-    //  - CPU_BITS      = 32
+    //  - NUM_XCORRS      = 6
+    //  - MAX_LAGS        = 11          But we use 6 bits per channel
+    //  - BITS_PER_XCORR  = 6,          $clog2(2*MAX_LAGS+1) 
+    //  - CPU_BITS        = 32
 
     // -- Clock and reset
     input  logic                                        clk,            // Avalon slave CPU clock
