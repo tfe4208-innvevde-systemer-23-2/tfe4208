@@ -25,7 +25,7 @@ module PeakFinder #(
     logic[$clog2(2*MAX_LAGS+1)-1:0]     lagIterator;
 
     // -- Assign statements
-    assign dataOut = ((maxValue > MIN_XCORR_VAL) ? lagIterator : {1'b1, {($clog2(2*MAX_LAGS)){1'b0}}});
+    assign dataOut = ((maxValue > MIN_XCORR_VAL) ? lagIterator : {1'b1, {($clog2(2*MAX_LAGS+1)-1){1'b0}}});
 
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin

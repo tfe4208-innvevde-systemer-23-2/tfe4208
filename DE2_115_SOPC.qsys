@@ -61,7 +61,7 @@
    {
       datum baseAddress
       {
-         value = "528424";
+         value = "528440";
          type = "String";
       }
    }
@@ -93,7 +93,7 @@
    {
       datum baseAddress
       {
-         value = "528416";
+         value = "528432";
          type = "String";
       }
    }
@@ -114,7 +114,7 @@
       }
       datum baseAddress
       {
-         value = "528400";
+         value = "528416";
          type = "String";
       }
    }
@@ -130,7 +130,7 @@
    {
       datum baseAddress
       {
-         value = "528384";
+         value = "528400";
          type = "String";
       }
    }
@@ -140,6 +140,14 @@
       {
          value = "7";
          type = "int";
+      }
+   }
+   element pwm_2.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "528384";
+         type = "String";
       }
    }
 }
@@ -211,7 +219,7 @@
   <parameter name="dataAddrWidth" value="20" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='pwm_2.avalon_slave_0' start='0x0' end='0x10' type='pwm.avalon_slave_0' /><slave name='onchip_memory2.s1' start='0x40000' end='0x72000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x80800' end='0x81000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='pwm_1.avalon_slave_0' start='0x81000' end='0x81010' type='pwm.avalon_slave_0' /><slave name='pwm_0.avalon_slave_0' start='0x81010' end='0x81020' type='pwm.avalon_slave_0' /><slave name='peripheral_0.avalon_slave_0' start='0x81020' end='0x81028' type='peripheral.avalon_slave_0' /><slave name='jtag_uart.avalon_jtag_slave' start='0x81028' end='0x81030' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2.s1' start='0x40000' end='0x72000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x80800' end='0x81000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='pwm_2.avalon_slave_0' start='0x81000' end='0x81010' type='pwm.avalon_slave_0' /><slave name='pwm_1.avalon_slave_0' start='0x81010' end='0x81020' type='pwm.avalon_slave_0' /><slave name='pwm_0.avalon_slave_0' start='0x81020' end='0x81030' type='pwm.avalon_slave_0' /><slave name='peripheral_0.avalon_slave_0' start='0x81030' end='0x81038' type='peripheral.avalon_slave_0' /><slave name='jtag_uart.avalon_jtag_slave' start='0x81038' end='0x81040' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -430,7 +438,7 @@
    start="cpu.data_master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00081028" />
+  <parameter name="baseAddress" value="0x00081038" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -439,7 +447,7 @@
    start="cpu.data_master"
    end="pwm_0.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00081010" />
+  <parameter name="baseAddress" value="0x00081020" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -448,7 +456,7 @@
    start="cpu.data_master"
    end="pwm_1.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00081000" />
+  <parameter name="baseAddress" value="0x00081010" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -457,7 +465,7 @@
    start="cpu.data_master"
    end="peripheral_0.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00081020" />
+  <parameter name="baseAddress" value="0x00081030" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -466,7 +474,7 @@
    start="cpu.data_master"
    end="pwm_2.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="baseAddress" value="0x00081000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
