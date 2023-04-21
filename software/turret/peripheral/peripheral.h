@@ -19,7 +19,7 @@ typedef struct peripheral_dev {
 
 /* Lags data structure */
 typedef struct peripheral_lags{
-	uint8_t *l01, l02, l03, l12, l13, l23;
+	uint8_t t01, t02, t03, t12, t13, t23;
 } peripheral_lags;
 
 /*******************************************************************************
@@ -31,6 +31,10 @@ uint32_t peripheral_read(peripheral_dev *dev, uint8_t address);
 uint32_t peripheral_read_upper(peripheral_dev *dev);
 uint32_t peripheral_read_lower(peripheral_dev *dev);
 
+//void readAck(peripheral_dev *dev);		// TODO implement some acks so that the lags dont update inbetween reads
+
 void getLags(peripheral_dev *dev, peripheral_lags *lags);
+
+//void setThreshold(peripheral_dev *dev, uint32_t threshold);	// TODO: Set a configurable threshold
 
 #endif /* __PERIPHERAL_H__ */

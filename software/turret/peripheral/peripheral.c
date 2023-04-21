@@ -31,11 +31,11 @@ uint32_t peripheral_read_lower(peripheral_dev *dev) {
 
 void getLags(peripheral_dev *dev, peripheral_lags *lags) {
 	uint32_t temp = peripheral_read_lower(dev->base);
-	lags->l01 = (temp & PERIPHERAL_MASK_FIRST);
-	lags->l02 = ((temp & PERIPHERAL_MASK_SECOND) >> 6);
-	lags->l03 = ((temp & PERIPHERAL_MASK_THIRD) >> 12);
+	lags->t01 = (temp & PERIPHERAL_MASK_FIRST);
+	lags->t02 = (temp & PERIPHERAL_MASK_SECOND) >> 6;
+	lags->t03 = (temp & PERIPHERAL_MASK_THIRD) >> 12;
 	temp = peripheral_read_upper(dev->base);
-	lags->l12 = (temp & PERIPHERAL_MASK_FIRST);
-	lags->l13 = ((temp & PERIPHERAL_MASK_SECOND) >> 6);
-	lags->l23 = ((temp & PERIPHERAL_MASK_THIRD) >> 12);
+	lags->t12 = (temp & PERIPHERAL_MASK_FIRST);
+	lags->t13 = (temp & PERIPHERAL_MASK_SECOND) >> 6;
+	lags->t23 = (temp & PERIPHERAL_MASK_THIRD) >> 12;
 }
