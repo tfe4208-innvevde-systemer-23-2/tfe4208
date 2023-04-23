@@ -8,6 +8,7 @@
 
 #define C 343.3  // Lydhastighet 
 #define a 0.075  // Sidelengde tetraheder
+#define PI 3.1415926535
 
 void transpose_matrix(int row, int column, double** matrix){
     double** transpose_matrix = dmatrix(1,row,1,column);
@@ -25,6 +26,11 @@ void print_nxnmatrix(double** mat, int n){
             printf("Mat[%d][%d]: %f\n", i,j,mat[i][j]);
         }   
     }
+}
+
+void destroy_matrix(double** arr){
+    free(*arr);
+    free( arr);
 }
 
 void print_matrix(double** matrix, int m, int n){
@@ -80,7 +86,7 @@ void calculate_x(double** v, double** u, double* sigma, double** delays, double*
         }
     }
 
-       // Multiply the second vector
+    // Multiply the second vector
     for (i = 4; i <= 6; i++) {
         for (j = 1; j <= 1; j++) {
             for (k = 1; k <= 1; k++) {
@@ -88,7 +94,6 @@ void calculate_x(double** v, double** u, double* sigma, double** delays, double*
             }
         }
     }
-
     // Calculate the sum of the elements in the second vector
     double sum = 0;
     for (i = 1; i <= 6; i++) {
@@ -101,6 +106,21 @@ void calculate_x(double** v, double** u, double* sigma, double** delays, double*
             result[i][j] = temp[i-1][0] + sum;
         }
     }
+
+    destroy_matrix(temp);
+    destroy_matrix(temp2);
+}
+
+double rad2deg(double radians){
+    return radians * (180 / PI); 
+}
+
+double theta(double** r){
+    return acos(r[0][0]);
+}
+
+double phi(double** r){
+    return rad2deg(atan2(r[0][0], r[0][1]));
 }
 
 
@@ -136,11 +156,16 @@ int main(){
 
     calculate_x(v, new_u, sigma_inv, delays, x);
 
-    print_matrix(x, 3,1);
+    print_matrix(x, 3,3);
 
 
 
-    
+    destroy_matrix(x);
+    destroy_matrix(delays);
+    destroy_matrix(v);
+    destroy_matrix(u);
+    free_dvector(sigma,1,3);
+    free_dvector(sigma_inv,1,3);
     printf("Main done");
     
 
