@@ -63,7 +63,7 @@ the transpose VT) is output as v[1..n][1..n].
 {
 	int flag,i,its,j,jj,k,l,nm;
 	double anorm,c,f,g,h,s,scale,x,y,z,*rv1;
-    printf("SVD INIT\n");
+    //printf("SVD INIT\n");
 	rv1=dvector(1,n);
 	g=scale=anorm=0.0; /* Householder reduction to bidiagonal form */
 	for (i=1;i<=n;i++) {
@@ -71,11 +71,11 @@ the transpose VT) is output as v[1..n][1..n].
 		rv1[i]=scale*g;
 		g=s=scale=0.0;
 		if (i <= m) {
-            printf("I is < m \n");
+            //printf("I is < m \n");
 			for (k=i;k<=m;k++){
                 scale += fabs(a[k][i]);
             }    
-            printf("Ferdig med loop?\n");
+            //printf("Ferdig med loop?\n");
 			if (scale) {
 				for (k=i;k<=m;k++) {
 					a[k][i] /= scale;

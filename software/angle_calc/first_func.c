@@ -49,16 +49,6 @@ void destroy_matrix(double** arr){
     free( arr);
 }
 
-double **transpose_matrix(int row, int column, double** matrix){
-    double** transpose_matrix = create_matrix(row, column);
-    for (int i = 0; i < row; i++){
-        for (int j = 0; j < column; j++){
-            transpose_matrix[i][j] = matrix[j][i];
-        }
-    }
-    return transpose_matrix;
-}
-
 
 double** transpose_vector(int length, double vec[]){
     double** transpose_matrix = create_matrix(length, 1);
