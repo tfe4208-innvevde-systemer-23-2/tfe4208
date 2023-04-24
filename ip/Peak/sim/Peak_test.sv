@@ -71,7 +71,7 @@ module Peak_test;
 
     always @(posedge clk50M) 
         $display($stime,,,"rst=%b dataIn=%d ValidIn=%b ValidOut=%b DataOut=%d, state=%b, maxval=%d, iterator=%d",
-            rst, dut.peakGen[0].u_PeakFinder.dataIn[dut.iterator], dataInValid, dataOutValid, dataOut, dut.u_fsm.state, dut.peakGen[0].u_PeakFinder.maxValue, dut.iterator);
+            rst, dut.peakGen[0].u_PeakFinder.value, dataInValid, dataOutValid, dataOut, dut.u_fsm.state, dut.peakGen[0].u_PeakFinder.maxValue, dut.iterator);
 
     task stim;
         rst=1'b0; dataIn = '0; dataInValid = 1'b0;

@@ -21,10 +21,14 @@ module PeakFinder #(
 );
 
     // -- Internal signals
+    logic signed [NUM_BITS_XCORRS-1:0]  value;
     logic signed [NUM_BITS_XCORRS-1:0]  maxValue;
     logic[$clog2(2*MAX_LAGS+1)-1:0]     lagIterator;
 
+
+
     // -- Assign statements
+    assign value = dataIn[iterator];
     assign dataOut = ((maxValue > MIN_XCORR_VAL) ? lagIterator : {1'b1, {($clog2(2*MAX_LAGS)){1'b0}}});
 
     always_ff @(posedge clk or posedge rst) begin
@@ -33,8 +37,8 @@ module PeakFinder #(
             lagIterator     <= '0;
         end
         else begin
-            if (dataIn[iterator] > maxValue) begin
-                maxValue <= dataIn[iterator];
+            if (value > maxValue) begin
+                maxValue <= value;
                 lagIterator <= iterator;
             end
             else begin
