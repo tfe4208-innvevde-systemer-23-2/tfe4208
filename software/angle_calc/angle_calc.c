@@ -10,11 +10,13 @@
 #define a 0.075  // Sidelengde tetraheder
 #define PI 3.1415926535
 
-void transpose_matrix(int row, int column, double** matrix){
-    double** transpose_matrix = dmatrix(1,row,1,column);
-    for (int i = 1; i <= row; i++){
-        for (int j = 1; j <= column; j++){
+
+void transpose_matrix(int row, int column, double** matrix, double** transpose_matrix){
+    for (int i = 1; i < row+1; i++){
+        for (int j = 1; j < column+1; j++){
             transpose_matrix[i][j] = matrix[j][i];
+            //printf("Transpose[%d][%d]: %f\n", i,j,transpose_matrix[i][j]);
+            //printf("Matrix   [%d][%d]: %f\n", j,i,matrix[j][i]);
         }
     }
 }
@@ -37,9 +39,31 @@ void print_matrix(double** matrix, int m, int n){
     printf("Result:\n");
     for (int i = 1; i < m+1; i++) {
         for (int j = 1; j < n+1; j++) {
-            printf("%f ", matrix[i][j]);
+            printf("Mat[%d][%d]: %f\n", i,j,matrix[i][j]);
         }
         printf("\n");
+    }
+}
+
+void matrix_mult(double** mat_a, double** mat_b, double** result, int m, int n, int p){
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            result[i][j] = 0;
+            for (int k = 1; k <= p; k++) {
+                result[i][j] += mat_a[i][k] * mat_b[k][j];
+            }
+        }
+    }
+}
+
+void matrix_mult_test(double** mat_a, double** mat_b, double** result, int m, int n, int n_2){
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n_2; j++) {
+            result[i][j] = 0;
+            for (int k = 1; k <= n; k++) {
+                result[i][j] += mat_a[i][k] * mat_b[k][j];
+            }
+        }
     }
 }
 
@@ -62,53 +86,33 @@ void retireve_part_of_matrix(double** matrix, double** new, int row_m, int colum
     }
 }
 
-void calculate_x(double** v, double** u, double* sigma, double** delays, double** result){
+void calculate_x(double** V, double** U, double** Sigma, double** delays, double** result){
     int i, j, k;
-    double** temp = dmatrix(1,3,1,1);
-    double** temp2 = dmatrix(1,6,1,1);
+    double** temp = dmatrix(1,3,1,3);
+    double** temp2 = dmatrix(1,3,1,6);
 
+    
+    // Ganger sammen v og sigma 
+    matrix_mult_test(V,Sigma, temp, 3,3,3);
+    printf("Første mult complete\n");
 
-     // Ganger sammen v og u 
-    for (i = 1; i <= 3; i++) {
-        for (j = 1; j <= 3; j++) {
-            for (k = 1; k <= 3; k++) {
-                temp[i-1][0] += v[i][k] * u[k][j];
-            }
-        }
-    }
+    
+    print_matrix(temp, 3,3);
 
-    // legger sammen sigma 
-    for (i = 1; i <= 3; i++) {
-        for (j = 1; j <= 1; j++) {
-            for (k = 1; k <= 1; k++) {
-                temp2[i-1][0] += temp[i-1][0] * sigma[k];
-            }
-        }
-    }
+    // Ganger så inn U_T 
+    matrix_mult_test(temp, U, temp2, 3,3,6);
+    printf("Andre mult complete\n");
 
-    // Multiply the second vector
-    for (i = 4; i <= 6; i++) {
-        for (j = 1; j <= 1; j++) {
-            for (k = 1; k <= 1; k++) {
-                temp2[i-1][0] += delays[i-4][k] * sigma[k];
-            }
-        }
-    }
-    // Calculate the sum of the elements in the second vector
-    double sum = 0;
-    for (i = 1; i <= 6; i++) {
-        sum += temp2[i-1][0];
-    }
+    print_matrix(temp2, 3,6);
 
-    // Store the final result in the result array
-    for (i = 1; i <= 3; i++) {
-        for (j = 1; j <= 1; j++) {
-            result[i][j] = temp[i-1][0] + sum;
-        }
-    }
+    // Ganger inn tallene 
+
+    matrix_mult_test(temp2, delays, result, 3,6,1);
+    printf("Tredje mult complete\n");
 
     destroy_matrix(temp);
     destroy_matrix(temp2);
+
 }
 
 double rad2deg(double radians){
@@ -116,33 +120,56 @@ double rad2deg(double radians){
 }
 
 double theta(double** r){
-    return acos(r[0][0]);
+    double** new_r = dmatrix(1,3,1,1);
+    matrix_mult_test(r,r,new_r,3,1,3);
+    double length_r = sqrt(new_r[1][1]); 
+    return rad2deg(acos(r[1][3] / (length_r)));
 }
 
 double phi(double** r){
-    return rad2deg(atan2(r[0][0], r[0][1]));
+    return rad2deg(atan2(r[1][1], r[1][2]));
 }
 
 
 int main(){
-    //printf("Nepe\n");
+    printf("Nepe\n");
     double** u = dmatrix(1,6,1,3);
     create_r(u);
-    double* sigma =dvector(1,6);
+    double* sigma =dvector(1,3);
     //Matrix* r = mXcreate(6,3);
     //create_r(r);
     double** v = dmatrix(1,3,1,3);
     //Matrix* X = mXtranspose(r);
     svdcmp(u,6,3,sigma,v);
-    double** new_u = dmatrix(1, 3, 1, 6 );
-    retireve_part_of_matrix(u, new_u , 3, 6);
-    double* sigma_inv = dvector(1,3);
-    for (int i = 1; i < 4; i++)
-    {
-        sigma_inv[i] = ( 1 / sigma[i]);
-    }
-    transpose_matrix(3,6,u);
+    printf("SVD++ complete\n");
+   
 
+    
+
+    double** u_t = dmatrix(1,3,1,6);
+    //print_matrix(u, 6,3);
+    transpose_matrix(3,6,u, u_t);
+    //print_matrix(u_t, 3,6);
+    destroy_matrix(u);
+
+    double** v_t = dmatrix(1,3,1,3);
+    transpose_matrix(3,3,v,v_t);
+    printf("v\n");
+    print_matrix(v,3,3);
+    //destroy_matrix(v);
+
+    double** sigma_inv = dmatrix(1,3,1,3);
+    for (int i = 1; i < 4; i++){
+        for (int j = 1; j < 4; j++){
+            sigma_inv[i][j]     = 0;
+            sigma_inv[i][i]     = ( 1 / sigma[i]);
+        }
+    }
+    printf("Sigma_inv:\n");
+    print_matrix(sigma_inv,3,3);
+        
+    free_dvector(sigma,1,3);
+   
     // Calculate x 
     double** x = dmatrix(1,3,1,1); 
     
@@ -153,19 +180,22 @@ int main(){
     delays[4][1] = -0.000256;
     delays[5][1] = 0.000128;
     delays[6][1] = 0.000352;
+    printf("Pre calc X\n");
 
-    calculate_x(v, new_u, sigma_inv, delays, x);
+    calculate_x(v, u_t, sigma_inv, delays, x);
+    printf("Post calc x\n");
 
-    print_matrix(x, 3,3);
+    printf("Theta: %f\n", theta(x));
+    printf("Phi  : %f\n", phi(x));
 
 
+    print_matrix(x, 3,1);
 
     destroy_matrix(x);
     destroy_matrix(delays);
     destroy_matrix(v);
     destroy_matrix(u);
-    free_dvector(sigma,1,3);
-    free_dvector(sigma_inv,1,3);
+    destroy_matrix(sigma_inv);
     printf("Main done");
     
 
