@@ -6,7 +6,7 @@ module PeakFinder #(
     parameter NUM_SAMPLES               = 1024,
     parameter NUM_BITS_XCORRS           = 34,       // 2 * NUM_BITS_SAMPLE + $clog2(NUM_SAMPLES)
     parameter MAX_LAGS                  = 17,
-    parameter BITS_PER_XCORR            = 6,        // $clog2(2*MAX_LAGS+1) 
+    parameter BITS_PER_XCORR            = 5,        // $clog2(2*MAX_LAGS+1) 
     parameter MIN_XCORR_VAL             = 1000      // 
 ) (
     // -- Clock and reset
