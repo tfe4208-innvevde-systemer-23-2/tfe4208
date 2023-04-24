@@ -15,9 +15,15 @@ module Peak_test;
     logic               rst;
 
     // DUT I/O
-    logic[NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]    dataIn;
+    logic signed [NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]    dataIn;
+    logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                   dataIn0;
+    logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                   dataIn1;
+    logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                   dataIn2;
+    logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                   dataIn3;
+    logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                   dataIn4;
+    logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                   dataIn5;
     logic                                                       dataInValid;
-    logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS+1)-1:0]               dataOut;
+    logic[NUM_XCORRS-1:0][$clog2(2*MAX_LAGS+1)-1:0]             dataOut;
     logic                                                       dataOutValid;
 
     // Files
@@ -36,11 +42,24 @@ module Peak_test;
     ) dut (
         .clk(clk50M),
         .rst(rst),
-        .dataIn(dataIn),
+        .dataIn0(dataIn0),
+        .dataIn1(dataIn1),
+        .dataIn2(dataIn2),
+        .dataIn3(dataIn3),
+        .dataIn4(dataIn4),
+        .dataIn5(dataIn5),
         .dataInValid(dataInValid),
         .dataOut(dataOut),
         .dataOutValid(dataOutValid)
     );
+
+    assign dataIn0 = dataIn[0];
+    assign dataIn1 = dataIn[1];
+    assign dataIn2 = dataIn[2];
+    assign dataIn3 = dataIn[3];
+    assign dataIn4 = dataIn[4];
+    assign dataIn5 = dataIn[5];
+
 
     initial begin
         clk50M = 1'b0;
@@ -52,7 +71,7 @@ module Peak_test;
 
     always @(posedge clk50M) 
         $display($stime,,,"rst=%b dataIn=%d ValidIn=%b ValidOut=%b DataOut=%d, state=%b, maxval=%d, iterator=%d",
-            rst, dut.peakGen[0].u_PeakFinder.dataIn[dut.iterator], dataInValid, dataOutValid, dataOut, dut.u_fsm.state, dut.peakGen[0].u_PeakFinder.maxValue, dut.iterator);
+            rst, dut.peakGen[0].u_PeakFinder.value, dataInValid, dataOutValid, dataOut, dut.u_fsm.state, dut.peakGen[0].u_PeakFinder.maxValue, dut.iterator);
 
     task stim;
         rst=1'b0; dataIn = '0; dataInValid = 1'b0;

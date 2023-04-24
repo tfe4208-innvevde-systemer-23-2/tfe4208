@@ -12,13 +12,13 @@ module Peak #(
     input  logic                                                    clk,
     input  logic                                                    rst,
 
-    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn0,
-    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn1,
-    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn2,
-    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn3,
-    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn4,
-    input  logic[2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn5,
-    input  logic                                                    dataInValid,
+    input logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn0,
+    input logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn1,
+    input logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn2,
+    input logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn3,
+    input logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn4,
+    input logic signed [2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]                 dataIn5,
+    input logic                                                    dataInValid,
 
     output logic[(NUM_XCORRS * BITS_PER_XCORR)-1:0]                 dataOut,
     output logic                                                    dataOutValid
@@ -29,7 +29,7 @@ module Peak #(
     logic[NUM_XCORRS-1:0][BITS_PER_XCORR-1:0]             dataOutInternal;
     logic                                                       rstInternal;
     logic                                                       rstFsm;
-    logic[NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]    dataInInternal;
+    logic signed [NUM_XCORRS-1:0][2*MAX_LAGS:0][NUM_BITS_XCORRS-1:0]    dataInInternal;
 
     // -- Assign statements
     assign rstInternal       =  rst | rstFsm;
