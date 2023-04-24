@@ -70,7 +70,7 @@ module CpuPeripheral (
     // Clock in new debug info on internal register
     always_ff @(posedge clk or posedge reset) begin
         if (reset) begin
-            dataInInternal <= '0;
+            debugDataInternal <= '0;
         end
         else begin
             if (debugDataValid) begin
