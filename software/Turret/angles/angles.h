@@ -19,7 +19,6 @@ void calculate_x(double **V, double **U, double **Sigma, double **delays, double
 double rad2deg(double radians);
 double theta(double **r);
 double phi(double **r);
-
-// A "main" function
+int *get_angles_from_correlation(peripheral_lags lags);
 
 #endif

@@ -7,6 +7,7 @@
 
 #include "pantilt/pantilt.h"
 #include "peripheral/peripheral.h"
+#include "angles/angles.h"
 #include "system.h"
 
 #define SLEEP_DURATION_US (25000) //  25  ms
@@ -34,8 +35,11 @@ int main(void) {
     	// Read lags
     	getLags(&peripheral, &lags);
 		uint32_t debug = peripheral_read_debug(&peripheral);
-		// Calculate angles
-		// Control PWM
+		
+        // Calculate angles
+        int* angles = get_angles_from_correlation(&lags);
+
+        // Control PWM
 
 		// For debug
     	printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
