@@ -4,9 +4,9 @@
 #include "svd/svd.h"
 #include "angles.h"
 
-
-#define C 343.3  // Lydhastighet 
-#define a 0.075  // Sidelengde tetraheder
+#define C 343.3F // Lydhastighet
+#define a 0.075F // Sidelengde tetraheder
+#define PI 3.1415926535F
 #define PI 3.1415926535
 
 
@@ -120,8 +120,8 @@ double phi(double** r){
     return rad2deg(atan2(r[1][1], r[1][2]));
 }
 
-int* get_angles_from_correlation(peripheral_lags lags){
-
+void get_angles_from_correlation(peripheral_lags lags, int *angles)
+{
     // Calculate X = U Σ V.T 
     double** u = dmatrix(1,6,1,3);
     create_r(u);
@@ -162,7 +162,6 @@ int* get_angles_from_correlation(peripheral_lags lags){
 
     double t = theta(x);
     double p = phi(x);
-    int * angles;
     angles[0] = (int) t;
     angles[1] = (int) p;
 
@@ -171,6 +170,7 @@ int* get_angles_from_correlation(peripheral_lags lags){
     destroy_matrix(delays);
     destroy_matrix(v);
     destroy_matrix(u);
+    // destroy_matrix(u_t); // ?
     destroy_matrix(sigma_inv);
 
     return angles; // theta, phi 

@@ -3,9 +3,6 @@
 
 #include "../peripheral/peripheral.h"
 
-#define C 343.3  // Lydhastighet 
-#define a 0.075  // Sidelengde tetraheder
-#define PI 3.1415926535
 
 void transpose_matrix(int row, int column, double **matrix, double **transpose_matrix);
 void print_nxnmatrix(double **mat, int n);
@@ -19,6 +16,6 @@ void calculate_x(double **V, double **U, double **Sigma, double **delays, double
 double rad2deg(double radians);
 double theta(double **r);
 double phi(double **r);
-int *get_angles_from_correlation(peripheral_lags lags);
+void get_angles_from_correlation(peripheral_lags lags, int *angles);
 
 #endif
