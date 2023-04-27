@@ -136,7 +136,7 @@ void pantilt_set_angles(pantilt_dev *dev, uint8_t verticalAngel, uint8_t horizon
  * @return duty_cycle pwm duty cycle in us.
  */
 uint32_t pantilt_calculate_duty(uint8_t angle) {
-	uint32_t duty_cycle = (PANTILT_PWM_H_MAX_DUTY_CYCLE_US - PANTILT_PWM_H_MIN_DUTY_CYCLE_US)*(angle/180);
+	uint32_t duty_cycle = ((PANTILT_PWM_H_MAX_DUTY_CYCLE_US - PANTILT_PWM_H_MIN_DUTY_CYCLE_US) * angle) / 180;
 	return duty_cycle;
 }
 
