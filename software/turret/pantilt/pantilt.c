@@ -8,7 +8,8 @@
  * @param pwm_v_base Base address of the vertical PWM component.
  * @param pwm_h_base Base address of the horizontal PWM component.
  */
-pantilt_dev pantilt_inst(void *pwm_v_base, void *pwm_h_base, void *pwm_t_base) {
+pantilt_dev pantilt_inst(void *pwm_v_base, void *pwm_h_base, void *pwm_t_base)
+{
     pantilt_dev dev;
     dev.pwm_v = pwm_inst(pwm_v_base);
     dev.pwm_h = pwm_inst(pwm_h_base);
@@ -24,7 +25,8 @@ pantilt_dev pantilt_inst(void *pwm_v_base, void *pwm_h_base, void *pwm_t_base) {
  *
  * @param dev pantilt device structure.
  */
-void pantilt_init(pantilt_dev *dev) {
+void pantilt_init(pantilt_dev *dev)
+{
     pwm_init(&(dev->pwm_v));
     pwm_init(&(dev->pwm_h));
     pwm_init(&(dev->pwm_t));
@@ -38,7 +40,8 @@ void pantilt_init(pantilt_dev *dev) {
  * @param dev pantilt device structure.
  * @param duty_cycle pwm duty cycle in us.
  */
-void pantilt_configure_vertical(pantilt_dev *dev, uint32_t duty_cycle) {
+void pantilt_configure_vertical(pantilt_dev *dev, uint32_t duty_cycle)
+{
     // Need to compensate for inverted servo rotation.
     duty_cycle = PANTILT_PWM_V_MAX_DUTY_CYCLE_US - duty_cycle + PANTILT_PWM_V_MIN_DUTY_CYCLE_US;
 
@@ -56,7 +59,8 @@ void pantilt_configure_vertical(pantilt_dev *dev, uint32_t duty_cycle) {
  * @param dev pantilt device structure.
  * @param duty_cycle pwm duty cycle in us.
  */
-void pantilt_configure_horizontal(pantilt_dev *dev, uint32_t duty_cycle) {
+void pantilt_configure_horizontal(pantilt_dev *dev, uint32_t duty_cycle)
+{
     // Need to compensate for inverted servo rotation.
     duty_cycle = PANTILT_PWM_H_MAX_DUTY_CYCLE_US - duty_cycle + PANTILT_PWM_H_MIN_DUTY_CYCLE_US;
 
@@ -74,7 +78,8 @@ void pantilt_configure_horizontal(pantilt_dev *dev, uint32_t duty_cycle) {
  * @param dev pantilt device structure.
  * @param duty_cycle pwm duty cycle in us.
  */
-void pantilt_configure_trigger(pantilt_dev *dev, uint32_t duty_cycle) {
+void pantilt_configure_trigger(pantilt_dev *dev, uint32_t duty_cycle)
+{
     // Need to compensate for inverted servo rotation.
     duty_cycle = PANTILT_PWM_T_MAX_DUTY_CYCLE_US - duty_cycle + PANTILT_PWM_T_MIN_DUTY_CYCLE_US;
 
@@ -92,9 +97,10 @@ void pantilt_configure_trigger(pantilt_dev *dev, uint32_t duty_cycle) {
  * @param dev pantilt device structure.
  * @param verticalAngle in degrees [0-180].
  */
-void pantilt_set_angle_vertical(pantilt_dev *dev, uint8_t verticalAngle) {
-	uint32_t duty_cycle = pantilt_calculate_duty(verticalAngle);
-	pantilt_configure_vertical(dev, duty_cycle);
+void pantilt_set_angle_vertical(pantilt_dev *dev, uint8_t verticalAngle)
+{
+    uint32_t duty_cycle = pantilt_calculate_duty(verticalAngle);
+    pantilt_configure_vertical(dev, duty_cycle);
 }
 
 /**
@@ -105,9 +111,10 @@ void pantilt_set_angle_vertical(pantilt_dev *dev, uint8_t verticalAngle) {
  * @param dev pantilt device structure.
  * @param horizontalAngle in degrees [0-180].
  */
-void pantilt_set_angle_horizontal(pantilt_dev *dev, uint8_t horizontalAngle) {
-	uint32_t duty_cycle = pantilt_calculate_duty(horizontalAngle);
-	pantilt_configure_horizontal(dev, duty_cycle);
+void pantilt_set_angle_horizontal(pantilt_dev *dev, uint8_t horizontalAngle)
+{
+    uint32_t duty_cycle = pantilt_calculate_duty(horizontalAngle);
+    pantilt_configure_horizontal(dev, duty_cycle);
 }
 
 /**
@@ -119,13 +126,39 @@ void pantilt_set_angle_horizontal(pantilt_dev *dev, uint8_t horizontalAngle) {
  * @param verticalAngel in degrees [0-180].
  * @param horizontalAngle in degrees [0-180].
  */
-void pantilt_set_angles(pantilt_dev *dev, uint8_t verticalAngel, uint8_t horizontalAngle) {
-	pantilt_set_angle_vertical(dev, verticalAngel);
-	pantilt_set_angle_horizontal(dev, horizontalAngle);
+void pantilt_set_angles(pantilt_dev *dev, uint8_t verticalAngel, uint8_t horizontalAngle)
+{
+    pantilt_set_angle_vertical(dev, verticalAngel);
+    pantilt_set_angle_horizontal(dev, horizontalAngle);
 }
 
+/**
+ * pantilt_shoot
+ *
+ * Fire the bullet.
+ *
+ * @param dev pantilt device structure.
+ */
+void pantilt_shoot(pantilt_dev *dev)
+{
+    // Need to compensate for inverted servo rotation.
+    uint32_t duty_cycle_push = (PANTILT_PWM_T_MAX_DUTY_CYCLE_US - PANTILT_PWM_T_MIN_DUTY_CYCLE_US) * 3 / 2;
+    uint32_t duty_cycle_neutral = (PANTILT_PWM_T_MAX_DUTY_CYCLE_US - PANTILT_PWM_T_MIN_DUTY_CYCLE_US) / 2;
+    // duty_cycle = PANTILT_PWM_T_MAX_DUTY_CYCLE_US - duty_cycle + PANTILT_PWM_T_MIN_DUTY_CYCLE_US;
 
+    pwm_configure(&(dev->pwm_h),
+                  duty_cycle_push,
+                  PANTILT_PWM_PERIOD_US,
+                  PANTILT_PWM_CLOCK_FREQ_HZ);
 
+    usleep(1000000);
+
+    pwm_configure(&(dev->pwm_h),
+                  duty_cycle_neutral,
+                  PANTILT_PWM_PERIOD_US,
+                  PANTILT_PWM_CLOCK_FREQ_HZ);
+
+}
 
 /**
  * pantilt_calculate_duty
@@ -135,9 +168,10 @@ void pantilt_set_angles(pantilt_dev *dev, uint8_t verticalAngel, uint8_t horizon
  * @param angle in degrees [0-180].
  * @return duty_cycle pwm duty cycle in us.
  */
-uint32_t pantilt_calculate_duty(uint8_t angle) {
-	uint32_t duty_cycle = ((PANTILT_PWM_H_MAX_DUTY_CYCLE_US - PANTILT_PWM_H_MIN_DUTY_CYCLE_US) * angle) / 180;
-	return duty_cycle;
+uint32_t pantilt_calculate_duty(uint8_t angle)
+{
+    uint32_t duty_cycle = ((PANTILT_PWM_H_MAX_DUTY_CYCLE_US - PANTILT_PWM_H_MIN_DUTY_CYCLE_US) * angle) / 180;
+    return duty_cycle;
 }
 
 /**
@@ -147,7 +181,8 @@ uint32_t pantilt_calculate_duty(uint8_t angle) {
  *
  * @param dev pantilt device structure.
  */
-void pantilt_start_vertical(pantilt_dev *dev) {
+void pantilt_start_vertical(pantilt_dev *dev)
+{
     pwm_start(&(dev->pwm_v));
 }
 
@@ -158,7 +193,8 @@ void pantilt_start_vertical(pantilt_dev *dev) {
  *
  * @param dev pantilt device structure.
  */
-void pantilt_start_horizontal(pantilt_dev *dev) {
+void pantilt_start_horizontal(pantilt_dev *dev)
+{
     pwm_start(&(dev->pwm_h));
 }
 
@@ -169,7 +205,8 @@ void pantilt_start_horizontal(pantilt_dev *dev) {
  *
  * @param dev pantilt device structure.
  */
-void pantilt_start_trigger(pantilt_dev *dev) {
+void pantilt_start_trigger(pantilt_dev *dev)
+{
     pwm_start(&(dev->pwm_t));
 }
 
@@ -180,7 +217,8 @@ void pantilt_start_trigger(pantilt_dev *dev) {
  *
  * @param dev pantilt device structure.
  */
-void pantilt_stop_vertical(pantilt_dev *dev) {
+void pantilt_stop_vertical(pantilt_dev *dev)
+{
     pwm_stop(&(dev->pwm_v));
 }
 
@@ -191,7 +229,8 @@ void pantilt_stop_vertical(pantilt_dev *dev) {
  *
  * @param dev pantilt device structure.
  */
-void pantilt_stop_horizontal(pantilt_dev *dev) {
+void pantilt_stop_horizontal(pantilt_dev *dev)
+{
     pwm_stop(&(dev->pwm_h));
 }
 
@@ -202,6 +241,7 @@ void pantilt_stop_horizontal(pantilt_dev *dev) {
  *
  * @param dev pantilt device structure.
  */
-void pantilt_stop_trigger(pantilt_dev *dev) {
+void pantilt_stop_trigger(pantilt_dev *dev)
+{
     pwm_stop(&(dev->pwm_t));
 }
