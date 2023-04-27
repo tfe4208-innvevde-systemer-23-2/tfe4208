@@ -1,6 +1,8 @@
 #ifndef __ANGLES_H__
 #define __ANGLES_H__
 
+#include "../peripheral/peripheral.h"
+
 #define C 343.3  // Lydhastighet 
 #define a 0.075  // Sidelengde tetraheder
 #define PI 3.1415926535
