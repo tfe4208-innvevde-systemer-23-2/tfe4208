@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "svd.h"
+#include "svd/svd.h"
 #include "angles.h"
 
 
