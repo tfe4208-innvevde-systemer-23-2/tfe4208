@@ -26,8 +26,8 @@ typedef struct peripheral_lags{
 peripheral_dev peripheral_inst(void *base);
 
 uint32_t peripheral_read(peripheral_dev *dev, uint8_t address);
-uint32_t peripheral_read_upper(peripheral_dev *dev);
-uint32_t peripheral_read_lower(peripheral_dev *dev);
+uint32_t peripheral_read_debug(peripheral_dev *dev);
+uint32_t peripheral_read_lags(peripheral_dev *dev);
 
 //void readAck(peripheral_dev *dev);		// TODO implement some acks so that the lags dont update inbetween reads
 
