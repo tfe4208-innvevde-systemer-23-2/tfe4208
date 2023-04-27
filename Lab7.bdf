@@ -393,28 +393,28 @@ refer to the applicable agreement for further details.
 		(pt 408 32)
 		(output)
 		(text "chipEnable" (rect 0 0 53 12)(font "Arial" ))
-		(text "chipEnable" (rect 343 27 387 39)(font "Arial" ))
+		(text "chipEnable" (rect 343 27 396 39)(font "Arial" ))
 		(line (pt 408 32)(pt 392 32))
 	)
 	(port
 		(pt 408 48)
 		(output)
 		(text "busClk" (rect 0 0 34 12)(font "Arial" ))
-		(text "busClk" (rect 359 43 387 55)(font "Arial" ))
+		(text "busClk" (rect 359 43 393 55)(font "Arial" ))
 		(line (pt 408 48)(pt 392 48))
 	)
 	(port
 		(pt 408 64)
 		(output)
 		(text "dataOutValid" (rect 0 0 62 12)(font "Arial" ))
-		(text "dataOutValid" (rect 335 59 387 71)(font "Arial" ))
+		(text "dataOutValid" (rect 335 59 397 71)(font "Arial" ))
 		(line (pt 408 64)(pt 392 64))
 	)
 	(port
 		(pt 408 80)
 		(output)
 		(text "dataOut[NUM_SLAVES-1..0][NUM_BITS-1..0]" (rect 0 0 224 12)(font "Arial" ))
-		(text "dataOut[NUM_SLAVES-1..0][NUM_BITS-1..0]" (rect 198 75 387 87)(font "Arial" ))
+		(text "dataOut[NUM_SLAVES-1..0][NUM_BITS-1..0]" (rect 198 75 422 87)(font "Arial" ))
 		(line (pt 408 80)(pt 392 80)(line_width 3))
 	)
 	(parameter
@@ -535,7 +535,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"NUM_SAMPLES"
-		"1024"
+		"14336"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -556,7 +556,7 @@ refer to the applicable agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 608 160))
 	)
-	(annotation_block (parameter)(rect 240 88 476 221))
+	(annotation_block (parameter)(rect 240 88 482 221))
 )
 (symbol
 	(rect 968 -120 1504 88)
@@ -629,14 +629,14 @@ refer to the applicable agreement for further details.
 		(pt 536 32)
 		(output)
 		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 0 0 246 12)(font "Arial" ))
-		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 307 27 515 39)(font "Arial" ))
+		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 307 27 553 39)(font "Arial" ))
 		(line (pt 536 32)(pt 520 32)(line_width 3))
 	)
 	(port
 		(pt 536 48)
 		(output)
 		(text "dataOutValid" (rect 0 0 62 12)(font "Arial" ))
-		(text "dataOutValid" (rect 463 43 515 55)(font "Arial" ))
+		(text "dataOutValid" (rect 463 43 525 55)(font "Arial" ))
 		(line (pt 536 48)(pt 520 48))
 	)
 	(parameter
@@ -656,7 +656,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"BITS_PER_XCORR"
-		"6"
+		"5"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
