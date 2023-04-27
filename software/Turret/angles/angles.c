@@ -175,3 +175,11 @@ int* get_angles_from_correlation(peripheral_lags lags){
 
     return angles; // theta, phi 
 }
+
+/*
+int main(){
+    get_angles_from_correlation(delays);
+
+    return 0;
+}
+*/
