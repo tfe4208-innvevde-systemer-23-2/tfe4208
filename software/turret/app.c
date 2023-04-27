@@ -37,7 +37,7 @@ int main(void) {
 		uint32_t debug = peripheral_read_debug(&peripheral);
 		
         // Calculate angles
-		int* angles;
+		int* angles = malloc(2*sizeof(int));
         angles = get_angles_from_correlation(lags);
 
         // Control PWM
