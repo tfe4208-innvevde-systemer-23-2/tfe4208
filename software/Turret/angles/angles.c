@@ -1,8 +1,7 @@
 #include <math.h>
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
-#include "svd.h"
+#include "svd/svd.h"
 #include "angles.h"
 
 void transpose_matrix(int row, int column, double** matrix, double** transpose_matrix){

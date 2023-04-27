@@ -146,6 +146,8 @@ C_SRCS += app.c
 C_SRCS += pantilt/pantilt.c
 C_SRCS += pantilt/pwm/pwm.c
 C_SRCS += peripheral/peripheral.c
+C_SRCS += angles/angles.c
+C_SRCS += angles/svd/svd.c
 CXX_SRCS :=
 ASM_SRCS :=
 
