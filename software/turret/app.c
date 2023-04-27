@@ -37,14 +37,15 @@ int main(void) {
 		uint32_t debug = peripheral_read_debug(&peripheral);
 		
         // Calculate angles
-		int* angles[2] = malloc(8);
+		int* angles = malloc(2*sizeof(int));
         angles = get_angles_from_correlation(lags);
 
         // Control PWM
 
 		// For debug
     	printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
-		printf("debug: %d\n", debug);
+    	printf("vertical: %d, horizontal: %d", angles[0], angles[1]);
+		printf("debug: %d\n", (int)debug);
 		usleep(1000000);
 	}
 
