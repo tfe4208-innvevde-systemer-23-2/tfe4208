@@ -1,6 +1,8 @@
 #ifndef __ANGLES_H__
 #define __ANGLES_H__
 
+#include "../peripheral/peripheral.h"
+
 #define C 343.3  // Lydhastighet 
 #define a 0.075  // Sidelengde tetraheder
 #define PI 3.1415926535
@@ -17,7 +19,6 @@ void calculate_x(double **V, double **U, double **Sigma, double **delays, double
 double rad2deg(double radians);
 double theta(double **r);
 double phi(double **r);
-
-// A "main" function
+int *get_angles_from_correlation(peripheral_lags lags);
 
 #endif
