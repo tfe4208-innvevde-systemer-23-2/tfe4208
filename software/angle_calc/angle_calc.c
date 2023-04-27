@@ -174,12 +174,23 @@ int main(){
     double** x = dmatrix(1,3,1,1); 
     
     double** delays = dmatrix(1,6,1,1);
-    delays[1][1] = 0.008064;
-    delays[2][1] = 0.80704;
-    delays[3][1] = - 0.000032;
-    delays[4][1] = -0.000256;
-    delays[5][1] = 0.000128;
-    delays[6][1] = 0.000352;
+    //delays[1][1] = 0.008064;
+    //delays[2][1] = 0.80704;
+    //delays[3][1] = - 0.000032;
+    //delays[4][1] = -0.000256;
+    //delays[5][1] = 0.000128;
+    //delays[6][1] = 0.000352;
+
+    //double delaysx[6] =  {0.008064, 0.80704, -0.000032, -0.000256, 0.000128, 0.000352};
+    double delaysx[6] =  {-0.010272, -0.000128, -0.000416, 0.005472, 0.0, -0.000288};
+
+    for (int i = 0; i < 6; i++)
+    {
+        delays[i][1] = delaysx[i];
+    }
+    
+
+
     printf("Pre calc X\n");
 
     calculate_x(v, u_t, sigma_inv, delays, x);
