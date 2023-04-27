@@ -28,6 +28,13 @@ int main(void) {
     // More setup probably
     printf("Init complete, starting up...\n\n");
 
+    // Init angles and matrices
+    double** u_t = dmatrix(1,3,1,6);
+    double** v_t = dmatrix(1,3,1,3);
+    double** sigma_inv = dmatrix(1,3,1,3);
+    int* angles = malloc(2*sizeof(int));
+    init_angles(u_t, v_t, sigma_inv);
+
 
     // Main flow
    while(true) {
@@ -37,8 +44,7 @@ int main(void) {
 		uint32_t debug = peripheral_read_debug(&peripheral);
 		
         // Calculate angles
-		int* angles = malloc(2*sizeof(int));
-        angles = get_angles_from_correlation(lags);
+        get_angles_from_correlation(lags, angles);
 
         // Control PWM
 

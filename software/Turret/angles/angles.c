@@ -27,9 +27,17 @@ void print_nxnmatrix(double** mat, int n){
     }
 }
 
-void destroy_matrix(double** arr){
-    free(*arr);
-    free( arr);
+
+//void destroy_matrix(double** arr){
+//    free(*arr);
+//    free( arr);
+//}
+
+void destroy_matrix(double** arr, int low, int high){
+    for (int i=0; i<high; ++i) {
+        free_dvector(arr[i], low, high);
+    }
+    free(arr);
 }
 
 void print_matrix(double** matrix, int m, int n){
@@ -98,8 +106,8 @@ void calculate_lstsqr(double** V, double** U, double** Sigma, double** delays, d
     // Ganger inn tallene 
     matrix_mult_test(temp2, delays, result, 3,6,1);
 
-    destroy_matrix(temp);
-    destroy_matrix(temp2);
+    destroy_matrix(temp,1,3);
+    destroy_matrix(temp2,1,6);
 
 }
 
@@ -118,8 +126,8 @@ double phi(double** r){
     return rad2deg(atan2(r[1][1], r[1][2]));
 }
 
-void get_angles_from_correlation(peripheral_lags lags, int *angles)
-{
+
+void init_angles(double** u_t, double** v_t, double** sigma_inv){
     // Calculate X = U Σ V.T 
     double** u = dmatrix(1,6,1,3);
     create_r(u);
@@ -128,35 +136,38 @@ void get_angles_from_correlation(peripheral_lags lags, int *angles)
     svdcmp(u,6,3,sigma,v);
    
     // Invert the variables in X, i.e X**(-1) = U.T (1/Σ) V
-    double** u_t = dmatrix(1,3,1,6);
+    //double** u_t = dmatrix(1,3,1,6);
     transpose_matrix(3,6,u, u_t);
-    destroy_matrix(u);
+    destroy_matrix(u,1,6);
 
-    double** v_t = dmatrix(1,3,1,3);
+    //double** v_t = dmatrix(1,3,1,3);
     transpose_matrix(3,3,v,v_t);
-    destroy_matrix(v);
+    destroy_matrix(v,1,3);
 
-    double** sigma_inv = dmatrix(1,3,1,3);
+    //double** sigma_inv = dmatrix(1,3,1,3);
     for (int i = 1; i < 4; i++){
         for (int j = 1; j < 4; j++){
-            sigma_inv[i][j]     = 0;
-            sigma_inv[i][i]     = ( 1 / sigma[i]);
+            sigma_inv[i][j] =               0;
+            sigma_inv[i][i] = ( 1 / sigma[i]);
         }
     }
-        
     free_dvector(sigma,1,3);
-   
-    // Retrieve the correlations, and calculate least squares 
-    double** x = dmatrix(1,3,1,1); 
-    double** delays = dmatrix(1,6,1,1);
-    delays[1][1] =   lags.t01;
-    delays[2][1] =   lags.t02;
-    delays[3][1] =  -lags.t03;
-    delays[4][1] =  -lags.t12;
-    delays[5][1] =   lags.t13;
-    delays[6][1] =   lags.t23;
 
-    calculate_lstsqr(v, u_t, sigma_inv, delays, x);
+}
+
+void get_angles_from_correlation(peripheral_lags lags, int *angles, double** v_t, double** u_t, double** sigma_inv)
+{
+    // Retrieve the correlations, and calculate least squares 
+    double** x      = dmatrix(1,3,1,1); 
+    double** delays = dmatrix(1,6,1,1);
+    delays[1][1]    =         lags.t01;
+    delays[2][1]    =         lags.t02;
+    delays[3][1]    =       - lags.t03;
+    delays[4][1]    =       - lags.t12;
+    delays[5][1]    =         lags.t13;
+    delays[6][1]    =         lags.t23;
+
+    calculate_lstsqr(v_t, u_t, sigma_inv, delays, x);
 
     double t = theta(x);
     double p = phi(x);
@@ -164,12 +175,12 @@ void get_angles_from_correlation(peripheral_lags lags, int *angles)
     angles[1] = (int) p;
 
     // Free allocated memory 
-    destroy_matrix(x);
-    destroy_matrix(delays);
-    destroy_matrix(v);
-    destroy_matrix(u);
+    destroy_matrix(x,1,3);
+    destroy_matrix(delays,1,6);
+    destroy_matrix(v_t, 1,3);
+    destroy_matrix(u_t, 1,6);
     // destroy_matrix(u_t); // ?
-    destroy_matrix(sigma_inv);
+    destroy_matrix(sigma_inv,1,3);
 
     return angles; // theta, phi 
 }

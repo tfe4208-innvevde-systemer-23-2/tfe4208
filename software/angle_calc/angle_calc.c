@@ -29,9 +29,11 @@ void print_nxnmatrix(double** mat, int n){
     }
 }
 
-void destroy_matrix(double** arr){
-    free(*arr);
-    free( arr);
+void destroy_matrix(double** arr, int low, int high){
+    for (int i=0; i<high; ++i) {
+        free_dvector(arr[i], low, high);
+    }
+    free(arr);
 }
 
 void print_matrix(double** matrix, int m, int n){
@@ -100,8 +102,8 @@ void calculate_lstsqr(double** V, double** U, double** Sigma, double** delays, d
     // Ganger inn tallene 
     matrix_mult_test(temp2, delays, result, 3,6,1);
 
-    destroy_matrix(temp);
-    destroy_matrix(temp2);
+    destroy_matrix(temp,1,3);
+    destroy_matrix(temp2,1,6);
 
 }
 
