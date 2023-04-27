@@ -44,9 +44,6 @@ int main(void)
 	int *angles = malloc(2 * sizeof(int));
 	init_angles(u_t, v_t, sigma_inv);
 
-    // Main flow
-   while(true) {
-
 	// Main flow
 	while (true)
 	{
@@ -58,17 +55,17 @@ int main(void)
 		// Calculate angles
 		get_angles_from_correlation(lags, angles, x, delays, v_t, u_t, sigma_inv, temp, temp2, new_r);
 
-		// Control PWM
-
 		// For debug
 		printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
 		printf("vertical: %d, horizontal: %d", angles[0], angles[1]);
 		angles[0] = (angles[0] == 0x7fffffff) ? 0 : angles[0];
+		angles[0] = (angles[1] == 0x7fffffff) ? 0 : angles[1];
 		printf("debug: %d\n", (int)debug);
 
 		// Control turret
 		pantilt_set_angles(&pantilt, angles[0], angles[1]);
-		pantilt_shoot(&pantilt);
+		pantilt_set_angles(&pantilt, 20, 30);
+		// pantilt_shoot(&pantilt);
 
 		usleep(1000000);
 	}
