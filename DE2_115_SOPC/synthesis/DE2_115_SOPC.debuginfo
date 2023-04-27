@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="DE2_115_SOPC" kind="system" version="18.1" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2023.04.21.17:23:03 -->
+ <!-- 2023.04.27.11:26:53 -->
  <!-- A collection of modules and connections -->
  <parameter name="clockCrossingAdapter">
   <type>com.altera.sopcmodel.ensemble.EClockAdapter</type>
@@ -53,7 +53,7 @@
  </parameter>
  <parameter name="generationId">
   <type>int</type>
-  <value>1682090557</value>
+  <value>1682587566</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>true</visible>
@@ -5845,14 +5845,26 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>dataIn</name>
     <direction>Input</direction>
-    <width>36</width>
-    <role>lagsin</role>
+    <width>30</width>
+    <role>lagsin_t</role>
    </port>
    <port>
     <name>dataInValid</name>
     <direction>Input</direction>
     <width>1</width>
-    <role>lagsinvalid</role>
+    <role>lagsinvalid_t</role>
+   </port>
+   <port>
+    <name>debugData</name>
+    <direction>Input</direction>
+    <width>32</width>
+    <role>debugdata_t</role>
+   </port>
+   <port>
+    <name>debugDataValid</name>
+    <direction>Input</direction>
+    <width>1</width>
+    <role>debugdatavalid_t</role>
    </port>
   </interface>
  </module>
@@ -12970,5 +12982,5 @@ parameters are a RESULT of the module parameters. -->
   <version>18.1</version>
  </plugin>
  <reportVersion>18.1 625</reportVersion>
- <uniqueIdentifier>80E82CFE24F700000187A4690F1C</uniqueIdentifier>
+ <uniqueIdentifier>8CC68115DA7F00000187C208DBF2</uniqueIdentifier>
 </EnsembleReport>
