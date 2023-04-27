@@ -7,8 +7,6 @@
 #define C 343.3F // Lydhastighet
 #define a 0.075F // Sidelengde tetraheder
 #define PI 3.1415926535F
-#define PI 3.1415926535
-
 
 void transpose_matrix(int row, int column, double** matrix, double** transpose_matrix){
     for (int i = 1; i < row+1; i++){
