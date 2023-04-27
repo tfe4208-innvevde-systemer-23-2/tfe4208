@@ -29,28 +29,17 @@ int main(void) {
 
 
     // Main flow
-   /* while(true) {
+   while(true) {
 
     	// Read lags
     	getLags(&peripheral, &lags);
-    	// Calculate angles
-    	// Control PWM
+		uint32_t debug = peripheral_read_debug(&peripheral);
+		// Calculate angles
+		// Control PWM
 
-    	// For debug
-    	printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.l01, (int)lags.l02, (int)lags.l03, (int)lags.l12, (int)lags.l13, (int)lags.l23);
-    	usleep(1000000);
-
-    }*/
-
-	while (true) {
-		//printf("Current values 1, 2, 3: %d\n", (int)peripheral_read(&peripheral, 0));
-		printf("%d ", (int)peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_FIRST);
-		printf("%d ", (int)(peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_SECOND) >> 6);
-		printf("%d ", (int)(peripheral_read(&peripheral, 0) & PERIPHERAL_MASK_THIRD) >> 12);
-		//printf("Current value 4, 5, 6: %d\n", (int)peripheral_read(&peripheral, 4));
-		printf("%d ", (int)(peripheral_read(&peripheral, 4) & PERIPHERAL_MASK_FIRST));
-		printf("%d ", (int)(peripheral_read(&peripheral, 4) & PERIPHERAL_MASK_SECOND) >> 6);
-		printf("%d \n", (int)(peripheral_read(&peripheral, 4) & PERIPHERAL_MASK_THIRD) >> 12);
+		// For debug
+    	printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
+		printf("debug: %d\n", debug);
 		usleep(1000000);
 	}
 
