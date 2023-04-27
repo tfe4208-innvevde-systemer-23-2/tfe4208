@@ -4,13 +4,15 @@
 
 `timescale 1 ps / 1 ps
 module DE2_115_SOPC (
-		input  wire        clk_clk,                              //                      clk.clk
-		input  wire [35:0] peripheral_0_conduit_end_lagsin,      // peripheral_0_conduit_end.lagsin
-		input  wire        peripheral_0_conduit_end_lagsinvalid, //                         .lagsinvalid
-		output wire        pwm_0_conduit_end_pwm,                //        pwm_0_conduit_end.pwm
-		output wire        pwm_1_conduit_end_pwm,                //        pwm_1_conduit_end.pwm
-		output wire        pwm_2_conduit_end_pwm,                //        pwm_2_conduit_end.pwm
-		input  wire        reset_reset_n                         //                    reset.reset_n
+		input  wire        clk_clk,                                   //                      clk.clk
+		input  wire [29:0] peripheral_0_conduit_end_lagsin_t,         // peripheral_0_conduit_end.lagsin_t
+		input  wire        peripheral_0_conduit_end_lagsinvalid_t,    //                         .lagsinvalid_t
+		input  wire [31:0] peripheral_0_conduit_end_debugdata_t,      //                         .debugdata_t
+		input  wire        peripheral_0_conduit_end_debugdatavalid_t, //                         .debugdatavalid_t
+		output wire        pwm_0_conduit_end_pwm,                     //        pwm_0_conduit_end.pwm
+		output wire        pwm_1_conduit_end_pwm,                     //        pwm_1_conduit_end.pwm
+		output wire        pwm_2_conduit_end_pwm,                     //        pwm_2_conduit_end.pwm
+		input  wire        reset_reset_n                              //                    reset.reset_n
 	);
 
 	wire  [31:0] cpu_data_master_readdata;                                  // mm_interconnect_0:cpu_data_master_readdata -> cpu:d_readdata
@@ -130,12 +132,14 @@ module DE2_115_SOPC (
 	);
 
 	CpuPeripheral peripheral_0 (
-		.clk         (clk_clk),                                                //          clock.clk
-		.reset       (rst_controller_reset_out_reset),                         //          reset.reset
-		.readdata    (mm_interconnect_0_peripheral_0_avalon_slave_0_readdata), // avalon_slave_0.readdata
-		.address     (mm_interconnect_0_peripheral_0_avalon_slave_0_address),  //               .address
-		.dataIn      (peripheral_0_conduit_end_lagsin),                        //    conduit_end.lagsin
-		.dataInValid (peripheral_0_conduit_end_lagsinvalid)                    //               .lagsinvalid
+		.clk            (clk_clk),                                                //          clock.clk
+		.reset          (rst_controller_reset_out_reset),                         //          reset.reset
+		.readdata       (mm_interconnect_0_peripheral_0_avalon_slave_0_readdata), // avalon_slave_0.readdata
+		.address        (mm_interconnect_0_peripheral_0_avalon_slave_0_address),  //               .address
+		.dataIn         (peripheral_0_conduit_end_lagsin_t),                      //    conduit_end.lagsin_t
+		.dataInValid    (peripheral_0_conduit_end_lagsinvalid_t),                 //               .lagsinvalid_t
+		.debugData      (peripheral_0_conduit_end_debugdata_t),                   //               .debugdata_t
+		.debugDataValid (peripheral_0_conduit_end_debugdatavalid_t)               //               .debugdatavalid_t
 	);
 
 	pwm pwm_0 (

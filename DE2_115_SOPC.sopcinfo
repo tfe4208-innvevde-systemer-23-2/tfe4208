@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="DE2_115_SOPC" kind="DE2_115_SOPC" version="1.0" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2023.04.21.17:22:37 -->
+ <!-- 2023.04.27.11:26:06 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1682090557</value>
+  <value>1682587566</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -5825,14 +5825,26 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>dataIn</name>
     <direction>Input</direction>
-    <width>36</width>
-    <role>lagsin</role>
+    <width>30</width>
+    <role>lagsin_t</role>
    </port>
    <port>
     <name>dataInValid</name>
     <direction>Input</direction>
     <width>1</width>
-    <role>lagsinvalid</role>
+    <role>lagsinvalid_t</role>
+   </port>
+   <port>
+    <name>debugData</name>
+    <direction>Input</direction>
+    <width>32</width>
+    <role>debugdata_t</role>
+   </port>
+   <port>
+    <name>debugDataValid</name>
+    <direction>Input</direction>
+    <width>1</width>
+    <role>debugdatavalid_t</role>
    </port>
   </interface>
  </module>
