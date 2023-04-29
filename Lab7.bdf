@@ -58,63 +58,6 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(bidir)
-	(rect 1544 -8 1720 8)
-	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
-	(text "GPIO[0]" (rect 46 0 86 12)(font "Arial" ))
-	(pt 176 8)
-	(drawing
-		(line (pt 120 4)(pt 98 4))
-		(line (pt 176 8)(pt 124 8))
-		(line (pt 120 12)(pt 98 12))
-		(line (pt 98 4)(pt 94 8))
-		(line (pt 98 12)(pt 94 8))
-		(line (pt 120 4)(pt 124 8))
-		(line (pt 124 8)(pt 120 12))
-	)
-	(flipy)
-	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1720 -32 1792 -8))
-)
-(pin
-	(bidir)
-	(rect 1544 32 1720 48)
-	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
-	(text "GPIO[1]" (rect 46 0 86 12)(font "Arial" ))
-	(pt 176 8)
-	(drawing
-		(line (pt 120 4)(pt 98 4))
-		(line (pt 176 8)(pt 124 8))
-		(line (pt 120 12)(pt 98 12))
-		(line (pt 98 4)(pt 94 8))
-		(line (pt 98 12)(pt 94 8))
-		(line (pt 120 4)(pt 124 8))
-		(line (pt 124 8)(pt 120 12))
-	)
-	(flipy)
-	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1720 8 1792 32))
-)
-(pin
-	(bidir)
-	(rect 1544 72 1720 88)
-	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
-	(text "GPIO[2]" (rect 46 0 86 12)(font "Arial" ))
-	(pt 176 8)
-	(drawing
-		(line (pt 120 4)(pt 98 4))
-		(line (pt 176 8)(pt 124 8))
-		(line (pt 120 12)(pt 98 12))
-		(line (pt 98 4)(pt 94 8))
-		(line (pt 98 12)(pt 94 8))
-		(line (pt 120 4)(pt 124 8))
-		(line (pt 124 8)(pt 120 12))
-	)
-	(flipy)
-	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1720 48 1792 72))
-)
-(pin
-	(bidir)
 	(rect -16 -72 160 -56)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "GPIO[24]" (rect 90 0 136 12)(font "Arial" ))
@@ -204,6 +147,63 @@ refer to the applicable agreement for further details.
 	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
 	(annotation_block (location)(rect -712 -40 -640 40))
 )
+(pin
+	(bidir)
+	(rect 1544 -8 1720 8)
+	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
+	(text "GPIO[6]" (rect 5 0 46 12)(font "Arial" ))
+	(pt 176 8)
+	(drawing
+		(line (pt 120 4)(pt 98 4))
+		(line (pt 176 8)(pt 124 8))
+		(line (pt 120 12)(pt 98 12))
+		(line (pt 98 4)(pt 94 8))
+		(line (pt 98 12)(pt 94 8))
+		(line (pt 120 4)(pt 124 8))
+		(line (pt 124 8)(pt 120 12))
+	)
+	(flipy)
+	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 1720 -32 1792 -8))
+)
+(pin
+	(bidir)
+	(rect 1544 32 1720 48)
+	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
+	(text "GPIO[7]" (rect 5 0 46 12)(font "Arial" ))
+	(pt 176 8)
+	(drawing
+		(line (pt 120 4)(pt 98 4))
+		(line (pt 176 8)(pt 124 8))
+		(line (pt 120 12)(pt 98 12))
+		(line (pt 98 4)(pt 94 8))
+		(line (pt 98 12)(pt 94 8))
+		(line (pt 120 4)(pt 124 8))
+		(line (pt 124 8)(pt 120 12))
+	)
+	(flipy)
+	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 1720 8 1792 32))
+)
+(pin
+	(bidir)
+	(rect 1544 72 1720 88)
+	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
+	(text "GPIO[9]" (rect 5 0 46 12)(font "Arial" ))
+	(pt 176 8)
+	(drawing
+		(line (pt 120 4)(pt 98 4))
+		(line (pt 176 8)(pt 124 8))
+		(line (pt 120 12)(pt 98 12))
+		(line (pt 98 4)(pt 94 8))
+		(line (pt 98 12)(pt 94 8))
+		(line (pt 120 4)(pt 124 8))
+		(line (pt 124 8)(pt 120 12))
+	)
+	(flipy)
+	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 1720 48 1792 72))
+)
 (symbol
 	(rect 896 -112 928 -80)
 	(text "GND" (rect 6 3 16 24)(font "Arial" (font_size 6))(vertical))
@@ -273,127 +273,6 @@ refer to the applicable agreement for further details.
 		(line (pt 24 24)(pt 24 8))
 	)
 	(flipx_rotate90)
-)
-(symbol
-	(rect 968 -120 1504 88)
-	(text "Peak" (rect 5 0 29 12)(font "Arial" ))
-	(text "inst5" (rect 8 192 31 204)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "rst" (rect 0 0 12 12)(font "Arial" ))
-		(text "rst" (rect 21 43 33 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "dataIn0[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
-		(text "dataIn0[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 59 279 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64)(line_width 3))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "dataIn1[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
-		(text "dataIn1[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 75 279 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "dataIn2[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
-		(text "dataIn2[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 91 279 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 3))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "dataIn3[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
-		(text "dataIn3[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 107 279 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 3))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "dataIn4[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
-		(text "dataIn4[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 123 279 135)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128)(line_width 3))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "dataIn5[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
-		(text "dataIn5[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 139 279 151)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144)(line_width 3))
-	)
-	(port
-		(pt 0 160)
-		(input)
-		(text "dataInValid" (rect 0 0 54 12)(font "Arial" ))
-		(text "dataInValid" (rect 21 155 75 167)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160))
-	)
-	(port
-		(pt 536 32)
-		(output)
-		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 0 0 246 12)(font "Arial" ))
-		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 307 27 553 39)(font "Arial" ))
-		(line (pt 536 32)(pt 520 32)(line_width 3))
-	)
-	(port
-		(pt 536 48)
-		(output)
-		(text "dataOutValid" (rect 0 0 62 12)(font "Arial" ))
-		(text "dataOutValid" (rect 463 43 525 55)(font "Arial" ))
-		(line (pt 536 48)(pt 520 48))
-	)
-	(parameter
-		"NUM_BITS_SAMPLE"
-		"12"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"NUM_SAMPLES"
-		"1024"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"MAX_LAGS"
-		"11"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"BITS_PER_XCORR"
-		"5"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"NUM_XCORRS"
-		"6"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"NUM_BITS_XCORRS"
-		"32"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"MIN_XCORR_VAL"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 520 192))
-	)
-	(annotation_block (parameter)(rect 968 88 1188 240))
 )
 (symbol
 	(rect 1800 -200 2376 152)
@@ -571,7 +450,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"FREQ_SCALE"
-		"128"
+		"64"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
@@ -672,7 +551,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"NUM_SAMPLES"
-		"4096"
+		"14336"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -693,7 +572,128 @@ refer to the applicable agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 608 160))
 	)
-	(annotation_block (parameter)(rect 240 88 476 221))
+	(annotation_block (parameter)(rect 232 88 474 221))
+)
+(symbol
+	(rect 968 -120 1504 88)
+	(text "Peak" (rect 5 0 29 12)(font "Arial" ))
+	(text "inst5" (rect 8 192 31 204)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "rst" (rect 0 0 12 12)(font "Arial" ))
+		(text "rst" (rect 21 43 33 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "dataIn0[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
+		(text "dataIn0[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 59 279 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "dataIn1[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
+		(text "dataIn1[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 75 279 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "dataIn2[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
+		(text "dataIn2[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 91 279 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "dataIn3[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
+		(text "dataIn3[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 107 279 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "dataIn4[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
+		(text "dataIn4[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 123 279 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "dataIn5[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 0 0 258 12)(font "Arial" ))
+		(text "dataIn5[2*MAX_LAGS..0][NUM_BITS_XCORRS-1..0]" (rect 21 139 279 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "dataInValid" (rect 0 0 54 12)(font "Arial" ))
+		(text "dataInValid" (rect 21 155 75 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 536 32)
+		(output)
+		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 0 0 246 12)(font "Arial" ))
+		(text "dataOut[NUM_XCORRS*BITS_PER_XCORR-1..0]" (rect 307 27 553 39)(font "Arial" ))
+		(line (pt 536 32)(pt 520 32)(line_width 3))
+	)
+	(port
+		(pt 536 48)
+		(output)
+		(text "dataOutValid" (rect 0 0 62 12)(font "Arial" ))
+		(text "dataOutValid" (rect 463 43 525 55)(font "Arial" ))
+		(line (pt 536 48)(pt 520 48))
+	)
+	(parameter
+		"NUM_BITS_SAMPLE"
+		"12"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_SAMPLES"
+		"1024"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"MAX_LAGS"
+		"11"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"BITS_PER_XCORR"
+		"5"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_XCORRS"
+		"6"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_BITS_XCORRS"
+		"32"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"MIN_XCORR_VAL"
+		"50000000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 520 192))
+	)
+	(annotation_block (parameter)(rect 968 88 1215 240))
 )
 (connector
 	(pt 968 -88)

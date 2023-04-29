@@ -3,9 +3,9 @@
 # PiWedge pinout
 Mappinge til PiWedge er ikke 1 til 1 med GPIO pinsene derfor trenger vi denne
 
-PWM0 (GPIO0) -> 3V3
-PWM1 (GPIO1) -> 5V
-PWM2 (GPIO2) -> SDA
+PWM0 (GPIO6) -> G4
+PWM1 (GPIO7) -> TX
+PWM2 (GPIO9) -> RX
 
 5V -> G17
 GND(5V) -> G18

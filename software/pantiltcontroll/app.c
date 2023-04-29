@@ -20,6 +20,7 @@ int main(void) {
 
     // Initialize hardware
     pantilt_init(&pantilt);
+    printf("pantilt_init complete, starting up...\n\n");
 
     // Center servos.
     pantilt_configure_vertical(&pantilt, 1500);
@@ -34,7 +35,7 @@ int main(void) {
         uint32_t v_duty_us = 0;
         uint32_t h_duty_us = 0;
 
-        /*// bottom to top
+        // bottom to top
         v_duty_us = PANTILT_PWM_V_MIN_DUTY_CYCLE_US;
         do {
             pantilt_configure_vertical(&pantilt, v_duty_us);
@@ -65,7 +66,7 @@ int main(void) {
             h_duty_us -= PANTILT_STEP_US;
             usleep(SLEEP_DURATION_US);
         } while (PANTILT_PWM_H_MIN_DUTY_CYCLE_US <= h_duty_us);
-        */
+
     }
 
     return EXIT_SUCCESS;
