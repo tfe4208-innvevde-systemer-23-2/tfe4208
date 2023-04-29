@@ -31,10 +31,10 @@ uint32_t peripheral_read_lags(peripheral_dev *dev) {
 
 void getLags(peripheral_dev *dev, peripheral_lags *lags) {
 	uint32_t temp = peripheral_read_lags(dev);
-	lags->t01 = (temp >> (0 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS;
-	lags->t02 = (temp >> (1 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS;
-	lags->t03 = (temp >> (3 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS; // Number 2 and 3 seem to be swapped
-	lags->t12 = (temp >> (2 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS; // at some point
-	lags->t13 = (temp >> (4 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS;
-	lags->t23 = (temp >> (5 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS;
+	lags->t01 = -(temp >> (0 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS;
+	lags->t02 = -(temp >> (1 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS;
+	lags->t03 = -(temp >> (3 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS; // Number 2 and 3 seem to be swapped
+	lags->t12 = -(temp >> (2 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS; // at some point
+	lags->t13 = -(temp >> (4 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS;
+	lags->t23 = -(temp >> (5 * PERIPHERAL_XCORR_BITS)) & PERIPHERAL_MASK_LAGS;
 }
