@@ -27,9 +27,9 @@ inline static double sqr(double x) {
 //  double* time_delays = {0.008064, 0.80704, -3.2*10**(-5), -0.000256, 0.000128, 0.000352};
 
 double **create_matrix(int m, int n){
-    double **b = (double **)malloc(m+1 * sizeof(double *));
-    for (int i = 1; i < m+1; i++) {
-        b[i] = (double *)malloc(n+1 * sizeof(double));
+    double **b = (double **)malloc(m * sizeof(double *));
+    for (int i = 0; i < m; i++) {
+        b[i] = (double *)malloc(n * sizeof(double));
     }
     return b;
 }

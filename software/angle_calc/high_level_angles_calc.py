@@ -30,15 +30,19 @@ X = np.transpose(r) / C
 X = np.transpose(X)
 
 # lstsq leverer en tuple som svar, så hent ut riktig r_t! (første rad)
-r_t = np.linalg.lstsq(X,T, rcond = None)
+# r_t = np.linalg.lstsq(X, T, rcond=None)
+X = np.linalg.pinv(X, rcond=1e-10)
+print(X)
 
-r = np.transpose(r_t[0])
+r_t = X@T
+
+r = np.transpose(r_t)
 print(r)
 z_axis = np.transpose([0,0,1])
 length_r = np.sqrt(np.dot(r, r))
 length_z = 1
 
-#print(r_t[0][0])
+# print(r_t[0][0])
 #X_inv = np.linalg.inv(X)
 #r_t = X_inv @ T
 #r = np.transpose(r_t)
