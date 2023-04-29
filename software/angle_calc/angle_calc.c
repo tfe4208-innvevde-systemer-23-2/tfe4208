@@ -122,7 +122,7 @@ double rad2deg(double radians){
 double theta(double** r){
     double** new_r = dmatrix(1,3,1,1);
     matrix_mult_test(r,r,new_r,3,1,3);
-    double length_r = sqrt(new_r[1][1]); 
+    double length_r = sqrt(new_r[1][1]+ new_r[2][1]+ new_r[3][1]); 
     return rad2deg(acos(r[1][3] / (length_r)));
 }
 
@@ -131,6 +131,33 @@ double phi(double** r){
 }
 
 
+// Test SVD
+int main(){
+
+    double ** A = dmatrix(1,3,1,3);
+    A[1][1] = 3;
+    A[1][2] = 2;
+    A[1][3] = 2;
+    A[2][1] = 2;
+    A[2][2] = 3;
+    A[2][3] = -2;
+    printf("Heisann\n");
+
+    double** V = dmatrix(1,3,1,3);
+    double* sigma = dvector(1,2);
+
+    svdcmp(A,3,2,sigma,V);
+
+    print_matrix(A, 3,3);
+    print_matrix(V, 2,2);
+    printf("Sigma[1]: %f  Sigma[2]: %f\n", sigma[1], sigma[2]);
+
+
+}
+
+
+
+/*
 int main(){
     printf("Nepe\n");
     double** u = dmatrix(1,6,1,3);
@@ -212,3 +239,4 @@ int main(){
 
     return 0;
 }
+//*/
