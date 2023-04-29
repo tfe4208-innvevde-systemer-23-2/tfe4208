@@ -52,7 +52,7 @@ int main(void)
 		uint32_t debug = peripheral_read_debug(&peripheral);
 
 		// Calculate angles
-		get_angles_from_correlation(lags, angles, x, delays, v_t, u_t, sigma_inv, temp, temp2, new_r);
+		... get_angles_from_correlation(&lags);
 
 		// Control PWM
 
