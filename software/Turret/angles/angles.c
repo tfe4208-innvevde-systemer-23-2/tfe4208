@@ -169,7 +169,7 @@ double theta(double **r, double **new_r)
 {
     // dmatrixFill(new_r, 1, 3, 1, 1);
     matrix_mult_test(r, r, new_r, 3, 1, 3);
-    double length_r = sqrt(new_r[1][1]);
+    double length_r = sqrt(new_r[1][1] + new_r[1][2] + new_r[1][3]);
     return rad2deg(acos(r[1][3] / (length_r)));
 }
 

@@ -19,12 +19,12 @@ typedef struct pantilt_dev {
 #define PANTILT_PWM_PERIOD_US           (20000)    // 20.00 ms
 
 /* Vertical servo */
-#define PANTILT_PWM_V_MIN_DUTY_CYCLE_US (100)      //  0.10 ms
-#define PANTILT_PWM_V_MAX_DUTY_CYCLE_US (2250)     //  2.25 ms
+#define PANTILT_PWM_V_MIN_DUTY_CYCLE_US (600)      //  0.60 ms
+#define PANTILT_PWM_V_MAX_DUTY_CYCLE_US (2450)     //  2.45 ms
 
 /* Horizontal servo */
-#define PANTILT_PWM_H_MIN_DUTY_CYCLE_US (100)     //  0.10 ms
-#define PANTILT_PWM_H_MAX_DUTY_CYCLE_US (2250)    //  2.25 ms
+#define PANTILT_PWM_H_MIN_DUTY_CYCLE_US (600)     //  0.60 ms
+#define PANTILT_PWM_H_MAX_DUTY_CYCLE_US (2450)    //  2.45 ms
 
 /* Trigger servo */
 #define PANTILT_PWM_T_MIN_DUTY_CYCLE_US (100)     //  0.10 ms

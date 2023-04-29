@@ -157,7 +157,6 @@ void pantilt_shoot(pantilt_dev *dev)
                   duty_cycle_neutral,
                   PANTILT_PWM_PERIOD_US,
                   PANTILT_PWM_CLOCK_FREQ_HZ);
-
 }
 
 /**
@@ -170,7 +169,7 @@ void pantilt_shoot(pantilt_dev *dev)
  */
 uint32_t pantilt_calculate_duty(uint8_t angle)
 {
-    uint32_t duty_cycle = ((PANTILT_PWM_H_MAX_DUTY_CYCLE_US - PANTILT_PWM_H_MIN_DUTY_CYCLE_US) * angle) / 180;
+    uint32_t duty_cycle = PANTILT_PWM_H_MIN_DUTY_CYCLE_US + ((double)(PANTILT_PWM_H_MAX_DUTY_CYCLE_US - PANTILT_PWM_H_MIN_DUTY_CYCLE_US) * (double)angle / 180.0f);
     return duty_cycle;
 }
 
