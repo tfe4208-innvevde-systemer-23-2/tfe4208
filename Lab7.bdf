@@ -571,7 +571,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"FREQ_SCALE"
-		"128"
+		"64"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
@@ -672,7 +672,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"NUM_SAMPLES"
-		"4096"
+		"14336"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -693,7 +693,7 @@ refer to the applicable agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 608 160))
 	)
-	(annotation_block (parameter)(rect 240 88 476 221))
+	(annotation_block (parameter)(rect 232 88 474 221))
 )
 (connector
 	(pt 968 -88)

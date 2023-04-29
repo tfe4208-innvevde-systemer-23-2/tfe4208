@@ -8,6 +8,7 @@
 #include "pantilt/pantilt.h"
 #include "peripheral/peripheral.h"
 #include "angles/angles.h"
+#include "Sanitycheck/Sanity.h"
 #include "system.h"
 
 #define SLEEP_DURATION_US (25000) //  25  ms
@@ -53,15 +54,15 @@ int main(void)
 		uint32_t debug = peripheral_read_debug(&peripheral);
 
 		// Calculate angles
-		get_angles_from_correlation(lags, angles, x, delays, v_t, u_t, sigma_inv, temp, temp2, new_r);
+		double angle;
+		//get_angles_from_correlation(lags, angles, x, delays, v_t, u_t, sigma_inv, temp, temp2, new_r);
+		angle = calculateAngle(&lags);
+		angle = rad2deg(angle);
 
 		// For debug
 		printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
-		printf("vertical: %d, horizontal: %d", angles[0], angles[1]);
-		angles[0] = (angles[0] == 0x7fffffff) ? 0 : angles[0];
-		angles[0] = (angles[1] == 0x7fffffff) ? 0 : angles[1];
+		printf("vertical: %f\n", angle);
 		printf("debug: %d\n", (int)debug);
-
 		// Control turret
 		pantilt_set_angles(&pantilt, angles[0], angles[1]);
 		pantilt_set_angles(&pantilt, 20, 30);

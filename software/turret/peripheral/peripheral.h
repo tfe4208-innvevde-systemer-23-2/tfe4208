@@ -17,7 +17,7 @@ typedef struct peripheral_dev {
 
 /* Lags data structure */
 typedef struct peripheral_lags{
-	uint8_t t01, t02, t03, t12, t13, t23;
+	char t01, t02, t03, t12, t13, t23;
 } peripheral_lags;
 
 /*******************************************************************************
