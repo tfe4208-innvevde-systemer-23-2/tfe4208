@@ -114,7 +114,7 @@ double rad2deg(double radians){
 double theta(double** r){
     double** new_r = dmatrix(1,3,1,1);
     matrix_mult_test(r,r,new_r,3,1,3);
-    double length_r = sqrt(new_r[1][1]); 
+    double length_r = sqrt(new_r[1][1]+ new_r[2][1]+ new_r[3][1]); 
     return rad2deg(acos(r[1][3] / (length_r)));
 }
 
@@ -123,72 +123,35 @@ double phi(double** r){
 }
 
 
+// Test SVD
+int main(){
 
-/*
-typedef struct peripheral_lags{
-	uint8_t t01, t02, t03, t12, t13, t23;
-} peripheral_lags;
-*/
+    double ** A = dmatrix(1,3,1,3);
+    A[1][1] = 3;
+    A[1][2] = 2;
+    A[1][3] = 2;
+    A[2][1] = 2;
+    A[2][2] = 3;
+    A[2][3] = -2;
+    printf("Heisann\n");
 
-int* get_angles_from_correlation(peripheral_lags lags, ){
+    double** V = dmatrix(1,3,1,3);
+    double* sigma = dvector(1,2);
 
-    // Calculate X = U Σ V.T 
-    double** u = dmatrix(1,6,1,3);
-    create_r(u);
-    double* sigma =dvector(1,3);
-    double** v = dmatrix(1,3,1,3);
-    svdcmp(u,6,3,sigma,v);
-   
-    // Invert the variables in X, i.e X**(-1) = U.T (1/Σ) V
-    double** u_t = dmatrix(1,3,1,6);
-    transpose_matrix(3,6,u, u_t);
-    destroy_matrix(u);
+    svdcmp(A,3,2,sigma,V);
 
-    double** v_t = dmatrix(1,3,1,3);
-    transpose_matrix(3,3,v,v_t);
-    destroy_matrix(v);
+    print_matrix(A, 3,3);
+    print_matrix(V, 2,2);
+    printf("Sigma[1]: %f  Sigma[2]: %f\n", sigma[1], sigma[2]);
 
-    double** sigma_inv = dmatrix(1,3,1,3);
-    for (int i = 1; i < 4; i++){
-        for (int j = 1; j < 4; j++){
-            sigma_inv[i][j]     = 0;
-            sigma_inv[i][i]     = ( 1 / sigma[i]);
-        }
-        
-    free_dvector(sigma,1,3);
-   
-    // Retrieve the correlations, and calculate least squares 
-    double** x = dmatrix(1,3,1,1); 
-    double** delays = dmatrix(1,6,1,1);
-    delays[1][1] =   lags.t01;
-    delays[2][1] =   lags.t02;
-    delays[3][1] =  -lags.t03;
-    delays[4][1] =  -lags.t12;
-    delays[5][1] =   lags.t13;
-    delays[6][1] =   lags.t23;
 
-    calculate_lstsqr(v, u_t, sigma_inv, delays, x);
-
-    double t = theta(x);
-    double p = phi(x);
-    int * angles;
-    angles[0] = (int) t;
-    angles[1] = (int) p;
-
-    // Free allocated memory 
-    destroy_matrix(x);
-    destroy_matrix(delays);
-    destroy_matrix(v);
-    destroy_matrix(u);
-    destroy_matrix(sigma_inv);
-
-    return angles; // theta, phi 
 }
 
+
+
 /*
-
-
-int  compute_angles(){
+int main(){
+    printf("Nepe\n");
     double** u = dmatrix(1,6,1,3);
     create_r(u);
     double* sigma =dvector(1,3);
@@ -229,7 +192,31 @@ int  compute_angles(){
     // Calculate x 
     double** x = dmatrix(1,3,1,1); 
     
+    double** delays = dmatrix(1,6,1,1);
+    //delays[1][1] = 0.008064;
+    //delays[2][1] = 0.80704;
+    //delays[3][1] = - 0.000032;
+    //delays[4][1] = -0.000256;
+    //delays[5][1] = 0.000128;
+    //delays[6][1] = 0.000352;
+
+    //double delaysx[6] =  {0.008064, 0.80704, -0.000032, -0.000256, 0.000128, 0.000352};
+    double delaysx[6] =  {-0.010272, -0.000128, -0.000416, 0.005472, 0.0, -0.000288};
+
+    for (int i = 0; i < 6; i++)
+    {
+        delays[i][1] = delaysx[i];
+    }
     
+
+
+    printf("Pre calc X\n");
+
+    calculate_x(v, u_t, sigma_inv, delays, x);
+    printf("Post calc x\n");
+
+    printf("Theta: %f\n", theta(x));
+    printf("Phi  : %f\n", phi(x));
 
 
     print_matrix(x, 3,1);
@@ -244,5 +231,4 @@ int  compute_angles(){
 
     return 0;
 }
-
-*/
+//*/

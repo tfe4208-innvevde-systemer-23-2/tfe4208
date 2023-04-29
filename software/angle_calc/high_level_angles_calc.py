@@ -1,7 +1,9 @@
 import numpy as np
 
 # Time delays
-t_t = [0.008064, 0.80704, -3.2*10**(-5), -0.000256, 0.000128, 0.000352]
+#t_t = [0.008064, 0.80704, -3.2*10**(-5), -0.000256, 0.000128, 0.000352]
+#t_t = [0.008064, 0.80704, -3.2*10**(-5), -0.000256, 0.000128, 0.000352]
+t_t = [-0.010272, -0.000128, -0.000416, 0.005472, 0.0, -0.000288]
 
 t21 = t_t[0]
 t31 = t_t[1]
@@ -28,15 +30,19 @@ X = np.transpose(r) / C
 X = np.transpose(X)
 
 # lstsq leverer en tuple som svar, så hent ut riktig r_t! (første rad)
-r_t = np.linalg.lstsq(X,T, rcond = None)
+# r_t = np.linalg.lstsq(X, T, rcond=None)
+X = np.linalg.pinv(X, rcond=1e-10)
+print(X)
 
-r = np.transpose(r_t[0])
+r_t = X@T
+
+r = np.transpose(r_t)
 print(r)
 z_axis = np.transpose([0,0,1])
 length_r = np.sqrt(np.dot(r, r))
 length_z = 1
 
-#print(r_t[0][0])
+# print(r_t[0][0])
 #X_inv = np.linalg.inv(X)
 #r_t = X_inv @ T
 #r = np.transpose(r_t)
