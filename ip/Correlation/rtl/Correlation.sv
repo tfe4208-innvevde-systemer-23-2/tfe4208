@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////
 // Title:           Crosscorrelation
-// Author:          
+// Author:          Daniel Vorhaug
 // Date:            17.03.2023
 // Description:     
 ////////////////////////////////////////////////////
@@ -26,7 +26,7 @@ module Correlation #(
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut4,
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut5,
 
-    output logic signed [31:0][NUM_BITS_SAMPLE-1:0] dataInAverage
+    output logic signed [NUM_SLAVES-1:0][31:0] dataInAverage
 );
 
 logic positiveEdge;

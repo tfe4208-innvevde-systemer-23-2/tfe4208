@@ -103,8 +103,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 624 144)
 		(output)
-		(text "dataInAverage[31..0][NUM_BITS_SAMPLE-1..0]" (rect 0 0 200 12)(font "Arial" ))
-		(text "dataInAverage[31..0][NUM_BITS_SAMPLE-1..0]" (rect 403 139 603 151)(font "Arial" ))
+		(text "dataInAverage[NUM_SLAVES-1..0][31..0]" (rect 0 0 174 12)(font "Arial" ))
+		(text "dataInAverage[NUM_SLAVES-1..0][31..0]" (rect 429 139 603 151)(font "Arial" ))
 		(line (pt 624 144)(pt 608 144)(line_width 3))
 	)
 	(parameter
