@@ -24,7 +24,9 @@ module Correlation #(
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut2,
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut3,
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut4,
-    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut5
+    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut5,
+
+    output logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInAverage
 );
 
 logic positiveEdge;
@@ -62,6 +64,7 @@ generate
             end else if (positiveEdge) begin
                 // Shift in new sample
                 inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataInDetrended[slave]};
+                dataInAverage[slave] <= dataInAverage[slave] + dataInDetrended[slave] - inputBuffer[slave][NUM_SAMPLES-1];
             end else begin
                 // Keep old values
                 inputBuffer[slave] <= inputBuffer[slave];
