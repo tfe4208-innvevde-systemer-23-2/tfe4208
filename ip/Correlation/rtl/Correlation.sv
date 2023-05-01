@@ -32,12 +32,12 @@ module Correlation #(
 logic positiveEdge;
 
 logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInDetrended;
-logic signed [31:0][NUM_BITS_SAMPLE-1:0] dataInDetrendedPadded;
+logic signed [NUM_SLAVES-1:0][31:0] dataInDetrendedPadded;
 logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInOffset;
 
 // Shift register for storing the input data
 logic signed [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
-logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] inputBufferEndPadded;
+logic signed [NUM_SLAVES-1:0][31:0] inputBufferEndPadded;
 
 // Values used for crosscorrelation calculations. The f and g refer to the symbols in the crosscorrelation formula.
 // The add-values are used when introducing a new value to crosscorrelation estimate, and the sub-values are used when they are removed.

@@ -598,7 +598,7 @@ refer to the applicable agreement for further details.
 (symbol
 	(rect 240 -88 864 88)
 	(text "Correlation" (rect 5 0 58 12)(font "Arial" ))
-	(text "inst17" (rect 8 160 36 177)(font "Intel Clear" ))
+	(text "inst19" (rect 8 160 36 177)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
