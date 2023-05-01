@@ -580,9 +580,25 @@ refer to the applicable agreement for further details.
 	(annotation_block (parameter)(rect 968 88 1215 240))
 )
 (symbol
+	(rect 1624 -56 1640 -24)
+	(text "VCC" (rect 0 5 10 25)(font "Arial" (font_size 6))(vertical))
+	(text "inst8" (rect 5 6 22 28)(font "Intel Clear" )(vertical)(invisible))
+	(port
+		(pt 16 16)
+		(output)
+		(text "1" (rect 19 7 24 19)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 7 8 19 13)(font "Courier New" (bold))(vertical)(invisible))
+		(line (pt 16 16)(pt 8 16))
+	)
+	(drawing
+		(line (pt 8 24)(pt 8 8))
+	)
+	(rotate90)
+)
+(symbol
 	(rect 240 -88 864 88)
 	(text "Correlation" (rect 5 0 58 12)(font "Arial" ))
-	(text "inst9" (rect 8 160 31 172)(font "Arial" ))
+	(text "inst17" (rect 8 160 36 177)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -615,7 +631,7 @@ refer to the applicable agreement for further details.
 		(pt 624 128)
 		(output)
 		(text "validOut" (rect 0 0 41 12)(font "Arial" ))
-		(text "validOut" (rect 568 120 609 132)(font "Arial" ))
+		(text "validOut" (rect 569 123 610 135)(font "Arial" ))
 		(line (pt 624 128)(pt 608 128))
 	)
 	(port
@@ -660,6 +676,13 @@ refer to the applicable agreement for further details.
 		(text "xCorrOut5[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 325 107 654 119)(font "Arial" ))
 		(line (pt 624 112)(pt 608 112)(line_width 3))
 	)
+	(port
+		(pt 624 144)
+		(output)
+		(text "dataInAverage[NUM_SLAVES-1..0][31..0]" (rect 0 0 205 12)(font "Arial" ))
+		(text "dataInAverage[NUM_SLAVES-1..0][31..0]" (rect 430 139 635 151)(font "Arial" ))
+		(line (pt 624 144)(pt 608 144)(line_width 3))
+	)
 	(parameter
 		"NUM_BITS_SAMPLE"
 		"12"
@@ -693,7 +716,7 @@ refer to the applicable agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 608 160))
 	)
-	(annotation_block (parameter)(rect 232 88 474 221))
+	(annotation_block (parameter)(rect 240 88 482 221))
 )
 (connector
 	(pt 968 -88)
@@ -887,18 +910,23 @@ refer to the applicable agreement for further details.
 	(pt 904 40)
 )
 (connector
-	(text "xCorrValidOut" (rect 1650 -56 1717 -39)(font "Intel Clear" ))
-	(pt 1800 -40)
-	(pt 1640 -40)
-)
-(connector
 	(text "xCorrs01[22..0][37..0]" (rect 866 -72 966 -55)(font "Intel Clear" ))
 	(pt 864 -56)
 	(pt 968 -56)
 	(bus)
 )
 (connector
-	(text "xCorrs01[11][31..0]" (rect 1650 -72 1739 -55)(font "Intel Clear" ))
+	(pt 1800 -40)
+	(pt 1640 -40)
+)
+(connector
+	(text "dataAverage[3..0][31..0]" (rect 864 40 978 57)(font "Intel Clear" ))
+	(pt 864 56)
+	(pt 952 56)
+	(bus)
+)
+(connector
+	(text "dataAverage[0][31..0]" (rect 1650 -72 1753 -55)(font "Intel Clear" ))
 	(pt 1640 -56)
 	(pt 1800 -56)
 	(bus)
