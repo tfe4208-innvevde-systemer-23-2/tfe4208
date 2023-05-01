@@ -26,16 +26,18 @@ module Correlation #(
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut4,
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut5,
 
-    output logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInAverage
+    output logic signed [31:0][NUM_BITS_SAMPLE-1:0] dataInAverage
 );
 
 logic positiveEdge;
 
 logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInDetrended;
+logic signed [31:0][NUM_BITS_SAMPLE-1:0] dataInDetrendedPadded;
 logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInOffset;
 
 // Shift register for storing the input data
 logic signed [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] inputBufferEndPadded;
 
 // Values used for crosscorrelation calculations. The f and g refer to the symbols in the crosscorrelation formula.
 // The add-values are used when introducing a new value to crosscorrelation estimate, and the sub-values are used when they are removed.
@@ -64,12 +66,15 @@ generate
             end else if (positiveEdge) begin
                 // Shift in new sample
                 inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataInDetrended[slave]};
-                dataInAverage[slave] <= dataInAverage[slave] + dataInDetrended[slave] - inputBuffer[slave][NUM_SAMPLES-1];
+                dataInAverage[slave] <= dataInAverage[slave] + dataInDetrendedPadded[slave] - inputBufferEndPadded[slave];
             end else begin
                 // Keep old values
                 inputBuffer[slave] <= inputBuffer[slave];
             end
         end
+
+        assign dataInDetrendedPadded[slave] = {{32-NUM_BITS_SAMPLE{dataInDetrended[slave][NUM_BITS_SAMPLE-1]}}, dataInDetrended[slave][NUM_BITS_SAMPLE-1:0]};
+        assign inputBufferEndPadded[slave] = {{32-NUM_BITS_SAMPLE{inputBuffer[slave][NUM_SAMPLES-1][NUM_BITS_SAMPLE-1]}}, inputBuffer[slave][NUM_SAMPLES-1]};
 
         // Assign the f- and g-values for the crosscorrelation calculations
         assign xCorrInputAddf[slave] = inputBuffer[slave][MAX_SAMPLES_DELAY];
