@@ -51,7 +51,7 @@ logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
 
 
 // Offset for the input data. Used to center the data around 0
-assign dataInOffset = {2**(NUM_BITS_SAMPLE-1), 2**(NUM_BITS_SAMPLE-1), 2**(NUM_BITS_SAMPLE-1), 2**(NUM_BITS_SAMPLE-1)};
+assign dataInOffset = {12'b1000_0000_0000, 12'b1000_0000_0000, 12'b1000_0000_0000, 12'b1000_0000_0000};
 
 genvar slave, bufferLine;
 generate
