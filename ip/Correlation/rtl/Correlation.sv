@@ -30,6 +30,7 @@ module Correlation #(
 logic positiveEdge;
 
 logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInDetrended;
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInOffset;
 
 // Shift register for storing the input data
 logic signed [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
@@ -44,11 +45,15 @@ logic signed [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrI
 // Registers for storing the crosscorrelation values
 logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
 
+
+// Offset for the input data. Used to center the data around 0
+assign dataInOffset = {2**(NUM_BITS_SAMPLE-1), 2**(NUM_BITS_SAMPLE-1), 2**(NUM_BITS_SAMPLE-1), 2**(NUM_BITS_SAMPLE-1)};
+
 genvar slave, bufferLine;
 generate
     for (slave = 0; slave < NUM_SLAVES; slave++) begin : slaveBuffer
 
-        assign dataInDetrended[slave] = signed'(dataIn[slave]) - (2**(NUM_BITS_SAMPLE-1));
+        assign dataInDetrended[slave] = signed'(dataIn[slave]) - dataInOffset[slave];
 
         // Sets up the inputBuffer shift register
         always @(posedge clk or posedge rst) begin
