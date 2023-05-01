@@ -566,7 +566,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"NUM_BITS_XCORRS"
-		"32"
+		"38"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -682,7 +682,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"NUM_BITS_XCORR"
-		"32"
+		"38"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -892,7 +892,7 @@ refer to the applicable agreement for further details.
 	(pt 1640 -40)
 )
 (connector
-	(text "xCorrs01[22..0][31..0]" (rect 866 -72 966 -55)(font "Intel Clear" ))
+	(text "xCorrs01[22..0][37..0]" (rect 866 -72 966 -55)(font "Intel Clear" ))
 	(pt 864 -56)
 	(pt 968 -56)
 	(bus)
