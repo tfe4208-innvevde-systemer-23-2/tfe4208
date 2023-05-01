@@ -12,6 +12,6 @@ void pseudo_inv(double** matrix);
 double rad2deg(double radians);
 double theta(double** r);
 double phi(double** r);
-int *get_angles_from_correlation(peripheral_lags *lags);
+void get_angles_from_correlation(peripheral_lags* lags, double* angles);
 
 #endif

@@ -52,7 +52,7 @@ double phi(double** r){
 }
 
 
-int* get_angles_from_correlation(peripheral_lags* lags) {
+void get_angles_from_correlation(peripheral_lags* lags, double* angles) {
     double** matrise = create_matrix(3,6);
     double** delays = create_matrix(6,1);
     delays[0][0] = lags->t01;
@@ -67,37 +67,10 @@ int* get_angles_from_correlation(peripheral_lags* lags) {
 
     double t = theta(r);
     double p = phi(r);
-    double *angles;
+    // double *angles;
 
     angles[0] = t;
     angles[1] = p;
 
-    return angles;
+    // return angles;
 }
-
-int main(){
-    double** matrise = create_matrix(3,6);
-    pseudo_inv(matrise);
-
-    // Legg til delays for testing
-    double** delays = create_matrix(6,1);
-    //double delaysx[] = {-0.010272, -0.000128, -0.000416, 0.005472, 0.0, -0.000288};
-    double delaysx[] = {0.008064, 0.80704, -0.000032, -0.000256, 0.000128, 0.000352};
-    
-    for (int i = 0; i < 6; i++)
-    {
-        delays[i][0] = delaysx[i];
-    }
-    double** r = create_matrix(3,1);
-    printf("Mathias er nepe\n");
-    matrix_mult_test(matrise,delays,r, 3,6,1);
-    printf("Mathias er nepe\n");
-    print_matrix(r,1,3);
-
-
-    printf("Theta: %f\n", theta(r));
-    printf("Phi  : %f\n", phi(r)); 
-
-    return 0;
-}
-

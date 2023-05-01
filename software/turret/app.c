@@ -37,18 +37,19 @@ int main(void)
 	printf("Init complete, starting up...\n\n");
 
 	// Init angles and matrices
-	double **x = dmatrix(1, 3, 1, 1);
-	double **delays = dmatrix(1, 6, 1, 1);
-	double **u_t = dmatrix(1, 3, 1, 6);
-	double **v_t = dmatrix(1, 3, 1, 3);
-	double **sigma_inv = dmatrix(1, 3, 1, 3);
-	double **temp = dmatrix(1, 3, 1, 3);
-	double **temp2 = dmatrix(1, 3, 1, 6);
-	double **new_r = dmatrix(1, 3, 1, 1);
-	int *angles = malloc(2 * sizeof(int));
-	init_angles(u_t, v_t, sigma_inv);
+	// double **x = dmatrix(1, 3, 1, 1);
+	// double **delays = dmatrix(1, 6, 1, 1);
+	// double **u_t = dmatrix(1, 3, 1, 6);
+	// double **v_t = dmatrix(1, 3, 1, 3);
+	// double **sigma_inv = dmatrix(1, 3, 1, 3);
+	// double **temp = dmatrix(1, 3, 1, 3);
+	// double **temp2 = dmatrix(1, 3, 1, 6);
+	// double **new_r = dmatrix(1, 3, 1, 1);
+	// int *angles = malloc(2 * sizeof(int));
+	// init_angles(u_t, v_t, sigma_inv);
 
-	double angle;
+	double * angle = malloc(2 * sizeof(double));
+	
 	// double old_angle;
 
 	// Main flow
@@ -63,7 +64,7 @@ int main(void)
 		// usleep(2000000);
 		// continue;
 		
-		if (lags.t01 > 11 || lags.t02 > 11 || lags.t12 > 11)
+		if (lags.t01 > 11 || lags.t02 > 11 || lags.t12 > 11 || lags.t03 > 11 || lags.t13 > 11 || lags.t23 > 11)
 		{
 			// printf("No signal\n");
 			usleep(100000);
@@ -73,22 +74,23 @@ int main(void)
 		uint32_t debug = peripheral_read_debug(&peripheral);
 
 		// Calculate angles
-		... get_angles_from_correlation(&lags);
+		get_angles_from_correlation(&lags, angle);
 
-		// get_angles_from_correlation(lags, angles, x, delays, v_t, u_t, sigma_inv, temp, temp2, new_r);
-		angle = calculateAngle(&lags);
-		angle = rad2deg(angle);
+		// // get_angles_from_correlation(lags, angles, x, delays, v_t, u_t, sigma_inv, temp, temp2, new_r);
+		// angle = calculateAngle(&lags);
+		// angle = rad2deg(angle);
 
 		// For debug
-		printf("vertical: %f\n", angle);
+		printf("vertical: %f\n", angle[0]);
+		printf("horizontal: %f\n", angle[1]);
 		printf("debug: %d\n", (int)debug);
 
 		// Control turret
 
-		if (angle > 0.1)
+		if (angle[1] > 0.1)
 		{
 			pantilt_start_horizontal(&pantilt);
-			pantilt_set_angles(&pantilt, 90, angle);
+			pantilt_set_angles(&pantilt, angle[0], angle[1]);
 			usleep(100000);
 			pantilt_shoot(&pantilt);
 			pantilt_stop_horizontal(&pantilt);
