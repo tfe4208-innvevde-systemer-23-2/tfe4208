@@ -710,7 +710,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"MIN_XCORR_VAL"
-		"7500000"
+		"6800000"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
@@ -930,7 +930,7 @@ refer to the applicable agreement for further details.
 	(pt 1800 -72)
 )
 (connector
-	(text "xCorrs01[11][31..0]" (rect 1626 -72 1715 -55)(font "Intel Clear" ))
+	(text "xCorrs01[11][37..6]" (rect 1626 -72 1715 -55)(font "Intel Clear" ))
 	(pt 1800 -56)
 	(pt 1624 -56)
 	(bus)

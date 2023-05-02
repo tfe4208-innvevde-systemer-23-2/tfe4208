@@ -52,11 +52,11 @@ int main(void)
 
 		// Read lags
 		getLags(&peripheral, &lags);
-		//printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
+		printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
 
 		// Read debug data
 		uint32_t debug = peripheral_read_debug(&peripheral);
-		printf("debug: %d\n", (int)debug);
+		printf("debug: %x\n", (int)debug);
 		
 		// Preprocessing of data
 		if (lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12) {
@@ -101,6 +101,7 @@ int main(void)
 
 		// Shoot if we have to
 		if (debug > SHOOT_THRESHOLD) {
+			printf("FIRE!!!");
 			pantilt_shoot(&pantilt);
 		}
 
