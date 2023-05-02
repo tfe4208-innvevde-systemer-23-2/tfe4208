@@ -11,7 +11,7 @@ double **create_matrix(int m, int n){
     return b;
 }
 
-void matrix_mult_test(double** mat_a, double** mat_b, double** result, int m, int n, int n_2){
+void matrix_mult(double** mat_a, double** mat_b, double** result, int m, int n, int n_2){
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n_2; j++) {
             result[i][j] = 0;
@@ -42,19 +42,22 @@ void pseudo_inv(double** matrix){
 double rad2deg(double radians){
     return radians * (180 / PI); 
 }
+
 double theta(double** r){
-    double length_r = sqrt(r[0][0]*r[0][0] + r[1][0]*r[1][0] + r[2][0]*r[2][0]); 
-    return rad2deg(acos(r[2][0] / (length_r)));
+    double length_r = sqrt(pow(r[0][0], 2) + pow(r[1][0], 2) + pow(r[2][0], 2));
+    if (length_r != 0.0) {
+    	return rad2deg(acos(r[2][0] / (length_r)));
+    }
+    else {
+    	return 180.0;
+    }
 }
 
 double phi(double** r){
     return rad2deg(atan2(r[0][0], r[1][0]));
 }
 
-
-void get_angles_from_correlation(peripheral_lags* lags, double* angles) {
-    double** matrise = create_matrix(3,6);
-    double** delays = create_matrix(6,1);
+void get_angles_from_correlation(peripheral_lags* lags, double** matrise, double** delays, double** r, double* angles) {
     delays[0][0] = lags->t01;
     delays[1][0] = lags->t02;
     delays[2][0] = lags->t03;
@@ -62,15 +65,13 @@ void get_angles_from_correlation(peripheral_lags* lags, double* angles) {
     delays[4][0] = lags->t13;
     delays[5][0] = lags->t23;
 
-    double** r = create_matrix(3,1);
-    matrix_mult_test(matrise,delays,r, 3,6,1);
+
+    matrix_mult(matrise,delays,r, 3,6,1);
 
     double t = theta(r);
     double p = phi(r);
-    // double *angles;
 
     angles[0] = t;
     angles[1] = p;
 
-    // return angles;
 }

@@ -20,73 +20,54 @@ int main(void)
 	pantilt_dev pantilt = pantilt_inst((void *)PWM_0_BASE, (void *)PWM_1_BASE, (void *)PWM_2_BASE);
 	peripheral_dev peripheral = peripheral_inst((void *)PERIPHERAL_0_BASE);
 
+	// Set up matrices
+    double** matrise = create_matrix(3,6);
+    pseudo_inv(matrise);
+    double** delays = create_matrix(6,1);
+    double** r = create_matrix(3,1);
+
 	// Initialize pwm hardware
 	pantilt_init(&pantilt);
 	pantilt_configure_vertical(&pantilt, 1500);
 	pantilt_configure_horizontal(&pantilt, 1500);
 	pantilt_configure_trigger(&pantilt, 1500);
 	// pantilt_start_vertical(&pantilt);
-	pantilt_start_horizontal(&pantilt);
+	//pantilt_start_horizontal(&pantilt);
 	// pantilt_start_trigger(&pantilt);
 
 	// Create lags structure
 	peripheral_lags lags;
-	// lags = (peripheral_lags *)malloc(sizeof(peripheral_lags));
+
+	// Allocate memory for angles
+	double * angle = malloc(2 * sizeof(double));
 
 	// More setup probably
 	printf("Init complete, starting up...\n\n");
-
-	// Init angles and matrices
-	// double **x = dmatrix(1, 3, 1, 1);
-	// double **delays = dmatrix(1, 6, 1, 1);
-	// double **u_t = dmatrix(1, 3, 1, 6);
-	// double **v_t = dmatrix(1, 3, 1, 3);
-	// double **sigma_inv = dmatrix(1, 3, 1, 3);
-	// double **temp = dmatrix(1, 3, 1, 3);
-	// double **temp2 = dmatrix(1, 3, 1, 6);
-	// double **new_r = dmatrix(1, 3, 1, 1);
-	// int *angles = malloc(2 * sizeof(int));
-	// init_angles(u_t, v_t, sigma_inv);
-
-	double * angle = malloc(2 * sizeof(double));
+	printf("====================================\n");
 	
-	// double old_angle;
-
 	// Main flow
-	while (true)
-	{
+	while (true) {
 
 		// Read lags
 		getLags(&peripheral, &lags);
-		printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
+		//printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
 
-		// pantilt_shoot(&pantilt);
-		// usleep(2000000);
-		// continue;
+		// Read debug data
+		uint32_t debug = peripheral_read_debug(&peripheral);
+		printf("debug: %d\n", (int)debug);
 		
-		if (lags.t01 > 11 || lags.t02 > 11 || lags.t12 > 11 || lags.t03 > 11 || lags.t13 > 11 || lags.t23 > 11)
-		{
+		// Preprocessing of data
+		if (lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12) {
 			// printf("No signal\n");
 			usleep(100000);
 			continue;
 		}
 
-		uint32_t debug = peripheral_read_debug(&peripheral);
-
 		// Calculate angles
-		get_angles_from_correlation(&lags, angle);
-
-		// // get_angles_from_correlation(lags, angles, x, delays, v_t, u_t, sigma_inv, temp, temp2, new_r);
-		// angle = calculateAngle(&lags);
-		// angle = rad2deg(angle);
-
-		// For debug
-		printf("vertical: %f\n", angle[0]);
-		printf("horizontal: %f\n", angle[1]);
-		printf("debug: %d\n", (int)debug);
+		get_angles_from_correlation(&lags, matrise, delays, r, angle);
+		printf("vertical: %f, horizontal: %f \n", angle[0], angle[1]);
 
 		// Control turret
-
 		if (angle[1] > 0.1)
 		{
 			pantilt_start_horizontal(&pantilt);
@@ -104,6 +85,10 @@ int main(void)
 		{
 			usleep(100000);
 		}
+
+		// pantilt_shoot(&pantilt);
+		// usleep(2000000);
+		// continue;
 		// if
 		// {
 		// 	angle

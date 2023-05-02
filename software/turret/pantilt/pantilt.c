@@ -144,24 +144,11 @@ void pantilt_shoot(pantilt_dev *dev)
     // Need to compensate for inverted servo rotation.
     uint32_t duty_cycle_push = PANTILT_PWM_PERIOD_US * 13 / 200;
     uint32_t duty_cycle_neutral = PANTILT_PWM_PERIOD_US * 21 / 200;
-    // duty_cycle = PANTILT_PWM_T_MAX_DUTY_CYCLE_US - duty_cycle + PANTILT_PWM_T_MIN_DUTY_CYCLE_US;
 
-    pantilt_start_trigger(dev);
-
-    pwm_configure(&(dev->pwm_t),
-                  duty_cycle_push,
-                  PANTILT_PWM_PERIOD_US,
-                  PANTILT_PWM_CLOCK_FREQ_HZ);
-
+    //pantilt_start_trigger(dev);
+    pantilt_configure_trigger(dev, duty_cycle_push);
     usleep(150000);
-
-    pwm_configure(&(dev->pwm_t),
-                  duty_cycle_neutral,
-                  PANTILT_PWM_PERIOD_US,
-                  PANTILT_PWM_CLOCK_FREQ_HZ);
-
-    usleep(150000);
-
+    pantilt_configure_trigger(dev, duty_cycle_neutral);
     // pantilt_stop_trigger(dev);
 }
 
