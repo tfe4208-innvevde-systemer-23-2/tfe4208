@@ -112,7 +112,7 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(bidir)
-	(rect 1528 232 1704 248)
+	(rect 1536 232 1712 248)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "GPIO[13]" (rect 90 0 136 12)(font "Arial" ))
 	(pt 0 8)
@@ -126,7 +126,7 @@ refer to the applicable agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1664 224 1728 248))
+	(annotation_block (location)(rect 1672 224 1736 248))
 )
 (pin
 	(bidir)
@@ -836,16 +836,8 @@ refer to the applicable agreement for further details.
 	(pt 232 -40)
 )
 (connector
-	(pt 1528 -72)
-	(pt 1528 240)
-)
-(connector
 	(pt 952 -128)
 	(pt 1608 -128)
-)
-(connector
-	(pt 1504 -72)
-	(pt 1528 -72)
 )
 (connector
 	(pt 1608 -128)
@@ -855,10 +847,6 @@ refer to the applicable agreement for further details.
 	(pt 1504 -88)
 	(pt 1800 -88)
 	(bus)
-)
-(connector
-	(pt 1528 -72)
-	(pt 1800 -72)
 )
 (connector
 	(pt 1720 120)
@@ -926,7 +914,23 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "dataAverage[3][31..0]" (rect 1626 -72 1729 -55)(font "Intel Clear" ))
+	(pt 1536 240)
+	(pt 1520 240)
+)
+(connector
+	(pt 1520 -72)
+	(pt 1520 240)
+)
+(connector
+	(pt 1504 -72)
+	(pt 1520 -72)
+)
+(connector
+	(pt 1520 -72)
+	(pt 1800 -72)
+)
+(connector
+	(text "xCorrs01[11][31..0]" (rect 1626 -72 1715 -55)(font "Intel Clear" ))
 	(pt 1800 -56)
 	(pt 1624 -56)
 	(bus)
@@ -934,6 +938,6 @@ refer to the applicable agreement for further details.
 (junction (pt 952 -128))
 (junction (pt 1608 -128))
 (junction (pt 232 -128))
-(junction (pt 1528 -72))
 (junction (pt 904 40))
 (junction (pt -32 -48))
+(junction (pt 1520 -72))

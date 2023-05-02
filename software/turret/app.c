@@ -13,6 +13,7 @@
 
 #define SLEEP_DURATION_US (25000) //  25  ms
 #define PANTILT_STEP_US (25)	  //  25  us
+#define SHOOT_THRESHOLD 20000000
 
 int main(void)
 {
@@ -32,14 +33,15 @@ int main(void)
 	pantilt_configure_horizontal(&pantilt, 1500);
 	pantilt_configure_trigger(&pantilt, 1500);
 	// pantilt_start_vertical(&pantilt);
-	//pantilt_start_horizontal(&pantilt);
+	// pantilt_start_horizontal(&pantilt);
 	// pantilt_start_trigger(&pantilt);
 
 	// Create lags structure
 	peripheral_lags lags;
 
 	// Allocate memory for angles
-	double * angle = malloc(2 * sizeof(double));
+	double * calcAngle = malloc(2 * sizeof(double));
+	double * servoAngle = malloc(2 * sizeof(double));
 
 	// More setup probably
 	printf("Init complete, starting up...\n\n");
@@ -64,11 +66,11 @@ int main(void)
 		}
 
 		// Calculate angles
-		get_angles_from_correlation(&lags, matrise, delays, r, angle);
-		printf("vertical: %f, horizontal: %f \n", angle[0], angle[1]);
+		get_angles_from_correlation(&lags, matrise, delays, r, calcAngle);
+		printf("vertical: %f, horizontal: %f \n", calcAngle[0], calcAngle[1]);
 
 		// Control turret
-		if (angle[1] > 0.1)
+		/*if (angle[1] > 0.1)
 		{
 			pantilt_start_horizontal(&pantilt);
 			pantilt_set_angles(&pantilt, angle[0], angle[1]);
@@ -85,36 +87,23 @@ int main(void)
 		{
 			usleep(100000);
 		}
+*/
 
-		// pantilt_shoot(&pantilt);
-		// usleep(2000000);
-		// continue;
-		// if
-		// {
-		// 	angle
-		// }
+		// Control PWM
+		pantilt_start_horizontal(&pantilt);
+		pantilt_start_vertical(&pantilt);
+		pantilt_set_angles(&pantilt, servoAngle[1], servoAngle[0]);
 
-		// pantilt_shoot(&pantilt);
+		usleep(150000);
 
-		// pantilt_start_horizontal(&pantilt);
+		pantilt_stop_horizontal(&pantilt);
+		pantilt_stop_vertical(&pantilt);
 
-		// pantilt_set_angles(&pantilt, 90, 180);
-		// printf("180\n");
-		// usleep(3000000);
+		// Shoot if we have to
+		if (debug > SHOOT_THRESHOLD) {
+			pantilt_shoot(&pantilt);
+		}
 
-		// // pantilt_set_angles(&pantilt, 90, -89);
-		// // printf("-89\n");
-		// // usleep(3000000);
-
-		// // pantilt_set_angles(&pantilt, 90, 89);
-		// // printf("89\n");
-		// // usleep(3000000);
-
-		// pantilt_set_angles(&pantilt, 90, 0);
-		// printf("0\n");
-		// usleep(3000000);
-
-		// pantilt_stop_horizontal(&pantilt);
 	}
 
 	return EXIT_SUCCESS;
