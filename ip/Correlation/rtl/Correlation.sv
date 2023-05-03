@@ -35,6 +35,8 @@ logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE:0] dataInDetrended;
 logic signed [NUM_SLAVES-1:0][31:0] dataInDetrendedPadded;
 logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE:0] dataInOffset;
 
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE:0] dataInSigned;
+
 // Shift register for storing the input data
 logic signed [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
 logic signed [NUM_SLAVES-1:0][31:0] inputBufferEndPadded;
@@ -75,7 +77,8 @@ genvar slave, bufferLine;
 generate
     for (slave = 0; slave < NUM_SLAVES; slave++) begin : slaveBuffer
 
-        assign dataInDetrended[slave] = signed'({dataIn[slave][NUM_BITS_SAMPLE-1], dataIn[slave]}) + dataInOffset[slave];
+        assign dataInSigned[slave] = signed'({1'b0, dataIn[slave]});
+        assign dataInDetrended[slave] = dataInSigned[slave] + dataInOffset[slave];
 
         // Sets up the inputBuffer shift register
         always @(posedge clk or posedge rst) begin
@@ -83,7 +86,7 @@ generate
             if (rst) begin
                 inputBuffer[slave] <= '0;
                 dataInAverage[slave] <= '0;
-                dataInOffset[slave] <= 12'b1000_0000_0000;
+                dataInOffset[slave] <= -2048;
                 
             end else if (positiveEdge) begin
                 // Shift in new sample
@@ -92,12 +95,12 @@ generate
 
                 if (detrendCounter > NUM_SAMPLES) begin
                     if (dataInAverage[slave] > 0) begin
-                        dataInOffset[slave] <= dataInOffset[slave] + 1;
-                    end else begin
                         dataInOffset[slave] <= dataInOffset[slave] - 1;
+                    end else begin
+                        dataInOffset[slave] <= dataInOffset[slave] + 1;
                     end
                 end else if (detrendCounter == 0) begin
-                    dataInOffset[slave] <= 12'b1000_0000_0000;
+                    dataInOffset[slave] <= -2048;
                 end
             end else begin
                 // Keep old values
