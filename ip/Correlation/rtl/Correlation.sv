@@ -31,9 +31,9 @@ module Correlation #(
 
 logic positiveEdge;
 
-logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInDetrended;
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE:0] dataInDetrended;
 logic signed [NUM_SLAVES-1:0][31:0] dataInDetrendedPadded;
-logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInOffset;
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE:0] dataInOffset;
 
 // Shift register for storing the input data
 logic signed [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
@@ -49,25 +49,56 @@ logic signed [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrI
 // Registers for storing the crosscorrelation values
 logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
 
+// int detrendCounter = -1;
+logic [15:0] detrendCounter; // 14 bits is enough to count to 14336
+
 
 // Offset for the input data. Used to center the data around 0
 // Values found experimentally
-assign dataInOffset = {12'b0111_1110_1101, 12'b1000_0000_1010, 12'b0111_1111_1100, 12'b1000_0000_1100};
+// assign dataInOffset = {12'b0111_1110_1101, 12'b1000_0000_1010, 12'b0111_1111_1100, 12'b1000_0000_1100};
+
+
+always @(posedge clk or posedge rst) begin
+    // detrendCounter <= ((detrendCounter == NUM_SAMPLES) || rst) ? 0 : detrendCounter + 1;
+    if (rst) begin
+        detrendCounter <= 0;
+    end else if (positiveEdge) begin
+        if (detrendCounter > NUM_SAMPLES) begin
+            detrendCounter <= 1;
+        end else begin
+            detrendCounter <= detrendCounter + 1;
+        end
+    end
+end
 
 genvar slave, bufferLine;
 generate
     for (slave = 0; slave < NUM_SLAVES; slave++) begin : slaveBuffer
 
-        assign dataInDetrended[slave] = signed'(dataIn[slave]) - dataInOffset[slave];
+        assign dataInDetrended[slave] = signed'({dataIn[slave][NUM_BITS_SAMPLE-1], dataIn[slave]}) + dataInOffset[slave];
 
         // Sets up the inputBuffer shift register
         always @(posedge clk or posedge rst) begin
+            // detrendCounter <= ((detrendCounter == NUM_SAMPLES) || rst) ? 0 : detrendCounter + 1;
             if (rst) begin
                 inputBuffer[slave] <= '0;
+                dataInAverage[slave] <= '0;
+                dataInOffset[slave] <= 12'b1000_0000_0000;
+                
             end else if (positiveEdge) begin
                 // Shift in new sample
-                inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataInDetrended[slave]};
-                dataInAverage[slave] <= dataInAverage[slave] + dataInDetrendedPadded[slave] - inputBufferEndPadded[slave];
+                inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataInDetrended[slave][NUM_BITS_SAMPLE-1:0]};
+                dataInAverage[slave] <= dataInAverage[slave] + dataInDetrendedPadded[slave][NUM_BITS_SAMPLE-1:0] - inputBufferEndPadded[slave];
+
+                if (detrendCounter > NUM_SAMPLES) begin
+                    if (dataInAverage[slave] > 0) begin
+                        dataInOffset[slave] <= dataInOffset[slave] + 1;
+                    end else begin
+                        dataInOffset[slave] <= dataInOffset[slave] - 1;
+                    end
+                end else if (detrendCounter == 0) begin
+                    dataInOffset[slave] <= 12'b1000_0000_0000;
+                end
             end else begin
                 // Keep old values
                 inputBuffer[slave] <= inputBuffer[slave];
