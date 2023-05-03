@@ -25,6 +25,22 @@
          type = "String";
       }
    }
+   element DE2_115_SOPC
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element DE2_115_SOPC
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element clk_50
    {
       datum _sortIndex
@@ -85,7 +101,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "7";
          type = "int";
       }
    }
@@ -138,7 +154,7 @@
    {
       datum _sortIndex
       {
-         value = "7";
+         value = "6";
          type = "int";
       }
    }
@@ -463,18 +479,18 @@
    kind="avalon"
    version="18.1"
    start="cpu.data_master"
-   end="peripheral_0.avalon_slave_0">
+   end="pwm_2.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00081030" />
+  <parameter name="baseAddress" value="0x00081000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
    version="18.1"
    start="cpu.data_master"
-   end="pwm_2.avalon_slave_0">
+   end="peripheral_0.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00081000" />
+  <parameter name="baseAddress" value="0x00081030" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -522,12 +538,12 @@
    end="onchip_memory2.clk1" />
  <connection kind="clock" version="18.1" start="clk_50.clk" end="pwm_0.clock" />
  <connection kind="clock" version="18.1" start="clk_50.clk" end="pwm_1.clock" />
+ <connection kind="clock" version="18.1" start="clk_50.clk" end="pwm_2.clock" />
  <connection
    kind="clock"
    version="18.1"
    start="clk_50.clk"
    end="peripheral_0.clock" />
- <connection kind="clock" version="18.1" start="clk_50.clk" end="pwm_2.clock" />
  <connection kind="interrupt" version="18.1" start="cpu.irq" end="jtag_uart.irq">
   <parameter name="irqNumber" value="0" />
  </connection>
@@ -551,12 +567,12 @@
    kind="reset"
    version="18.1"
    start="clk_50.clk_reset"
-   end="peripheral_0.reset" />
+   end="pwm_2.reset" />
  <connection
    kind="reset"
    version="18.1"
    start="clk_50.clk_reset"
-   end="pwm_2.reset" />
+   end="peripheral_0.reset" />
  <connection
    kind="reset"
    version="18.1"

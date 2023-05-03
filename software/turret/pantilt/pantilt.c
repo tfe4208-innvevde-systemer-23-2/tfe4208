@@ -126,7 +126,7 @@ void pantilt_set_angle_horizontal(pantilt_dev *dev, uint8_t horizontalAngle)
  * @param verticalAngel in degrees [0-180].
  * @param horizontalAngle in degrees [0-180].
  */
-void pantilt_set_angles(pantilt_dev *dev, uint8_t verticalAngel, uint8_t horizontalAngle)
+void pantilt_set_angles(pantilt_dev *dev, uint8_t horizontalAngle, uint8_t verticalAngel)
 {
     pantilt_set_angle_vertical(dev, verticalAngel);
     pantilt_set_angle_horizontal(dev, horizontalAngle);

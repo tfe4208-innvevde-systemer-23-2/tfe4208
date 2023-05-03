@@ -56,14 +56,14 @@ int main(void)
 
 		// Read debug data
 		uint32_t debug = peripheral_read_debug(&peripheral);
-		printf("debug: %x\n", (int)debug);
+		printf("debug: %d\n", (int)debug);
 		
-		// Preprocessing of data
-		if (lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12) {
-			// printf("No signal\n");
-			usleep(100000);
-			continue;
-		}
+		// // Preprocessing of data
+		// if (lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12) {
+		// 	// printf("No signal\n");
+		// 	usleep(100000);
+		// 	continue;
+		// }
 
 		// Calculate angles
 		get_angles_from_correlation(&lags, matrise, delays, r, calcAngle);
@@ -87,14 +87,19 @@ int main(void)
 		{
 			usleep(100000);
 		}
-*/
+	*/
+
+		if (calcAngle[0] < 60)
+			calcAngle[0] = 60;
+		if (calcAngle[0] > 140)
+			calcAngle[0] = 140;
 
 		// Control PWM
 		pantilt_start_horizontal(&pantilt);
 		pantilt_start_vertical(&pantilt);
-		pantilt_set_angles(&pantilt, servoAngle[1], servoAngle[0]);
+		pantilt_set_angles(&pantilt, 180-calcAngle[0], 180-calcAngle[1]);
 
-		usleep(150000);
+		usleep(350000);
 
 		pantilt_stop_horizontal(&pantilt);
 		pantilt_stop_vertical(&pantilt);
