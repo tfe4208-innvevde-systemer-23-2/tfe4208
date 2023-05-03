@@ -13,7 +13,6 @@
 
 #define SLEEP_DURATION_US (25000) //  25  ms
 #define PANTILT_STEP_US (25)	  //  25  us
-#define SHOOT_THRESHOLD 20000000
 
 int main(void)
 {
@@ -41,9 +40,9 @@ int main(void)
 
 	// Allocate memory for angles
 	double * calcAngle = malloc(2 * sizeof(double));
-	double * servoAngle = malloc(2 * sizeof(double));
+	//double * servoAngle = malloc(2 * sizeof(double));
 
-	// More setup probably
+
 	printf("Init complete, starting up...\n\n");
 	printf("====================================\n");
 	
@@ -58,54 +57,41 @@ int main(void)
 		uint32_t debug = peripheral_read_debug(&peripheral);
 		printf("debug: %d\n", (int)debug);
 		
-		// // Preprocessing of data
-		// if (lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12) {
-		// 	// printf("No signal\n");
-		// 	usleep(100000);
-		// 	continue;
-		// }
+		 // Preprocessing of data
+		 if (lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12) {
+		 	// printf("No signal\n");
+		 	usleep(10000);
+		 	continue;
+		 }
+
+		 // Something more maybe??
 
 		// Calculate angles
 		get_angles_from_correlation(&lags, matrise, delays, r, calcAngle);
 		printf("vertical: %f, horizontal: %f \n", calcAngle[0], calcAngle[1]);
 
-		// Control turret
-		/*if (angle[1] > 0.1)
-		{
-			pantilt_start_horizontal(&pantilt);
-			pantilt_set_angles(&pantilt, angle[0], angle[1]);
-			usleep(100000);
-			pantilt_shoot(&pantilt);
-			pantilt_stop_horizontal(&pantilt);
-			// usleep(300000);
-			
-			usleep(300000);
+		// Some more processing
 
-			// old_angle = angle;
-		}
-		else
-		{
-			usleep(100000);
-		}
-	*/
-
+		// Adjust angles within the limits
 		if (calcAngle[0] < 60)
 			calcAngle[0] = 60;
 		if (calcAngle[0] > 140)
 			calcAngle[0] = 140;
 
 		// Control PWM
-		pantilt_start_horizontal(&pantilt);
-		pantilt_start_vertical(&pantilt);
-		pantilt_set_angles(&pantilt, 180-calcAngle[0], 180-calcAngle[1]);
+		if (lags.flags & 0x2) {
+			pantilt_start_horizontal(&pantilt);
+			pantilt_start_vertical(&pantilt);
+			pantilt_set_angles(&pantilt, 180-calcAngle[0], 180-calcAngle[1]);
 
-		usleep(350000);
+			usleep(350000);
 
-		pantilt_stop_horizontal(&pantilt);
-		pantilt_stop_vertical(&pantilt);
+			pantilt_stop_horizontal(&pantilt);
+			pantilt_stop_vertical(&pantilt);
+		}
 
 		// Shoot if we have to
-		if (debug > SHOOT_THRESHOLD) {
+		if (lags.flags & 0x1) {
 			printf("FIRE!!!");
 			pantilt_shoot(&pantilt);
 		}

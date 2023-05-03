@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>02.mai.2023 13:06:53</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1683025613374</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>03.mai.2023 21:11:13</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1683141073516</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\Maths\Desktop\tfe4208\software\Turret_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\DE2_115_SOPC.sopcinfo</SopcDesignFile>
