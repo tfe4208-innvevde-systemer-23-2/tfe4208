@@ -53,8 +53,11 @@ int main(void)
 		uint32_t debug = peripheral_read_debug(&peripheral);
 		printf("debug: %d\n", (int)debug);
 
-		//Preprocessing of data
-		if (lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12)
+		// Preprocessing of data
+		bool inValidCorrelations = lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12;
+		bool inValidCombination = lags.t01 == 0 && lags.t02 == 0 && lags.t12 == 0 && lags.t03 == 0 && lags.t13 == 0 && lags.t23 == 0;
+
+		if (inValidCorrelations || inValidCombination)
 		{
 			printf("No signal\n");
 			usleep(10000);
@@ -69,8 +72,13 @@ int main(void)
 		// Adjust angles within the limits
 		if (calcAngle[0] < 60)
 			calcAngle[0] = 60;
-		if (calcAngle[0] > 140)
+		else if (calcAngle[0] > 140)
 			calcAngle[0] = 140;
+
+		if (calcAngle[1] < -90)
+			calcAngle[1] = 180;
+		else if (calcAngle[1] < 0)
+			calcAngle[1] = 0;
 
 		// Control PWM
 		if (lags.flags & 0b10)
@@ -79,10 +87,12 @@ int main(void)
 			pantilt_start_vertical(&pantilt);
 			pantilt_set_angles(&pantilt, 180 - calcAngle[0], 180 - calcAngle[1]);
 
-			usleep(350000);
+			usleep(150000);
 
 			pantilt_stop_horizontal(&pantilt);
 			pantilt_stop_vertical(&pantilt);
+
+			usleep(300000);
 		}
 
 		// Shoot if we have to
