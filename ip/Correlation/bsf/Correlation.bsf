@@ -55,7 +55,7 @@ refer to the applicable agreement for further details.
 		(pt 624 128)
 		(output)
 		(text "validOut" (rect 0 0 41 12)(font "Arial" ))
-		(text "validOut" (rect 568 120 609 132)(font "Arial" ))
+		(text "validOut" (rect 569 123 603 135)(font "Arial" ))
 		(line (pt 624 128)(pt 608 128))
 	)
 	(port
@@ -100,6 +100,13 @@ refer to the applicable agreement for further details.
 		(text "xCorrOut5[2*MAX_SAMPLES_DELAY..0][NUM_BITS_XCORR-1..0]" (rect 325 107 603 119)(font "Arial" ))
 		(line (pt 624 112)(pt 608 112)(line_width 3))
 	)
+	(port
+		(pt 624 144)
+		(output)
+		(text "dataInAverage[NUM_SLAVES-1..0][31..0]" (rect 0 0 205 12)(font "Arial" ))
+		(text "dataInAverage[NUM_SLAVES-1..0][31..0]" (rect 430 139 603 151)(font "Arial" ))
+		(line (pt 624 144)(pt 608 144)(line_width 3))
+	)
 	(parameter
 		"NUM_BITS_SAMPLE"
 		"12"
@@ -117,7 +124,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"MAX_SAMPLES_DELAY"
-		"9"
+		"11"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter

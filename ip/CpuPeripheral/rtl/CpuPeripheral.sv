@@ -27,7 +27,10 @@ module CpuPeripheral (
                                                                         // ^ Also does not support parametrized signal width,
                                                                         //   we need 30 bit wide signal for MAX_LAGS < 16
     input  logic                                        dataInValid,    // Data input is valid
+    input  logic                                        dataEnable,     // Enable the data input signal
+    input  logic                                        dataShoot,      // Shoot your shot ;)
 
+    // -- Debug interface
     input  logic[31:0]                                  debugData,
     input  logic                                        debugDataValid
 
@@ -41,10 +44,10 @@ module CpuPeripheral (
     always_comb begin
         case (address)
             0: begin // Transmit the calculated lags. 2 bits unused right now
-                readdata = {1'b1, 1'b0, dataInInternal};
+                readdata = {dataEnable, dataShoot, dataInInternal};
             end
 
-            1: begin // Transmit debug data, whatever is on the 
+            1: begin // Transmit debug data
                 readdata = debugDataInternal;
             end
 

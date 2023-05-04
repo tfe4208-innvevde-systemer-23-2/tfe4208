@@ -9,6 +9,8 @@ module DE2_115_SOPC (
 		input  wire        peripheral_0_conduit_end_lagsinvalid_t,    //                         .lagsinvalid_t
 		input  wire [31:0] peripheral_0_conduit_end_debugdata_t,      //                         .debugdata_t
 		input  wire        peripheral_0_conduit_end_debugdatavalid_t, //                         .debugdatavalid_t
+		input  wire        peripheral_0_conduit_end_lagsenable_t,     //                         .lagsenable_t
+		input  wire        peripheral_0_conduit_end_lagsshoot_t,      //                         .lagsshoot_t
 		output wire        pwm_0_conduit_end_pwm,                     //        pwm_0_conduit_end.pwm
 		output wire        pwm_1_conduit_end_pwm,                     //        pwm_1_conduit_end.pwm
 		output wire        pwm_2_conduit_end_pwm,                     //        pwm_2_conduit_end.pwm
@@ -46,13 +48,13 @@ module DE2_115_SOPC (
 	wire         mm_interconnect_0_pwm_1_avalon_slave_0_read;               // mm_interconnect_0:pwm_1_avalon_slave_0_read -> pwm_1:read
 	wire         mm_interconnect_0_pwm_1_avalon_slave_0_write;              // mm_interconnect_0:pwm_1_avalon_slave_0_write -> pwm_1:write
 	wire  [31:0] mm_interconnect_0_pwm_1_avalon_slave_0_writedata;          // mm_interconnect_0:pwm_1_avalon_slave_0_writedata -> pwm_1:writedata
-	wire  [31:0] mm_interconnect_0_peripheral_0_avalon_slave_0_readdata;    // peripheral_0:readdata -> mm_interconnect_0:peripheral_0_avalon_slave_0_readdata
-	wire   [0:0] mm_interconnect_0_peripheral_0_avalon_slave_0_address;     // mm_interconnect_0:peripheral_0_avalon_slave_0_address -> peripheral_0:address
 	wire  [31:0] mm_interconnect_0_pwm_2_avalon_slave_0_readdata;           // pwm_2:readdata -> mm_interconnect_0:pwm_2_avalon_slave_0_readdata
 	wire   [1:0] mm_interconnect_0_pwm_2_avalon_slave_0_address;            // mm_interconnect_0:pwm_2_avalon_slave_0_address -> pwm_2:address
 	wire         mm_interconnect_0_pwm_2_avalon_slave_0_read;               // mm_interconnect_0:pwm_2_avalon_slave_0_read -> pwm_2:read
 	wire         mm_interconnect_0_pwm_2_avalon_slave_0_write;              // mm_interconnect_0:pwm_2_avalon_slave_0_write -> pwm_2:write
 	wire  [31:0] mm_interconnect_0_pwm_2_avalon_slave_0_writedata;          // mm_interconnect_0:pwm_2_avalon_slave_0_writedata -> pwm_2:writedata
+	wire  [31:0] mm_interconnect_0_peripheral_0_avalon_slave_0_readdata;    // peripheral_0:readdata -> mm_interconnect_0:peripheral_0_avalon_slave_0_readdata
+	wire   [0:0] mm_interconnect_0_peripheral_0_avalon_slave_0_address;     // mm_interconnect_0:peripheral_0_avalon_slave_0_address -> peripheral_0:address
 	wire  [31:0] mm_interconnect_0_cpu_debug_mem_slave_readdata;            // cpu:debug_mem_slave_readdata -> mm_interconnect_0:cpu_debug_mem_slave_readdata
 	wire         mm_interconnect_0_cpu_debug_mem_slave_waitrequest;         // cpu:debug_mem_slave_waitrequest -> mm_interconnect_0:cpu_debug_mem_slave_waitrequest
 	wire         mm_interconnect_0_cpu_debug_mem_slave_debugaccess;         // mm_interconnect_0:cpu_debug_mem_slave_debugaccess -> cpu:debug_mem_slave_debugaccess
@@ -139,7 +141,9 @@ module DE2_115_SOPC (
 		.dataIn         (peripheral_0_conduit_end_lagsin_t),                      //    conduit_end.lagsin_t
 		.dataInValid    (peripheral_0_conduit_end_lagsinvalid_t),                 //               .lagsinvalid_t
 		.debugData      (peripheral_0_conduit_end_debugdata_t),                   //               .debugdata_t
-		.debugDataValid (peripheral_0_conduit_end_debugdatavalid_t)               //               .debugdatavalid_t
+		.debugDataValid (peripheral_0_conduit_end_debugdatavalid_t),              //               .debugdatavalid_t
+		.dataEnable     (peripheral_0_conduit_end_lagsenable_t),                  //               .lagsenable_t
+		.dataShoot      (peripheral_0_conduit_end_lagsshoot_t)                    //               .lagsshoot_t
 	);
 
 	pwm pwm_0 (

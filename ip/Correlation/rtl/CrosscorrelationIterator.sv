@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////
 // Title:           Crosscorrelation Iterator
-// Author:          
+// Author:          Daniel Vorhaug
 // Date:            17.03.2023
 // Description:     
 ////////////////////////////////////////////////////

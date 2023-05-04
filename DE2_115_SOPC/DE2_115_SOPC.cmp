@@ -5,6 +5,8 @@
 			peripheral_0_conduit_end_lagsinvalid_t    : in  std_logic                     := 'X';             -- lagsinvalid_t
 			peripheral_0_conduit_end_debugdata_t      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- debugdata_t
 			peripheral_0_conduit_end_debugdatavalid_t : in  std_logic                     := 'X';             -- debugdatavalid_t
+			peripheral_0_conduit_end_lagsenable_t     : in  std_logic                     := 'X';             -- lagsenable_t
+			peripheral_0_conduit_end_lagsshoot_t      : in  std_logic                     := 'X';             -- lagsshoot_t
 			pwm_0_conduit_end_pwm                     : out std_logic;                                        -- pwm
 			pwm_1_conduit_end_pwm                     : out std_logic;                                        -- pwm
 			pwm_2_conduit_end_pwm                     : out std_logic;                                        -- pwm

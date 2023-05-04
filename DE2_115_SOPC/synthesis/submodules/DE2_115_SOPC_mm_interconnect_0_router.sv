@@ -213,7 +213,7 @@ module DE2_115_SOPC_mm_interconnect_0_router
 
     // ( 0x81000 .. 0x81010 )
     if ( {address[RG:PAD2],{PAD2{1'b0}}} == 20'h81000   ) begin
-            src_channel = 7'b0010000;
+            src_channel = 7'b0001000;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 6;
     end
 
@@ -231,7 +231,7 @@ module DE2_115_SOPC_mm_interconnect_0_router
 
     // ( 0x81030 .. 0x81038 )
     if ( {address[RG:PAD5],{PAD5{1'b0}}} == 20'h81030  && read_transaction  ) begin
-            src_channel = 7'b0001000;
+            src_channel = 7'b0010000;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 3;
     end
 

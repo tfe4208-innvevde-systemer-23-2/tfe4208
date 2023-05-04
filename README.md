@@ -7,6 +7,8 @@ PWM0 (GPIO6) -> G4
 PWM1 (GPIO7) -> TX
 PWM2 (GPIO9) -> RX
 
+Motor control (GPIO17) -> G24
+
 5V -> G17
 GND(5V) -> G18
 

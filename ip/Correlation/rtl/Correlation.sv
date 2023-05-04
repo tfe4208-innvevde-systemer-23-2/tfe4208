@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////
 // Title:           Crosscorrelation
-// Author:          
+// Author:          Daniel Vorhaug
 // Date:            17.03.2023
 // Description:     
 ////////////////////////////////////////////////////
@@ -24,15 +24,20 @@ module Correlation #(
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut2,
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut3,
     output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut4,
-    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut5
+    output logic signed [2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorrOut5,
+
+    output logic signed [NUM_SLAVES-1:0][31:0] dataInAverage
 );
 
 logic positiveEdge;
 
 logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInDetrended;
+logic signed [NUM_SLAVES-1:0][31:0] dataInDetrendedPadded;
+logic signed [NUM_SLAVES-1:0][NUM_BITS_SAMPLE-1:0] dataInOffset;
 
 // Shift register for storing the input data
 logic signed [NUM_SLAVES-1:0][NUM_SAMPLES-1:0][NUM_BITS_SAMPLE-1:0] inputBuffer;
+logic signed [NUM_SLAVES-1:0][31:0] inputBufferEndPadded;
 
 // Values used for crosscorrelation calculations. The f and g refer to the symbols in the crosscorrelation formula.
 // The add-values are used when introducing a new value to crosscorrelation estimate, and the sub-values are used when they are removed.
@@ -44,11 +49,16 @@ logic signed [NUM_SLAVES-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_SAMPLE-1:0] xCorrI
 // Registers for storing the crosscorrelation values
 logic signed [NUM_XCORRS-1:0][2*MAX_SAMPLES_DELAY:0][NUM_BITS_XCORR-1:0] xCorr;
 
+
+// Offset for the input data. Used to center the data around 0
+// Values found experimentally
+assign dataInOffset = {12'b0111_1110_1101, 12'b1000_0000_1010, 12'b0111_1111_1100, 12'b1000_0000_1100};
+
 genvar slave, bufferLine;
 generate
     for (slave = 0; slave < NUM_SLAVES; slave++) begin : slaveBuffer
 
-        assign dataInDetrended[slave] = signed'(dataIn[slave]) - (2**(NUM_BITS_SAMPLE-1));
+        assign dataInDetrended[slave] = signed'(dataIn[slave]) - dataInOffset[slave];
 
         // Sets up the inputBuffer shift register
         always @(posedge clk or posedge rst) begin
@@ -57,11 +67,15 @@ generate
             end else if (positiveEdge) begin
                 // Shift in new sample
                 inputBuffer[slave] <= {inputBuffer[slave][NUM_SAMPLES-2:0], dataInDetrended[slave]};
+                dataInAverage[slave] <= dataInAverage[slave] + dataInDetrendedPadded[slave] - inputBufferEndPadded[slave];
             end else begin
                 // Keep old values
                 inputBuffer[slave] <= inputBuffer[slave];
             end
         end
+
+        assign dataInDetrendedPadded[slave] = {{32-NUM_BITS_SAMPLE{dataInDetrended[slave][NUM_BITS_SAMPLE-1]}}, dataInDetrended[slave][NUM_BITS_SAMPLE-1:0]};
+        assign inputBufferEndPadded[slave] = {{32-NUM_BITS_SAMPLE{inputBuffer[slave][NUM_SAMPLES-1][NUM_BITS_SAMPLE-1]}}, inputBuffer[slave][NUM_SAMPLES-1]};
 
         // Assign the f- and g-values for the crosscorrelation calculations
         assign xCorrInputAddf[slave] = inputBuffer[slave][MAX_SAMPLES_DELAY];
