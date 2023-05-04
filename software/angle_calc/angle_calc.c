@@ -1,81 +1,234 @@
 #include <math.h>
 #include <stdio.h>
+#include <conio.h>
 #include <stdlib.h>
+#include "svd.h"
 
 
 #define C 343.3  // Lydhastighet 
 #define a 0.075  // Sidelengde tetraheder
+#define PI 3.1415926535
 
-float** transpose_matrix(int row, int column, float** matrix){
-    float** transpose_matrix;
-    for (int i = 0; i < row; i++){
-        for (int j = 0; j < column; j++){
-            transpose_matrix[j][i] = matrix[i][j];
+
+void transpose_matrix(int row, int column, double** matrix, double** transpose_matrix){
+    for (int i = 1; i < row+1; i++){
+        for (int j = 1; j < column+1; j++){
+            transpose_matrix[i][j] = matrix[j][i];
+            //printf("Transpose[%d][%d]: %f\n", i,j,transpose_matrix[i][j]);
+            //printf("Matrix   [%d][%d]: %f\n", j,i,matrix[j][i]);
         }
     }
-    return transpose_matrix;
 }
 
-float** transpose_vector(int length, float* vec){
-    float** transpose_vec;
-    for (int i = 0; i < length; i++){
-        transpose_vec[0][length - i] = vec[i]; 
+void print_nxnmatrix(double** mat, int n){
+    for (int i = 1; i<n+1;i++){
+        for (int j = 1; j < n+1; j++)
+        {
+            printf("Mat[%d][%d]: %f\n", i,j,mat[i][j]);
+        }   
     }
-    return transpose_vec;
-    
 }
 
-void destroy_matrix(float** arr){
-    free(*arr);
-    free( arr);
+void destroy_matrix(double** arr, int low, int high){
+    for (int i=0; i<high; ++i) {
+        free_dvector(arr[i], low, high);
+    }
+    free(arr);
 }
 
-int least_square(){
-    return 0;
-}
-
-
-void print_matrix(float** result, int m, int n, int p){
+void print_matrix(double** matrix, int m, int n){
     printf("Result:\n");
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < p; j++) {
-            printf("%d ", result[i][j]);
+    for (int i = 1; i < m+1; i++) {
+        for (int j = 1; j < n+1; j++) {
+            printf("Mat[%d][%d]: %f\n", i,j,matrix[i][j]);
         }
         printf("\n");
     }
 }
 
-float** matrix_mult(float** mat_a, float** mat_b, int m, int n, int p){
-    return NULL;
-}
-
-float theta(){
-    float z_axis[3] = {0,0,1}; 
-    float** z_axis_trans = transpose_vector(3, z_axis);
-    for (size_t i = 0; i < 3; i++)
-    {
-        printf("Val: %d", z_axis_trans[i][0]);
+void matrix_mult(double** mat_a, double** mat_b, double** result, int m, int n, int p){
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            result[i][j] = 0;
+            for (int k = 1; k <= p; k++) {
+                result[i][j] += mat_a[i][k] * mat_b[k][j];
+            }
+        }
     }
 }
 
-void setup_constants(){
-    struct vector{
-        double b[3];
-    } myVec = {{1,2,3}};
-
-    //r21 = calloc(3, sizeof(float));
-    struct vector r21 = {-0.5*a, sqrt(3)*a/2, 0};
-    struct vector r31 = {-a, 0, 0};
-    struct vector r41 = {-0.5*a, a*sqrt(3)/6, sqrt(2*a/3)};
-    struct vector r32 = {-0.5*a, sqrt(3)*a/2, 0};
-    struct vector r42 = {0, sqrt(3)*a/3, sqrt(2*a/3)};
-    struct vector r43 = {0.5*a, sqrt(3)*a/6, sqrt(2*a/3)};
+void matrix_mult_test(double** mat_a, double** mat_b, double** result, int m, int n, int n_2){
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n_2; j++) {
+            result[i][j] = 0;
+            for (int k = 1; k <= n; k++) {
+                result[i][j] += mat_a[i][k] * mat_b[k][j];
+            }
+        }
+    }
 }
 
-void init(){}
+void create_r(double** r){
+    r[1][1] = -0.5*a / C; r[1][2] = sqrt(3)*a/2 / C; r[1][3] = 0;
+    r[2][1] = -a     / C; r[2][2] = 0           / C; r[2][3] = 0;
+    r[3][1] = -0.5*a / C; r[3][2] = a*sqrt(3)/6 / C; r[3][3] = sqrt(2*a/3) / C;
+    r[4][1] = -0.5*a / C; r[4][2] = sqrt(3)*a/2 / C; r[4][3] = 0;
+    r[5][1] = 0      / C; r[5][2] = sqrt(3)*a/3 / C; r[5][3] = sqrt(2*a/3) / C;
+    r[6][1] = 0.5*a  / C; r[6][2] = sqrt(3)*a/6 / C; r[6][3] = sqrt(2*a/3) / C;
+}
 
+void retireve_part_of_matrix(double** matrix, double** new, int row_m, int column_n){ 
+    for (int i = 1; i < row_m; i++)
+    {
+        for (int j = 1; j < column_n; j++)
+        {
+            new[i][j] = matrix[i][j];
+        }
+    }
+}
+
+void calculate_lstsqr(double** V, double** U, double** Sigma, double** delays, double** result){
+    int i, j, k;
+    double** temp = dmatrix(1,3,1,3);
+    double** temp2 = dmatrix(1,3,1,6);
+
+    // Ganger sammen v og sigma 
+    matrix_mult_test(V,Sigma, temp, 3,3,3);
+    //printf("Første mult complete\n");
+
+    // Ganger så inn U_T 
+    matrix_mult_test(temp, U, temp2, 3,3,6);
+
+    // Ganger inn tallene 
+    matrix_mult_test(temp2, delays, result, 3,6,1);
+
+    destroy_matrix(temp,1,3);
+    destroy_matrix(temp2,1,6);
+
+}
+
+double rad2deg(double radians){
+    return radians * (180 / PI); 
+}
+
+double theta(double** r){
+    double** new_r = dmatrix(1,3,1,1);
+    matrix_mult_test(r,r,new_r,3,1,3);
+    double length_r = sqrt(new_r[1][1]+ new_r[2][1]+ new_r[3][1]); 
+    return rad2deg(acos(r[1][3] / (length_r)));
+}
+
+double phi(double** r){
+    return rad2deg(atan2(r[1][1], r[1][2]));
+}
+
+
+// Test SVD
 int main(){
-    setup_constants();
-    theta();
+
+    double ** A = dmatrix(1,3,1,3);
+    A[1][1] = 3;
+    A[1][2] = 2;
+    A[1][3] = 2;
+    A[2][1] = 2;
+    A[2][2] = 3;
+    A[2][3] = -2;
+    printf("Heisann\n");
+
+    double** V = dmatrix(1,3,1,3);
+    double* sigma = dvector(1,2);
+
+    svdcmp(A,3,2,sigma,V);
+
+    print_matrix(A, 3,3);
+    print_matrix(V, 2,2);
+    printf("Sigma[1]: %f  Sigma[2]: %f\n", sigma[1], sigma[2]);
+
+
+}
+
+
+
+/*
+int main(){
+    printf("Nepe\n");
+    double** u = dmatrix(1,6,1,3);
+    create_r(u);
+    double* sigma =dvector(1,3);
+    //Matrix* r = mXcreate(6,3);
+    //create_r(r);
+    double** v = dmatrix(1,3,1,3);
+    //Matrix* X = mXtranspose(r);
+    svdcmp(u,6,3,sigma,v);
+    printf("SVD++ complete\n");
+   
+
+    
+
+    double** u_t = dmatrix(1,3,1,6);
+    //print_matrix(u, 6,3);
+    transpose_matrix(3,6,u, u_t);
+    //print_matrix(u_t, 3,6);
+    destroy_matrix(u);
+
+    double** v_t = dmatrix(1,3,1,3);
+    transpose_matrix(3,3,v,v_t);
+    printf("v\n");
+    print_matrix(v,3,3);
+    //destroy_matrix(v);
+
+    double** sigma_inv = dmatrix(1,3,1,3);
+    for (int i = 1; i < 4; i++){
+        for (int j = 1; j < 4; j++){
+            sigma_inv[i][j]     = 0;
+            sigma_inv[i][i]     = ( 1 / sigma[i]);
+        }
+    }
+    printf("Sigma_inv:\n");
+    print_matrix(sigma_inv,3,3);
+        
+    free_dvector(sigma,1,3);
+   
+    // Calculate x 
+    double** x = dmatrix(1,3,1,1); 
+    
+    double** delays = dmatrix(1,6,1,1);
+    //delays[1][1] = 0.008064;
+    //delays[2][1] = 0.80704;
+    //delays[3][1] = - 0.000032;
+    //delays[4][1] = -0.000256;
+    //delays[5][1] = 0.000128;
+    //delays[6][1] = 0.000352;
+
+    //double delaysx[6] =  {0.008064, 0.80704, -0.000032, -0.000256, 0.000128, 0.000352};
+    double delaysx[6] =  {-0.010272, -0.000128, -0.000416, 0.005472, 0.0, -0.000288};
+
+    for (int i = 0; i < 6; i++)
+    {
+        delays[i][1] = delaysx[i];
+    }
+    
+
+
+    printf("Pre calc X\n");
+
+    calculate_x(v, u_t, sigma_inv, delays, x);
+    printf("Post calc x\n");
+
+    printf("Theta: %f\n", theta(x));
+    printf("Phi  : %f\n", phi(x));
+
+
+    print_matrix(x, 3,1);
+
+    destroy_matrix(x);
+    destroy_matrix(delays);
+    destroy_matrix(v);
+    destroy_matrix(u);
+    destroy_matrix(sigma_inv);
+    printf("Main done");
+    
+
     return 0;
 }
+//*/

@@ -16,16 +16,19 @@
 
 int main(void) {
     // Hardware control structures
-    pantilt_dev pantilt = pantilt_inst((void *) PWM_0_BASE, (void *) PWM_1_BASE);
+    pantilt_dev pantilt = pantilt_inst((void *) PWM_0_BASE, (void *) PWM_1_BASE, (void *) PWM_2_BASE);
 
     // Initialize hardware
     pantilt_init(&pantilt);
+    printf("pantilt_init complete, starting up...\n\n");
 
     // Center servos.
-    pantilt_configure_vertical(&pantilt, PANTILT_PWM_V_MIN_DUTY_CYCLE_US);
-    pantilt_configure_horizontal(&pantilt, PANTILT_PWM_H_MIN_DUTY_CYCLE_US);
+    pantilt_configure_vertical(&pantilt, 1500);
+    pantilt_configure_horizontal(&pantilt, 1500);
+    pantilt_configure_horizontal(&pantilt, PANTILT_PWM_T_MAX_DUTY_CYCLE_US);
     pantilt_start_vertical(&pantilt);
     pantilt_start_horizontal(&pantilt);
+    pantilt_start_trigger(&pantilt);
 
     // Rotate servos in "square" motion
     while (true) {
@@ -63,6 +66,7 @@ int main(void) {
             h_duty_us -= PANTILT_STEP_US;
             usleep(SLEEP_DURATION_US);
         } while (PANTILT_PWM_H_MIN_DUTY_CYCLE_US <= h_duty_us);
+
     }
 
     return EXIT_SUCCESS;
