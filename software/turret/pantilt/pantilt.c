@@ -134,6 +134,21 @@ void pantilt_set_angles(pantilt_dev *dev, uint8_t horizontalAngle, uint8_t verti
 }
 
 /**
+ * pantilt_shoot_init
+ *
+ * Fire the bullet.
+ *
+ * @param dev pantilt device structure.
+ */
+void pantilt_shoot_init(pantilt_dev *dev)
+{
+    uint32_t duty_cycle_neutral = PANTILT_PWM_PERIOD_US * 21 / 200;
+
+    pantilt_start_trigger(dev);
+    pantilt_configure_trigger(dev, duty_cycle_neutral);
+}
+
+/**
  * pantilt_shoot
  *
  * Fire the bullet.

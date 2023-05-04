@@ -30,17 +30,13 @@ int main(void)
 	pantilt_init(&pantilt);
 	pantilt_configure_vertical(&pantilt, 1500);
 	pantilt_configure_horizontal(&pantilt, 1500);
-	pantilt_configure_trigger(&pantilt, 1500);
-	// pantilt_start_vertical(&pantilt);
-	// pantilt_start_horizontal(&pantilt);
-	// pantilt_start_trigger(&pantilt);
+	pantilt_shoot_init(&pantilt);
 
 	// Create lags structure
 	peripheral_lags lags;
 
 	// Allocate memory for angles
 	double * calcAngle = malloc(2 * sizeof(double));
-	//double * servoAngle = malloc(2 * sizeof(double));
 
 
 	printf("Init complete, starting up...\n\n");
@@ -63,8 +59,6 @@ int main(void)
 		 	usleep(10000);
 		 	continue;
 		 }
-
-		 // Something more maybe??
 
 		// Calculate angles
 		get_angles_from_correlation(&lags, matrise, delays, r, calcAngle);

@@ -36,11 +36,13 @@ void pantilt_init(pantilt_dev *dev);
 
 void pantilt_configure_vertical(pantilt_dev *dev, uint32_t duty_cycle);
 void pantilt_configure_horizontal(pantilt_dev *dev, uint32_t duty_cycle);
-void pantilt_configure_trigger(pantilt_dev *dev, uint32_t duty_cycle);          // TODO: Går fra 10% bakerst til 6% fremmerst
+void pantilt_configure_trigger(pantilt_dev *dev, uint32_t duty_cycle);
 
 void pantilt_set_angle_vertical(pantilt_dev *dev, uint8_t verticalAngle);
 void pantilt_set_angle_horizontal(pantilt_dev *dev, uint8_t horizontalAngle);
 void pantilt_set_angles(pantilt_dev *dev, uint8_t horizontalAngle, uint8_t verticalAngel);
+
+void pantilt_shoot_init(pantilt_dev *dev);
 void pantilt_shoot(pantilt_dev *dev);
 
 uint32_t pantilt_calculate_duty(uint8_t angle);
