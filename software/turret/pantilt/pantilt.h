@@ -27,8 +27,8 @@ typedef struct pantilt_dev {
 #define PANTILT_PWM_H_MAX_DUTY_CYCLE_US (2450)    //  2.45 ms
 
 /* Trigger servo */
-#define PANTILT_PWM_T_MIN_DUTY_CYCLE_US (100)     //  0.10 ms
-#define PANTILT_PWM_T_MAX_DUTY_CYCLE_US (2250)    //  2.25 ms
+#define PANTILT_PWM_T_MIN_DUTY_CYCLE_US (1250)     //  1.25 ms - Calibrated for the trigger
+#define PANTILT_PWM_T_MAX_DUTY_CYCLE_US (2050)    //  2.05 ms  - Calibrated for the trigger
 
 pantilt_dev pantilt_inst(void *pwm_v_base, void *pwm_h_base, void *pwm_t_base);
 

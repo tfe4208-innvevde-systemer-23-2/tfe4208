@@ -21,10 +21,10 @@ int main(void)
 	peripheral_dev peripheral = peripheral_inst((void *)PERIPHERAL_0_BASE);
 
 	// Set up matrices
-    double** matrise = create_matrix(3,6);
-    pseudo_inv(matrise);
-    double** delays = create_matrix(6,1);
-    double** r = create_matrix(3,1);
+	double **matrise = create_matrix(3, 6);
+	pseudo_inv(matrise);
+	double **delays = create_matrix(6, 1);
+	double **r = create_matrix(3, 1);
 
 	// Initialize pwm hardware
 	pantilt_init(&pantilt);
@@ -36,35 +36,35 @@ int main(void)
 	peripheral_lags lags;
 
 	// Allocate memory for angles
-	double * calcAngle = malloc(2 * sizeof(double));
-
+	double *calcAngle = malloc(2 * sizeof(double));
 
 	printf("Init complete, starting up...\n\n");
 	printf("====================================\n");
-	
+
 	// Main flow
-	while (true) {
+	while (true)
+	{
 
 		// Read lags
 		getLags(&peripheral, &lags);
-		printf("Lags: %d, %d, %d, %d, %d, %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23);
+		printf("Lags: %d, %d, %d, %d, %d, %d, Flags: %d\n", (int)lags.t01, (int)lags.t02, (int)lags.t03, (int)lags.t12, (int)lags.t13, (int)lags.t23, lags.flags);
 
-		// Read debug data
+		//  Read debug data
 		uint32_t debug = peripheral_read_debug(&peripheral);
 		printf("debug: %d\n", (int)debug);
-		
-		 // Preprocessing of data
-		 if (lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12) {
-		 	// printf("No signal\n");
-		 	usleep(10000);
-		 	continue;
-		 }
+
+		//Preprocessing of data
+		if (lags.t01 == 12 || lags.t02 == 12 || lags.t12 == 12 || lags.t03 == 12 || lags.t13 == 12 || lags.t23 == 12)
+		{
+			printf("No signal\n");
+			usleep(10000);
+			continue;
+		}
+
+		get_angles_from_correlation(&lags, matrise, delays, r, calcAngle);
 
 		// Calculate angles
-		get_angles_from_correlation(&lags, matrise, delays, r, calcAngle);
 		printf("vertical: %f, horizontal: %f \n", calcAngle[0], calcAngle[1]);
-
-		// Some more processing
 
 		// Adjust angles within the limits
 		if (calcAngle[0] < 60)
@@ -73,10 +73,11 @@ int main(void)
 			calcAngle[0] = 140;
 
 		// Control PWM
-		if (lags.flags & 0x2) {
+		if (lags.flags & 0b10)
+		{
 			pantilt_start_horizontal(&pantilt);
 			pantilt_start_vertical(&pantilt);
-			pantilt_set_angles(&pantilt, 180-calcAngle[0], 180-calcAngle[1]);
+			pantilt_set_angles(&pantilt, 180 - calcAngle[0], 180 - calcAngle[1]);
 
 			usleep(350000);
 
@@ -85,11 +86,11 @@ int main(void)
 		}
 
 		// Shoot if we have to
-		if (lags.flags & 0x1) {
+		if ((~lags.flags) & 0b01)
+		{
 			printf("FIRE!!!");
 			pantilt_shoot(&pantilt);
 		}
-
 	}
 
 	return EXIT_SUCCESS;
